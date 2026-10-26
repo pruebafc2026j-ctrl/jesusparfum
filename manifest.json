@@ -1,16 +1,11 @@
 {
   "name": "JESÚS PARFUM",
   "short_name": "JESÚS PARFUM",
-  "description": "Fragancias de lujo al mejor precio en Guayaquil, Ecuador. Envíos a todo el país.",
-  "start_url": "./index.html",
+  "description": "Fragancias premium en Guayaquil con envíos a todo Ecuador.",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#0d0d0d",
-  "theme_color": "#c9a227",
-  "icons": [
-    {
-      "src": "https://placehold.co/512x512/c9a227/000?text=JP",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ]
+  "background_color": "#0b0b0b",
+  "theme_color": "#0b0b0b",
+  "lang": "es",
+  "icons": []
 }
