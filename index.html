@@ -40,12 +40,20 @@ header h1{color:#c9a227;font-size:1.3rem;letter-spacing:1px;cursor:pointer}
 .aviso h3{color:#c9a227;margin-bottom:10px}
 .aviso p{color:#ddd;line-height:1.6;font-size:.95rem}
 .titulo{text-align:center;color:#c9a227;font-size:1.6rem;margin:40px 0 15px}
-.buscador{display:block;width:90%;max-width:500px;margin:0 auto 25px;padding:12px 18px;border-radius:25px;border:2px solid #c9a227;background:#181818;color:#fff;font-size:.95rem;outline:none}
+.buscador{display:block;width:90%;max-width:500px;margin:0 auto 15px;padding:12px 18px;border-radius:25px;border:2px solid #c9a227;background:#181818;color:#fff;font-size:.95rem;outline:none}
 .buscador::placeholder{color:#777}
+.filtros{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:25px;padding:0 5%}
+.filtros button{background:#181818;color:#ccc;border:1px solid #444;padding:8px 16px;border-radius:20px;font-weight:bold;cursor:pointer;font-size:.85rem;transition:.3s}
+.filtros button:hover{border-color:#c9a227;color:#c9a227}
+.filtros button.activo{background:#c9a227;color:#000;border-color:#c9a227}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;padding:0 5%}
 .card{background:#181818;border:1px solid #2a2a2a;border-radius:12px;padding:15px;transition:.3s}
 .card:hover{border-color:#c9a227;transform:translateY(-4px)}
-.card h3{color:#c9a227;margin:0 0 8px;font-size:.95rem;min-height:38px}
+.card h3{color:#c9a227;margin:0 0 5px;font-size:.95rem;min-height:38px}
+.card .tag{display:inline-block;font-size:.65rem;padding:2px 6px;border-radius:4px;margin-bottom:8px;font-weight:bold}
+.tag.m{background:#1e3a8a;color:#93c5fd}
+.tag.f{background:#831843;color:#fbcfe8}
+.tag.u{background:#064e3b;color:#6ee7b7}
 .card .notas{color:#888;font-size:.75rem;margin-bottom:10px;line-height:1.4;min-height:30px}
 .tams{display:flex;gap:6px;margin:10px 0}
 .tams label{flex:1;background:#222;border:1px solid #333;border-radius:6px;padding:6px 3px;text-align:center;font-size:.7rem;cursor:pointer}
@@ -139,7 +147,16 @@ footer strong{color:#c9a227}
   </section>
 
   <h2 class="titulo" id="catalogo">Nuestro Catálogo</h2>
-  <input type="text" class="buscador" id="buscador" placeholder="🔍 Buscar perfume..." oninput="filtrar()">
+  
+  <input type="text" class="buscador" id="buscador" placeholder="🔍 Buscar por nombre o marca..." oninput="filtrar()">
+  
+  <div class="filtros">
+    <button class="activo" onclick="setFiltro('todos', this)">Todos</button>
+    <button onclick="setFiltro('f', this)">Mujer</button>
+    <button onclick="setFiltro('m', this)">Hombre</button>
+    <button onclick="setFiltro('u', this)">Unisex</button>
+  </div>
+
   <div class="grid" id="productos"></div>
 
   <section class="panel">
@@ -174,59 +191,188 @@ footer strong{color:#c9a227}
 </footer>
 
 <script>
-const nombres = [
-"GOOD GIRL Carolina Herrera","EILISH Billie Eilish","212 SEXY Femme","JPG CLASSIQUE Femme",
-"CLOUD Ariana Grande","Sí ARMANI","MY WAY ARMANI","DAISY EUPHORIA Calvin Klein",
-"JUICY COUTURE VJL","VIVA LA JUICE","LA VIDA ES BELLA","AMOR AMOR CACHAREL",
-"VERSACE P Femme","BFF K. KSHIAN","LADY MILLION","HIPNOTIC P DIOR",
-"MY INSOLENCE GUERLAIN","VERY IRRESISTIBLE Givenchy","COCO MADEMOISELLE CH","CHANCE EAU TENDRE CHANEL",
-"D&G LIGHT BLUE Femme","ADDICT DIOR","BLACK OPIUM YSL","VERSACE EROS",
-"JPG LE BEAU","9PM AFNAN","REPLICA M M","COSTA AZURRA Tom Ford",
-"GREEN IRISH T CREED","POLO RED","POLO BLUE","POLO BLACK",
-"LACOSTE RED","TOBACCO VANILLE Tom Ford","BOMBSHELL Victoria's Secret","HEIRESS Paris Hilton",
-"STRONGER With You Armani","HOMBRE LEATHER Tom Ford","540 BACCARAT Rouge","AQUA DI GIO",
-"AQUA DI GIO PROFONDO","TOMMY MEN","MAN IN BLACK Bulgari","INTERLUDE AMOUAGE",
-"BLACK PHANTOM Killian","ISSEY MIYAKE CLS","JPG SCANDAL","J'ADORE DIOR",
-"CODE ARMANI","CODE PROFUMO","ANGEL F MUGLER","A MAN MUGLER",
-"PLAY INTENSE G","L'IMMENSITÉ L.V","Y YSL","SAUVAGE DIOR",
-"MON GUERLAIN","FLOWERBOMB","CODE FEMME","AMBER OUD GOLD HARAMAIN",
-"POLO SPORT","INITIUS OUD FOR G","SILVER BLUE MANCERA","D&G LIGHT BLUE HOMBRE",
-"ROCHAS MAN","MON PARIS YSL","SPICEBOMB INFRARED","LOLITA LEMPICKA CLÁSICO",
-"JPG LE MALE","SELENA GOMEZ P","BARE VAINILLA VS","GABRIELLE CHANEL",
-"D&G POUR FEMME","TOY Moschino BUBLEE GUM","LA NUIT TRESOR INTENSE Lancome","MEOW KATTY PERRY",
-"WARM VAINILLA BATH & Body","LACOSTE IN PLAY RED","BLACK XS PURE NIGHT Paco Rabanne","CLUB DE NUIT INT",
-"HUGO B. MAGNETIC","PONY 4 FEMME","VIP BLACK 212","JPG ULTRAMALE",
-"GUCCI GUILTY","LA NUIT L'HOMME BLEU ELECTRIQUE","GUCCI FLORA F","DOLCE GABBANA POUR HOMME",
-"DOLCE GABBANA POUR HOMME INTENSE","KHAMRAH LATTAFA UNISEX","STRONGER W-Y INTENSELY","GUCCI POUR HOMME",
-"GENTLEMEN R. PRIVÉ GV","RALPH LAUREN ROCKS F","YARA LATTAFA F","OMNIA AMETHYSTE BULGARI F",
-"ELIXIR LE MALE","UOMO VALENTINO INTENSE","RED TOBACCO MANCERA","BACCARAT ROUGE 540 EXTRAIT UNISEX",
-"SPICEBOMB XTREME","SPICEBOMB CLÁSICO","BLUEBELL WILD J. MALONE F","DIOR HOMME INTENSE",
-"DIOR HOMME PARFUM","LAYTON MARLY","HEROD MARLY","ONE MILLION PRIVE",
-"ONE MILLION LUCKY","AZZARO MOST WANTED","HAWAS RASASI","AROM",
-"EROS VERSACE FLAME","BHARARA KING UNISEX","OHM BLACK","AZZARO WANTED BY NIGHT",
-"TERRES D'HERMES","ALTHAIR MARLY","HUGO BOSS INFINITY","VICTORY ELIXIR INTENSE",
-"LE BEAU LE PARFUM","LE MALE LE PARFUM","MANCERA INSTANT CRUSH UNISEX","CODE ABSOLUTE",
-"STRONGER WY ABSOLUTELY","STRONGER WY INTENSELY","VIP 2012 ROSÉ EXTRA F","COCONUT MILK VS F",
-"COCONUT PASSION VS F","MISS DIOR CLÁSICO F","LADY MILLION GOLD F","CHEIROSA 71 BRAZILIAN F",
-"DOLCE VITA DIOR F","HALLOWEEN CLÁSICO F","NYC BLECKER STREET F","HALLOWEEN MAN X",
-"HUGO BOSS ALIVE F","JPG LE BEAU PARADISE GARDEN","TYGAR BULGARI","ASAD ZANZIBAR",
-"SILLAGE CLUB DE NUIT","VALENTINO UOMO","HALLOWEEN X","HALLOWEEN MAN X",
-"HALLOWEEN CLÁSICO","LE BELLE LE PARFUM F","VALENTINO CORAL FANTASY","QAED AL FURSAN",
-"VALENTINO INTENSE F","HUGO BOSS LE PARFUM","HUGO BOSS CANTINFLORA","212 VIP RED",
-"EROS VERSACE PARFUM","CAN CAN F","PI GIVENCHY","LOLITA LEMPICKA MEN",
-"PLAY GIVENCHY","ULTRAMALE JPG","ABERCROMBIE FITCH","ARMANI CODE COLOGNE",
-"ARMANI CODE SPORT","AFRODISIACO XS RABANNE","GAIA F","CCORY PASIÓN F",
-"CCORY GOLD F"
+// Base de datos con el género: f = Femenino, m = Masculino, u = Unisex
+const perfumes = [
+  {n:"GOOD GIRL Carolina Herrera", g:"f"},
+  {n:"EILISH Billie Eilish", g:"f"},
+  {n:"212 SEXY Femme", g:"f"},
+  {n:"JPG CLASSIQUE Femme", g:"f"},
+  {n:"CLOUD Ariana Grande", g:"f"},
+  {n:"Sí ARMANI", g:"f"},
+  {n:"MY WAY ARMANI", g:"f"},
+  {n:"DAISY EUPHORIA Calvin Klein", g:"f"},
+  {n:"JUICY COUTURE VJL", g:"f"},
+  {n:"VIVA LA JUICE", g:"f"},
+  {n:"LA VIDA ES BELLA", g:"f"},
+  {n:"AMOR AMOR CACHAREL", g:"f"},
+  {n:"VERSACE P Femme", g:"f"},
+  {n:"BFF K. KSHIAN", g:"f"},
+  {n:"LADY MILLION", g:"f"},
+  {n:"HIPNOTIC P DIOR", g:"f"},
+  {n:"MY INSOLENCE GUERLAIN", g:"f"},
+  {n:"VERY IRRESISTIBLE Givenchy", g:"f"},
+  {n:"COCO MADEMOISELLE CH", g:"f"},
+  {n:"CHANCE EAU TENDRE CHANEL", g:"f"},
+  {n:"D&G LIGHT BLUE Femme", g:"f"},
+  {n:"ADDICT DIOR", g:"f"},
+  {n:"BLACK OPIUM YSL", g:"f"},
+  {n:"VERSACE EROS", g:"m"},
+  {n:"JPG LE BEAU", g:"m"},
+  {n:"9PM AFNAN", g:"m"},
+  {n:"REPLICA M M", g:"u"},
+  {n:"COSTA AZURRA Tom Ford", g:"m"},
+  {n:"GREEN IRISH T CREED", g:"m"},
+  {n:"POLO RED", g:"m"},
+  {n:"POLO BLUE", g:"m"},
+  {n:"POLO BLACK", g:"m"},
+  {n:"LACOSTE RED", g:"m"},
+  {n:"TOBACCO VANILLE Tom Ford", g:"u"},
+  {n:"BOMBSHELL Victoria's Secret", g:"f"},
+  {n:"HEIRESS Paris Hilton", g:"f"},
+  {n:"STRONGER With You Armani", g:"m"},
+  {n:"HOMBRE LEATHER Tom Ford", g:"m"},
+  {n:"540 BACCARAT Rouge", g:"u"},
+  {n:"AQUA DI GIO", g:"m"},
+  {n:"AQUA DI GIO PROFONDO", g:"m"},
+  {n:"TOMMY MEN", g:"m"},
+  {n:"MAN IN BLACK Bulgari", g:"m"},
+  {n:"INTERLUDE AMOUAGE", g:"u"},
+  {n:"BLACK PHANTOM Killian", g:"u"},
+  {n:"ISSEY MIYAKE CLS", g:"m"},
+  {n:"JPG SCANDAL", g:"f"},
+  {n:"J'ADORE DIOR", g:"f"},
+  {n:"CODE ARMANI", g:"m"},
+  {n:"CODE PROFUMO", g:"m"},
+  {n:"ANGEL F MUGLER", g:"f"},
+  {n:"A MAN MUGLER", g:"m"},
+  {n:"PLAY INTENSE G", g:"m"},
+  {n:"L'IMMENSITÉ L.V", g:"m"},
+  {n:"Y YSL", g:"m"},
+  {n:"SAUVAGE DIOR", g:"m"},
+  {n:"MON GUERLAIN", g:"f"},
+  {n:"FLOWERBOMB", g:"f"},
+  {n:"CODE FEMME", g:"f"},
+  {n:"AMBER OUD GOLD HARAMAIN", g:"u"},
+  {n:"POLO SPORT", g:"m"},
+  {n:"INITIUS OUD FOR G", g:"m"},
+  {n:"SILVER BLUE MANCERA", g:"u"},
+  {n:"D&G LIGHT BLUE HOMBRE", g:"m"},
+  {n:"ROCHAS MAN", g:"m"},
+  {n:"MON PARIS YSL", g:"f"},
+  {n:"SPICEBOMB INFRARED", g:"m"},
+  {n:"LOLITA LEMPICKA CLÁSICO", g:"f"},
+  {n:"JPG LE MALE", g:"m"},
+  {n:"SELENA GOMEZ P", g:"f"},
+  {n:"BARE VAINILLA VS", g:"f"},
+  {n:"GABRIELLE CHANEL", g:"f"},
+  {n:"D&G POUR FEMME", g:"f"},
+  {n:"TOY Moschino BUBLEE GUM", g:"f"},
+  {n:"LA NUIT TRESOR INTENSE Lancome", g:"f"},
+  {n:"MEOW KATTY PERRY", g:"f"},
+  {n:"WARM VAINILLA BATH & Body", g:"f"},
+  {n:"LACOSTE IN PLAY RED", g:"m"},
+  {n:"BLACK XS PURE NIGHT Paco Rabanne", g:"m"},
+  {n:"CLUB DE NUIT INT", g:"u"},
+  {n:"HUGO B. MAGNETIC", g:"m"},
+  {n:"PONY 4 FEMME", g:"f"},
+  {n:"VIP BLACK 212", g:"m"},
+  {n:"JPG ULTRAMALE", g:"m"},
+  {n:"GUCCI GUILTY", g:"m"},
+  {n:"LA NUIT L'HOMME BLEU ELECTRIQUE", g:"m"},
+  {n:"GUCCI FLORA F", g:"f"},
+  {n:"DOLCE GABBANA POUR HOMME", g:"m"},
+  {n:"DOLCE GABBANA POUR HOMME INTENSE", g:"m"},
+  {n:"KHAMRAH LATTAFA UNISEX", g:"u"},
+  {n:"STRONGER W-Y INTENSELY", g:"m"},
+  {n:"GUCCI POUR HOMME", g:"m"},
+  {n:"GENTLEMEN R. PRIVÉ GV", g:"m"},
+  {n:"RALPH LAUREN ROCKS F", g:"f"},
+  {n:"YARA LATTAFA F", g:"f"},
+  {n:"OMNIA AMETHYSTE BULGARI F", g:"f"},
+  {n:"ELIXIR LE MALE", g:"m"},
+  {n:"UOMO VALENTINO INTENSE", g:"m"},
+  {n:"RED TOBACCO MANCERA", g:"u"},
+  {n:"BACCARAT ROUGE 540 EXTRAIT UNISEX", g:"u"},
+  {n:"SPICEBOMB XTREME", g:"m"},
+  {n:"SPICEBOMB CLÁSICO", g:"m"},
+  {n:"BLUEBELL WILD J. MALONE F", g:"f"},
+  {n:"DIOR HOMME INTENSE", g:"m"},
+  {n:"DIOR HOMME PARFUM", g:"m"},
+  {n:"LAYTON MARLY", g:"u"},
+  {n:"HEROD MARLY", g:"m"},
+  {n:"ONE MILLION PRIVE", g:"m"},
+  {n:"ONE MILLION LUCKY", g:"m"},
+  {n:"AZZARO MOST WANTED", g:"m"},
+  {n:"HAWAS RASASI", g:"m"},
+  {n:"AROM", g:"m"},
+  {n:"EROS VERSACE FLAME", g:"m"},
+  {n:"BHARARA KING UNISEX", g:"u"},
+  {n:"OHM BLACK", g:"m"},
+  {n:"AZZARO WANTED BY NIGHT", g:"m"},
+  {n:"TERRES D'HERMES", g:"m"},
+  {n:"ALTHAIR MARLY", g:"u"},
+  {n:"HUGO BOSS INFINITY", g:"m"},
+  {n:"VICTORY ELIXIR INTENSE", g:"m"},
+  {n:"LE BEAU LE PARFUM", g:"m"},
+  {n:"LE MALE LE PARFUM", g:"m"},
+  {n:"MANCERA INSTANT CRUSH UNISEX", g:"u"},
+  {n:"CODE ABSOLUTE", g:"m"},
+  {n:"STRONGER WY ABSOLUTELY", g:"m"},
+  {n:"STRONGER WY INTENSELY", g:"m"},
+  {n:"VIP 2012 ROSÉ EXTRA F", g:"f"},
+  {n:"COCONUT MILK VS F", g:"f"},
+  {n:"COCONUT PASSION VS F", g:"f"},
+  {n:"MISS DIOR CLÁSICO F", g:"f"},
+  {n:"LADY MILLION GOLD F", g:"f"},
+  {n:"CHEIROSA 71 BRAZILIAN F", g:"f"},
+  {n:"DOLCE VITA DIOR F", g:"f"},
+  {n:"HALLOWEEN CLÁSICO F", g:"f"},
+  {n:"NYC BLECKER STREET F", g:"f"},
+  {n:"HALLOWEEN MAN X", g:"m"},
+  {n:"HUGO BOSS ALIVE F", g:"f"},
+  {n:"JPG LE BEAU PARADISE GARDEN", g:"m"},
+  {n:"TYGAR BULGARI", g:"m"},
+  {n:"ASAD ZANZIBAR", g:"m"},
+  {n:"SILLAGE CLUB DE NUIT", g:"u"},
+  {n:"VALENTINO UOMO", g:"m"},
+  {n:"HALLOWEEN X", g:"f"},
+  {n:"HALLOWEEN MAN X", g:"m"},
+  {n:"HALLOWEEN CLÁSICO", g:"f"},
+  {n:"LE BELLE LE PARFUM F", g:"f"},
+  {n:"VALENTINO CORAL FANTASY", g:"f"},
+  {n:"QAED AL FURSAN", g:"u"},
+  {n:"VALENTINO INTENSE F", g:"f"},
+  {n:"HUGO BOSS LE PARFUM", g:"m"},
+  {n:"HUGO BOSS CANTINFLORA", g:"f"},
+  {n:"212 VIP RED", g:"f"},
+  {n:"EROS VERSACE PARFUM", g:"m"},
+  {n:"CAN CAN F", g:"f"},
+  {n:"PI GIVENCHY", g:"f"},
+  {n:"LOLITA LEMPICKA MEN", g:"m"},
+  {n:"PLAY GIVENCHY", g:"m"},
+  {n:"ULTRAMALE JPG", g:"m"},
+  {n:"ABERCROMBIE FITCH", g:"m"},
+  {n:"ARMANI CODE COLOGNE", g:"m"},
+  {n:"ARMANI CODE SPORT", g:"m"},
+  {n:"AFRODISIACO XS RABANNE", g:"m"},
+  {n:"GAIA F", g:"f"},
+  {n:"CCORY PASIÓN F", g:"f"},
+  {n:"CCORY GOLD F", g:"f"}
 ];
 
 const PR = {"30":12.5,"50":15.5,"100":24};
 let pedido = [];
+let filtroActual = 'todos';
+
+// Etiquetas visuales para el género
+const tagText = {f: "Mujer", m: "Hombre", u: "Unisex"};
 
 let html = "";
-nombres.forEach((nombre, i) => {
-  html += `<div class="card" data-nombre="${nombre.toLowerCase()}">
-    <h3>${nombre}</h3>
-    <p class="notas">Fragancia premium · Notas características de la casa</p>
+perfumes.forEach((p, i) => {
+  html += `<div class="card" data-nombre="${p.n.toLowerCase()}" data-genero="${p.g}">
+    <span class="tag ${p.g}">${tagText[p.g]}</span>
+    <h3>${p.n}</h3>
+    <p class="notas">Fragancia premium · Notas características</p>
     <div class="tams">
       <label><input type="radio" name="t${i}" value="30" checked>30ml $12.50</label>
       <label><input type="radio" name="t${i}" value="50">50ml $15.50</label>
@@ -240,16 +386,25 @@ nombres.forEach((nombre, i) => {
 });
 document.getElementById("productos").innerHTML = html;
 
+function setFiltro(f, btn){
+  filtroActual = f;
+  document.querySelectorAll(".filtros button").forEach(b => b.classList.remove("activo"));
+  btn.classList.add("activo");
+  filtrar();
+}
+
 function filtrar(){
   const q = document.getElementById("buscador").value.toLowerCase();
   document.querySelectorAll(".card").forEach(c => {
-    c.style.display = c.dataset.nombre.includes(q) ? "block" : "none";
+    const coincideNombre = c.dataset.nombre.includes(q);
+    const coincideGenero = filtroActual === 'todos' || c.dataset.genero === filtroActual;
+    c.style.display = (coincideNombre && coincideGenero) ? "block" : "none";
   });
 }
 
 function agregar(i){
   const t = document.querySelector(`input[name="t${i}"]:checked`).value;
-  pedido.push({n: nombres[i], t, p: PR[t]});
+  pedido.push({n: perfumes[i].n, t, p: PR[t]});
   render();
   document.querySelector(".panel").scrollIntoView({behavior:"smooth"});
 }
@@ -258,8 +413,15 @@ function calc(){
   const sub = pedido.reduce((s,i) => s + i.p, 0);
   const g = {"30":[],"50":[],"100":[]};
   pedido.forEach(i => g[i.t].push(i));
+  
   let mg = null, mc = 0;
-  for(const t in g) if(g[t].length > mc){ mc = g[t].length; mg = t; }
+  for(const t in g) {
+    if(g[t].length > mc){ 
+      mc = g[t].length; 
+      mg = t; 
+    }
+  }
+  
   let desc = 0, det = [];
   if(mg && mc >= 2){
     const pct = mc >= 4 ? 20 : 15;
@@ -267,14 +429,18 @@ function calc(){
     desc = sg * pct / 100;
     det.push({t: mg, pct, desc, c: mc});
   }
-  const ciudad = document.getElementById("ciudad") ? document.getElementById("ciudad").value : "guayaquil";
+  
+  const ciudadElement = document.getElementById("ciudad");
+  const ciudad = ciudadElement ? ciudadElement.value : "guayaquil";
   const subConDesc = sub - desc;
+  
   let env = 0;
-  if(subConDesc >= 50){
+    if(subConDesc >= 50) {
     env = 0;
   } else {
     env = ciudad === "guayaquil" ? 3.5 : 7.0;
   }
+  
   return {sub, det, desc, env, tot: subConDesc + env, ciudad};
 }
 
@@ -297,10 +463,11 @@ function render(){
 function quitar(i){ pedido.splice(i,1); render(); }
 
 function verPerfume(i){
-  const nombre = nombres[i];
+  const p = perfumes[i];
   document.getElementById("contenidoPerfume").innerHTML = `
     <div class="perfil">
-      <h1>${nombre}</h1>
+      <span class="tag ${p.g}" style="margin-bottom:10px; display:inline-block;">${tagText[p.g]}</span>
+      <h1>${p.n}</h1>
       <p class="fam">Fragancia premium · JESÚS PARFUM</p>
       <p class="precio">Desde <strong>$12.50</strong></p>
       <p class="resumen">Fragancia de alta calidad disponible en 3 tamaños. Elige el tuyo y agrégalo a tu pedido.</p>
@@ -321,7 +488,7 @@ function verPerfume(i){
 
 function agregarDesde(i){
   const t = document.querySelector('input[name="tp"]:checked').value;
-  pedido.push({n: nombres[i], t, p: PR[t]});
+  pedido.push({n: perfumes[i].n, t, p: PR[t]});
   render();
   verCatalogo();
   setTimeout(() => document.querySelector(".panel").scrollIntoView({behavior:"smooth"}), 100);
