@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JESÚS PARFUM | Guayaquil, Ecuador</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif}
+body{background:#0d0d0d;color:#f5f5f5}
+header{display:flex;justify-content:space-between;align-items:center;padding:15px 5%;background:#000;border-bottom:2px solid #c9a227;position:sticky;top:0;z-index:10}
+header h1{color:#c9a227;font-size:1.3rem;letter-spacing:1px;cursor:pointer}
+.wa{background:#25D366;color:#fff;padding:9px 16px;border-radius:20px;text-decoration:none;font-weight:bold;font-size:.85rem}
+.bienvenida{background:linear-gradient(90deg,#c9a227,#e0b93a);color:#000;padding:12px;text-align:center;font-weight:bold;font-size:.85rem;position:relative}
+.bienvenida button{position:absolute;right:15px;top:50%;transform:translateY(-50%);background:#000;color:#c9a227;border:none;border-radius:50%;width:24px;height:24px;cursor:pointer;font-weight:bold}
+.hero{text-align:center;padding:70px 5%;background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.85)),url('https://images.unsplash.com/photo-1541643600914-78b084683601?w=1600') center/cover}
+.hero h2{color:#c9a227;font-size:2.2rem;margin-bottom:12px}
+.hero p{color:#ddd;margin-bottom:20px;font-size:1rem}
+.hero a{background:#c9a227;color:#000;padding:12px 28px;border-radius:25px;text-decoration:none;font-weight:bold}
+.beneficios{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;padding:30px 5%;background:#111;text-align:center}
+.beneficios div{padding:15px;background:#181818;border-radius:10px;border:1px solid #2a2a2a}
+.beneficios .ico{font-size:2rem;display:block;margin-bottom:8px}
+.beneficios h4{color:#c9a227;font-size:.9rem;margin-bottom:5px}
+.beneficios p{color:#aaa;font-size:.8rem}
+.info{max-width:900px;margin:40px auto;padding:0 5%}
+.info h2{color:#c9a227;text-align:center;margin-bottom:20px;font-size:1.6rem}
+.info .intro{color:#bbb;text-align:center;line-height:1.7;margin-bottom:25px;font-size:.95rem}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px}
+.info-grid div{background:#181818;border-left:4px solid #c9a227;border-radius:10px;padding:18px}
+.info-grid h4{color:#c9a227;margin-bottom:8px;font-size:.95rem}
+.info-grid p,.info-grid li{color:#bbb;font-size:.85rem;line-height:1.6}
+.info-grid ul{padding-left:16px}
+.aviso{max-width:700px;margin:40px auto;padding:25px;background:#1a1500;border:2px solid #c9a227;border-radius:12px;text-align:center}
+.aviso h3{color:#c9a227;margin-bottom:10px}
+.aviso p{color:#ddd;line-height:1.6;font-size:.95rem}
+.titulo{text-align:center;color:#c9a227;font-size:1.6rem;margin:40px 0 15px}
+.buscador{display:block;width:90%;max-width:500px;margin:0 auto 25px;padding:12px 18px;border-radius:25px;border:2px solid #c9a227;background:#181818;color:#fff;font-size:.95rem;outline:none}
+.buscador::placeholder{color:#777}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;padding:0 5%}
+.card{background:#181818;border:1px solid #2a2a2a;border-radius:12px;padding:15px;transition:.3s}
+.card:hover{border-color:#c9a227;transform:translateY(-4px)}
+.card h3{color:#c9a227;margin:0 0 8px;font-size:.95rem;min-height:38px}
+.card .notas{color:#888;font-size:.75rem;margin-bottom:10px;line-height:1.4;min-height:30px}
+.tams{display:flex;gap:6px;margin:10px 0}
+.tams label{flex:1;background:#222;border:1px solid #333;border-radius:6px;padding:6px 3px;text-align:center;font-size:.7rem;cursor:pointer}
+.tams input{display:none}
+.tams label:has(input:checked){border-color:#c9a227;background:#2a2410;color:#c9a227}
+.btn{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.btn button{border:none;padding:9px;border-radius:6px;font-weight:bold;cursor:pointer;font-size:.8rem}
+.b1{background:#c9a227;color:#000}
+.b1:hover{background:#e0b93a}
+.b2{background:transparent;color:#c9a227;border:1px solid #c9a227!important}
+.b2:hover{background:#c9a227;color:#000}
+.panel{background:#111;border-top:2px solid #c9a227;padding:30px 5%;margin-top:40px}
+.panel h2{color:#c9a227;text-align:center;margin-bottom:15px}
+#resumen{max-width:550px;margin:0 auto;background:#181818;border-radius:10px;padding:18px;font-size:.85rem}
+#resumen p{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed #2a2a2a}
+#resumen .tot{color:#c9a227;font-weight:bold;font-size:1rem;border:none}
+.recordatorio{max-width:550px;margin:20px auto 0;padding:15px;background:#1a1500;border:2px dashed #c9a227;border-radius:10px;text-align:center;font-size:.85rem;color:#eee;line-height:1.6}
+.recordatorio strong{color:#c9a227}
+.envio-box{max-width:550px;margin:20px auto 0;background:#181818;border:2px solid #2a2a2a;border-radius:10px;padding:18px}
+.envio-box label{display:block;color:#c9a227;font-weight:bold;font-size:.9rem;margin-bottom:10px}
+.envio-box select{width:100%;padding:12px;border-radius:8px;border:2px solid #2a2a2a;background:#0d0d0d;color:#fff;font-size:.9rem;outline:none;cursor:pointer}
+.envio-box select:focus{border-color:#c9a227}
+.envio-box .nota{color:#888;font-size:.75rem;margin-top:8px;text-align:center}
+.confirmar{display:block;margin:20px auto 0;background:#25D366;color:#fff;border:none;padding:14px 35px;border-radius:25px;font-size:.95rem;font-weight:bold;cursor:pointer}
+.confirmar:hover{background:#1ebe5b}
+.vacio{text-align:center;color:#666;padding:15px}
+footer{text-align:center;padding:30px 5%;color:#888;font-size:.8rem;border-top:1px solid #222;margin-top:30px;line-height:1.8}
+footer strong{color:#c9a227}
+#vistaPerfume{display:none}
+.perfil{max-width:900px;margin:40px auto;padding:30px;background:#181818;border:2px solid #c9a227;border-radius:14px}
+.perfil h1{color:#c9a227;margin-bottom:8px;font-size:1.6rem}
+.perfil .fam{color:#aaa;margin-bottom:15px;font-size:.9rem}
+.perfil .precio{color:#fff;font-size:1.2rem;margin-bottom:15px}
+.perfil .precio strong{color:#c9a227}
+.perfil .resumen{color:#ccc;line-height:1.6;font-size:.9rem;padding:12px;background:#0d0d0d;border-left:3px solid #c9a227;border-radius:8px;margin-bottom:15px}
+.volver{display:inline-block;margin:30px 5% 0;color:#c9a227;font-weight:bold;cursor:pointer;background:none;border:none;font-size:.9rem}
+.volver:hover{text-decoration:underline}
+.seccion{max-width:900px;margin:30px auto;padding:0 5%}
+.seccion h2{color:#c9a227;font-size:1.2rem;margin-bottom:15px;border-bottom:2px solid #2a2a2a;padding-bottom:8px}
+.selTam{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0}
+.selTam label{background:#181818;border:2px solid #2a2a2a;border-radius:8px;padding:12px;text-align:center;cursor:pointer}
+.selTam label:has(input:checked){border-color:#c9a227;background:#2a2410}
+.selTam input{display:none}
+.selTam .t{color:#fff;font-weight:bold;font-size:.95rem}
+.selTam .p{color:#c9a227;font-size:.8rem;margin-top:3px}
+.agregar{width:100%;background:#c9a227;color:#000;border:none;padding:14px;border-radius:8px;font-weight:bold;font-size:.95rem;cursor:pointer}
+.agregar:hover{background:#e0b93a}
+@media(max-width:600px){.hero h2{font-size:1.6rem}}
+</style>
+</head>
+<body>
+
+<div class="bienvenida" id="bienvenida">
+  ✨ ¡Bienvenido a <strong>JESÚS PARFUM</strong>! Recuerda: al confirmar tu pedido, debes enviar tus datos por WhatsApp. 📦
+  <button onclick="document.getElementById('bienvenida').style.display='none'">✕</button>
+</div>
+
+<header>
+  <h1 onclick="verCatalogo()">JESÚS PARFUM</h1>
+  <a class="wa" href="https://wa.me/593996428137" target="_blank">💬 WhatsApp</a>
+</header>
+
+<div id="vistaCatalogo">
+  <section class="hero">
+    <h2>Fragancias de Lujo</h2>
+    <p>Más de 170 fragancias disponibles · Envíos a todo Ecuador</p>
+    <a href="#catalogo">Ver Catálogo 🛍️</a>
+  </section>
+
+  <section class="beneficios">
+    <div><span class="ico">🚚</span><h4>Envíos Nacionales</h4><p>Guayaquil $3.50 · Provincias $7.00</p></div>
+    <div><span class="ico">🎁</span><h4>Combos</h4><p>15% / 20% OFF mismo tamaño</p></div>
+    <div><span class="ico">💎</span><h4>Premium</h4><p>Fragancias originales</p></div>
+    <div><span class="ico">💬</span><h4>WhatsApp</h4><p>Pedidos directos</p></div>
+  </section>
+
+  <section class="info">
+    <h2>✨ Sobre JESÚS PARFUM</h2>
+    <p class="intro">Fragancias de lujo a precios accesibles. Guayaquil, Ecuador · Envíos a todo el país.</p>
+    <div class="info-grid">
+      <div><h4>📍 Ubicación</h4><p>Guayaquil, Ecuador. Envíos nacionales.</p></div>
+      <div><h4>📏 Precios</h4><ul><li>30 ml — $12.50</li><li>50 ml — $15.50</li><li>100 ml — $24.00</li></ul></div>
+      <div><h4>🚚 Envío</h4><ul><li>Guayaquil: $3.50</li><li>Provincias (Servientrega): $7.00</li><li>Gratis desde $50</li></ul></div>
+      <div><h4>🎁 Promos</h4><ul><li>2-3 frascos: 15% OFF</li><li>4+ frascos: 20% OFF</li></ul></div>
+    </div>
+  </section>
+
+  <section class="aviso">
+    <h3>📦 Datos de Envío por WhatsApp</h3>
+    <p>Al confirmar tu pedido se abre WhatsApp. <strong>Debes enviar tus datos</strong> (nombre, dirección, ciudad y teléfono) para procesar el envío.</p>
+  </section>
+
+  <h2 class="titulo" id="catalogo">Nuestro Catálogo</h2>
+  <input type="text" class="buscador" id="buscador" placeholder="🔍 Buscar perfume..." oninput="filtrar()">
+  <div class="grid" id="productos"></div>
+
+  <section class="panel">
+    <h2>🛒 Tu Pedido</h2>
+    <div id="resumen"><p class="vacio">Aún no has agregado fragancias.</p></div>
+
+    <div class="envio-box">
+      <label>🚚 Selecciona tu ciudad de envío:</label>
+      <select id="ciudad" onchange="render()">
+        <option value="guayaquil">Guayaquil — Envío $3.50</option>
+        <option value="provincia">Otra provincia (Servientrega) — Envío $7.00</option>
+      </select>
+      <p class="nota">Envío gratis en pedidos desde $50 (después del descuento)</p>
+    </div>
+
+    <div class="recordatorio">💬 <strong>Recuerda:</strong> debes enviar tus datos de delivery por WhatsApp para completar el envío.</div>
+    <button class="confirmar" onclick="enviarWhatsApp()">✅ Confirmar Pedido por WhatsApp</button>
+  </section>
+</div>
+
+<div id="vistaPerfume">
+  <button class="volver" onclick="verCatalogo()">← Volver al catálogo</button>
+  <div id="contenidoPerfume"></div>
+</div>
+
+<footer>
+  <p><strong>JESÚS PARFUM</strong> — Guayaquil, Ecuador · WhatsApp: +593 99 642 8137</p>
+  <p>Envío Guayaquil $3.50 · Provincias (Servientrega) $7.00 · Gratis desde $50</p>
+</footer>
+
+<script>
+const nombres = [
+"GOOD GIRL Carolina Herrera","EILISH Billie Eilish","212 SEXY Femme","JPG CLASSIQUE Femme",
+"CLOUD Ariana Grande","Sí ARMANI","MY WAY ARMANI","DAISY EUPHORIA Calvin Klein",
+"JUICY COUTURE VJL","VIVA LA JUICE","LA VIDA ES BELLA","AMOR AMOR CACHAREL",
+"VERSACE P Femme","BFF K. KSHIAN","LADY MILLION","HIPNOTIC P DIOR",
+"MY INSOLENCE GUERLAIN","VERY IRRESISTIBLE Givenchy","COCO MADEMOISELLE CH","CHANCE EAU TENDRE CHANEL",
+"D&G LIGHT BLUE Femme","ADDICT DIOR","BLACK OPIUM YSL","VERSACE EROS",
+"JPG LE BEAU","9PM AFNAN","REPLICA M M","COSTA AZURRA Tom Ford",
+"GREEN IRISH T CREED","POLO RED","POLO BLUE","POLO BLACK",
+"LACOSTE RED","TOBACCO VANILLE Tom Ford","BOMBSHELL Victoria's Secret","HEIRESS Paris Hilton",
+"STRONGER With You Armani","HOMBRE LEATHER Tom Ford","540 BACCARAT Rouge","AQUA DI GIO",
+"AQUA DI GIO PROFONDO","TOMMY MEN","MAN IN BLACK Bulgari","INTERLUDE AMOUAGE",
+"BLACK PHANTOM Killian","ISSEY MIYAKE CLS","JPG SCANDAL","J'ADORE DIOR",
+"CODE ARMANI","CODE PROFUMO","ANGEL F MUGLER","A MAN MUGLER",
+"PLAY INTENSE G","L'IMMENSITÉ L.V","Y YSL","SAUVAGE DIOR",
+"MON GUERLAIN","FLOWERBOMB","CODE FEMME","AMBER OUD GOLD HARAMAIN",
+"POLO SPORT","INITIUS OUD FOR G","SILVER BLUE MANCERA","D&G LIGHT BLUE HOMBRE",
+"ROCHAS MAN","MON PARIS YSL","SPICEBOMB INFRARED","LOLITA LEMPICKA CLÁSICO",
+"JPG LE MALE","SELENA GOMEZ P","BARE VAINILLA VS","GABRIELLE CHANEL",
+"D&G POUR FEMME","TOY Moschino BUBLEE GUM","LA NUIT TRESOR INTENSE Lancome","MEOW KATTY PERRY",
+"WARM VAINILLA BATH & Body","LACOSTE IN PLAY RED","BLACK XS PURE NIGHT Paco Rabanne","CLUB DE NUIT INT",
+"HUGO B. MAGNETIC","PONY 4 FEMME","VIP BLACK 212","JPG ULTRAMALE",
+"GUCCI GUILTY","LA NUIT L'HOMME BLEU ELECTRIQUE","GUCCI FLORA F","DOLCE GABBANA POUR HOMME",
+"DOLCE GABBANA POUR HOMME INTENSE","KHAMRAH LATTAFA UNISEX","STRONGER W-Y INTENSELY","GUCCI POUR HOMME",
+"GENTLEMEN R. PRIVÉ GV","RALPH LAUREN ROCKS F","YARA LATTAFA F","OMNIA AMETHYSTE BULGARI F",
+"ELIXIR LE MALE","UOMO VALENTINO INTENSE","RED TOBACCO MANCERA","BACCARAT ROUGE 540 EXTRAIT UNISEX",
+"SPICEBOMB XTREME","SPICEBOMB CLÁSICO","BLUEBELL WILD J. MALONE F","DIOR HOMME INTENSE",
+"DIOR HOMME PARFUM","LAYTON MARLY","HEROD MARLY","ONE MILLION PRIVE",
+"ONE MILLION LUCKY","AZZARO MOST WANTED","HAWAS RASASI","AROM",
+"EROS VERSACE FLAME","BHARARA KING UNISEX","OHM BLACK","AZZARO WANTED BY NIGHT",
+"TERRES D'HERMES","ALTHAIR MARLY","HUGO BOSS INFINITY","VICTORY ELIXIR INTENSE",
+"LE BEAU LE PARFUM","LE MALE LE PARFUM","MANCERA INSTANT CRUSH UNISEX","CODE ABSOLUTE",
+"STRONGER WY ABSOLUTELY","STRONGER WY INTENSELY","VIP 2012 ROSÉ EXTRA F","COCONUT MILK VS F",
+"COCONUT PASSION VS F","MISS DIOR CLÁSICO F","LADY MILLION GOLD F","CHEIROSA 71 BRAZILIAN F",
+"DOLCE VITA DIOR F","HALLOWEEN CLÁSICO F","NYC BLECKER STREET F","HALLOWEEN MAN X",
+"HUGO BOSS ALIVE F","JPG LE BEAU PARADISE GARDEN","TYGAR BULGARI","ASAD ZANZIBAR",
+"SILLAGE CLUB DE NUIT","VALENTINO UOMO","HALLOWEEN X","HALLOWEEN MAN X",
+"HALLOWEEN CLÁSICO","LE BELLE LE PARFUM F","VALENTINO CORAL FANTASY","QAED AL FURSAN",
+"VALENTINO INTENSE F","HUGO BOSS LE PARFUM","HUGO BOSS CANTINFLORA","212 VIP RED",
+"EROS VERSACE PARFUM","CAN CAN F","PI GIVENCHY","LOLITA LEMPICKA MEN",
+"PLAY GIVENCHY","ULTRAMALE JPG","ABERCROMBIE FITCH","ARMANI CODE COLOGNE",
+"ARMANI CODE SPORT","AFRODISIACO XS RABANNE","GAIA F","CCORY PASIÓN F",
+"CCORY GOLD F"
+];
+
+const PR = {"30":12.5,"50":15.5,"100":24};
+let pedido = [];
+
+let html = "";
+nombres.forEach((nombre, i) => {
+  html += `<div class="card" data-nombre="${nombre.toLowerCase()}">
+    <h3>${nombre}</h3>
+    <p class="notas">Fragancia premium · Notas características de la casa</p>
+    <div class="tams">
+      <label><input type="radio" name="t${i}" value="30" checked>30ml $12.50</label>
+      <label><input type="radio" name="t${i}" value="50">50ml $15.50</label>
+      <label><input type="radio" name="t${i}" value="100">100ml $24.00</label>
+    </div>
+    <div class="btn">
+      <button class="b1" onclick="agregar(${i})">+ Agregar</button>
+      <button class="b2" onclick="verPerfume(${i})">Ver más</button>
+    </div>
+  </div>`;
+});
+document.getElementById("productos").innerHTML = html;
+
+function filtrar(){
+  const q = document.getElementById("buscador").value.toLowerCase();
+  document.querySelectorAll(".card").forEach(c => {
+    c.style.display = c.dataset.nombre.includes(q) ? "block" : "none";
+  });
+}
+
+function agregar(i){
+  const t = document.querySelector(`input[name="t${i}"]:checked`).value;
+  pedido.push({n: nombres[i], t, p: PR[t]});
+  render();
+  document.querySelector(".panel").scrollIntoView({behavior:"smooth"});
+}
+
+function calc(){
+  const sub = pedido.reduce((s,i) => s + i.p, 0);
+  const g = {"30":[],"50":[],"100":[]};
+  pedido.forEach(i => g[i.t].push(i));
+  let mg = null, mc = 0;
+  for(const t in g) if(g[t].length > mc){ mc = g[t].length; mg = t; }
+  let desc = 0, det = [];
+  if(mg && mc >= 2){
+    const pct = mc >= 4 ? 20 : 15;
+    const sg = g[mg].reduce((s,i) => s + i.p, 0);
+    desc = sg * pct / 100;
+    det.push({t: mg, pct, desc, c: mc});
+  }
+  const ciudad = document.getElementById("ciudad") ? document.getElementById("ciudad").value : "guayaquil";
+  const subConDesc = sub - desc;
+  let env = 0;
+  if(subConDesc >= 50){
+    env = 0;
+  } else {
+    env = ciudad === "guayaquil" ? 3.5 : 7.0;
+  }
+  return {sub, det, desc, env, tot: subConDesc + env, ciudad};
+}
+
+function render(){
+  const b = document.getElementById("resumen");
+  if(!pedido.length){ b.innerHTML = '<p class="vacio">Aún no has agregado fragancias.</p>'; return; }
+  const c = calc();
+  let h = "";
+  pedido.forEach((i,x) => {
+    h += `<p><span>${x+1}. ${i.n} (${i.t}ml)</span><span>$${i.p.toFixed(2)} <button onclick="quitar(${x})" style="background:none;border:none;color:#e74c3c;cursor:pointer">✕</button></span></p>`;
+  });
+  h += `<p><span>Subtotal</span><span>$${c.sub.toFixed(2)}</span></p>`;
+  c.det.forEach(d => { h += `<p><span>Desc. ${d.pct}% (${d.c} frascos ${d.t}ml)</span><span>-$${d.desc.toFixed(2)}</span></p>`; });
+  const envTxt = c.env === 0 ? 'GRATIS 🚚' : '$' + c.env.toFixed(2);
+  h += `<p><span>Envío (${c.ciudad === "guayaquil" ? "Guayaquil" : "Servientrega"})</span><span>${envTxt}</span></p>`;
+  h += `<p class="tot"><span>TOTAL</span><span>$${c.tot.toFixed(2)}</span></p>`;
+  b.innerHTML = h;
+}
+
+function quitar(i){ pedido.splice(i,1); render(); }
+
+function verPerfume(i){
+  const nombre = nombres[i];
+  document.getElementById("contenidoPerfume").innerHTML = `
+    <div class="perfil">
+      <h1>${nombre}</h1>
+      <p class="fam">Fragancia premium · JESÚS PARFUM</p>
+      <p class="precio">Desde <strong>$12.50</strong></p>
+      <p class="resumen">Fragancia de alta calidad disponible en 3 tamaños. Elige el tuyo y agrégalo a tu pedido.</p>
+    </div>
+    <div class="seccion">
+      <h2>🛒 Elige tamaño</h2>
+      <div class="selTam">
+        <label><input type="radio" name="tp" value="30" checked><div class="t">30 ml</div><div class="p">$12.50</div></label>
+        <label><input type="radio" name="tp" value="50"><div class="t">50 ml</div><div class="p">$15.50</div></label>
+        <label><input type="radio" name="tp" value="100"><div class="t">100 ml</div><div class="p">$24.00</div></label>
+      </div>
+      <button class="agregar" onclick="agregarDesde(${i})">🛒 Agregar al pedido</button>
+    </div>`;
+  document.getElementById("vistaCatalogo").style.display = "none";
+  document.getElementById("vistaPerfume").style.display = "block";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function agregarDesde(i){
+  const t = document.querySelector('input[name="tp"]:checked').value;
+  pedido.push({n: nombres[i], t, p: PR[t]});
+  render();
+  verCatalogo();
+  setTimeout(() => document.querySelector(".panel").scrollIntoView({behavior:"smooth"}), 100);
+}
+
+function verCatalogo(){
+  document.getElementById("vistaPerfume").style.display = "none";
+  document.getElementById("vistaCatalogo").style.display = "block";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function enviarWhatsApp(){
+  if(!pedido.length){ alert("Agrega al menos una fragancia."); return; }
+  const c = calc();
+  let m = "🛍️ *PEDIDO JESÚS PARFUM*%0A%0A";
+  pedido.forEach((i,x) => { m += `${x+1}. ${i.n} — ${i.t}ml — $${i.p.toFixed(2)}%0A`; });
+  m += "%0A----------------%0A";
+  m += `Subtotal: $${c.sub.toFixed(2)}%0A`;
+  c.det.forEach(d => { m += `Desc. ${d.pct}% (${d.c} frascos ${d.t}ml): -$${d.desc.toFixed(2)}%0A`; });
+  const envTxt = c.env === 0 ? 'GRATIS' : '$' + c.env.toFixed(2);
+  m += `Envío (${c.ciudad === "guayaquil" ? "Guayaquil" : "Servientrega - provincia"}): ${envTxt}%0A`;
+  m += `*TOTAL: $${c.tot.toFixed(2)}*%0A%0A`;
+  m += "⚠️ *IMPORTANTE:* Responde este mensaje con tus datos:%0A";
+  m += "1️⃣ Nombre completo:%0A2️⃣ Dirección:%0A3️⃣ Ciudad y provincia:%0A4️⃣ Teléfono:%0A%0A";
+  m += "❌ Sin estos datos no procesamos el envío.";
+  window.open(`https://wa.me/593996428137?text=${m}`,"_blank");
+}
+</script>
+</body>
+</html>
