@@ -277,9 +277,10 @@ section.bloque{padding:52px 0}
   padding:18px 0 12px;background:linear-gradient(180deg,#1a1a1a,#121212);border-bottom:1px solid #232323;
 }
 .frasco svg{filter:drop-shadow(0 8px 12px rgba(0,0,0,.55))}
-.frasco img{height:172px;width:auto;max-width:88%;object-fit:contain;filter:drop-shadow(0 10px 16px rgba(0,0,0,.6));border-radius:8px}
+.mono{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2rem;letter-spacing:2px;color:#4a4437;user-select:none}
+.frasco img{position:relative;z-index:2;background:#141414;height:172px;width:auto;max-width:88%;object-fit:contain;filter:drop-shadow(0 10px 16px rgba(0,0,0,.6));border-radius:8px}
 @media(max-width:520px){.frasco img{height:132px}}
-.modal-frasco img{max-width:100%;max-height:250px;width:auto;object-fit:contain;border-radius:10px;filter:drop-shadow(0 14px 24px rgba(0,0,0,.6))}
+.modal-frasco img{position:relative;z-index:2;background:#101010;max-width:100%;max-height:250px;width:auto;object-fit:contain;border-radius:10px;filter:drop-shadow(0 14px 24px rgba(0,0,0,.6))}
 .item-frasco img{width:100%;height:100%;object-fit:contain;border-radius:6px}
 .mini-tag{position:absolute;top:9px;left:9px;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;z-index:1;font-size:.6rem;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:3px 7px;border-radius:5px}
 .t-a{background:#2a1c3a;color:#dcbcff}
@@ -778,111 +779,111 @@ const CONFIG = {
    g: f = mujer · m = hombre · u = unisex
    ===================================================================== */
 const perfumes = [
-  {n:"Armaf Odyssey Mandarin Sky", b:"Armaf", g:"a", img:"img/pa_1.jpg"},
-  {n:"Armaf Odyssey Mandarin Sky Elixir", b:"Armaf", g:"a", img:"img/pa_4.jpg"},
-  {n:"Armaf Odyssey Mandarin Sky Vintage", b:"Armaf", g:"a", img:"img/pa_new_1.jpg"},
-  {n:"Armaf Odyssey Wild", b:"Armaf", g:"a", img:"img/pa_2.jpg"},
-  {n:"Armaf Odyssey White Man", b:"Armaf", g:"a", img:"img/pa_8.jpg"},
-  {n:"Armaf Odyssey Artisto", b:"Armaf", g:"a", img:"img/pa_13.jpg"},
-  {n:"Armaf Odyssey Go Mango", b:"Armaf", g:"a", img:"img/pa_new_2.jpg"},
-  {n:"Armaf Odyssey Bahamas", b:"Armaf", g:"a", img:"img/pa_new_3.jpg"},
-  {n:"Armaf Odyssey Spectra", b:"Armaf", g:"a", img:"img/pa_9.jpg"},
-  {n:"Armaf Odyssey Mega", b:"Armaf", g:"a", img:"img/pa_6.jpg"},
-  {n:"Armaf Odyssey Dubai Chocolate", b:"Armaf", g:"a", img:"img/pa_11.jpg"},
-  {n:"Armaf Odyssey Black Forest", b:"Armaf", g:"a", img:"img/pa_5.jpg"},
-  {n:"Armaf Odyssey Limoni", b:"Armaf", g:"a", img:"img/pa_10.jpg"},
-  {n:"Armaf Odyssey Eau De Montagne", b:"Armaf", g:"a", img:"img/pa_101.jpg"},
-  {n:"Armaf Beach Party", b:"Armaf", g:"a", img:"img/pa_new_4.jpg"},
-  {n:"Lattafa Yara Rosa", b:"Lattafa", g:"a", img:"img/pa_15.jpg"},
-  {n:"Lattafa Yara Candy", b:"Lattafa", g:"a", img:"img/pa_18.jpg"},
-  {n:"Armaf Club de Nuit Intense", b:"Armaf", g:"a", img:"img/pa_37.jpg"},
-  {n:"Armaf Club de Nuit Woman", b:"Armaf", g:"a", img:"img/pa_41.jpg"},
-  {n:"Armaf Club de Nuit Urban Elixir", b:"Armaf", g:"a", img:"img/pa_43.jpg"},
-  {n:"Armaf Club de Nuit Urban Man", b:"Armaf", g:"a", img:"img/pa_42.jpg"},
-  {n:"Armaf Club De Nuit Maleka", b:"Armaf", g:"a", img:"img/pa_100.jpg"},
-  {n:"Armaf Club de Nuit Bling", b:"Armaf", g:"a", img:"img/pa_new_5.jpg"},
-  {n:"Armaf Club de Nuit Sillage", b:"Armaf", g:"a", img:"img/pa_40.jpg"},
-  {n:"Armaf Club de Nuit Untold", b:"Armaf", g:"a", img:"img/pa_45.jpg"},
-  {n:"Armaf Club De Nuit Milestone", b:"Armaf", g:"a", img:"img/pa_46.jpg"},
-  {n:"Armaf Club de Nuit Iconic", b:"Armaf", g:"a", img:"img/pa_39.jpg"},
-  {n:"Armaf Island Bliss", b:"Armaf", g:"a", img:"img/pa_32.jpg"},
-  {n:"Armaf Yum Yum", b:"Armaf", g:"a", img:"img/pa_33.jpg"},
-  {n:"Armaf Island Breeze", b:"Armaf", g:"a", img:"img/pa_new_6.jpg"},
-  {n:"Lattafa Badee Al Oud Sublime", b:"Lattafa", g:"a", img:"img/pa_56.jpg"},
-  {n:"Lattafa Qaed Al Fursan Blanco", b:"Lattafa", g:"a", img:"img/pa_60.jpg"},
-  {n:"Lattafa Qaed Al Fursan Negro", b:"Lattafa", g:"a", img:"img/pa_59.jpg"},
-  {n:"Lattafa Qaed Al Fursan Untamed", b:"Lattafa", g:"a", img:"img/pa_61.jpg"},
-  {n:"Lattafa Eclaire Banoffi", b:"Lattafa", g:"a", img:"img/pa_new_7.jpg"},
-  {n:"Lattafa Mayar Lattafa", b:"Lattafa", g:"a", img:"img/pa_72.jpg"},
-  {n:"Lattafa Mayar Cherry Intense", b:"Lattafa", g:"a", img:"img/pa_73.jpg"},
-  {n:"Al Haramain Amber Oud Gold Edition", b:"Al Haramain", g:"a", img:"img/pa_83.jpg"},
-  {n:"Lattafa Fakhar Black", b:"Lattafa", g:"a", img:"img/pa_68.jpg"},
-  {n:"Lattafa Fakhar Platin", b:"Lattafa", g:"a", img:"img/pa_new_8.jpg"},
-  {n:"Emper Stallion 53", b:"Emper", g:"a", img:"img/pa_86.jpg"},
-  {n:"Bharara Champagne Black", b:"Bharara", g:"a", img:"img/pa_103.jpg"},
-  {n:"Maison Alhambra Jean Lowe Matiere", b:"Maison Alhambra", g:"a", img:"img/pa_95.jpg"},
-  {n:"Bharara King EDP", b:"Bharara", g:"a", img:"img/pa_52.jpg"},
-  {n:"Bharara Rome Pour Femme", b:"Bharara", g:"a", img:"img/pa_96.jpg"},
-  {n:"Bharara Rome Imagine", b:"Bharara", g:"a", img:"img/pa_new_9.jpg"},
-  {n:"Armaf Tag Donna Di Terra", b:"Armaf", g:"a", img:"img/pa_29.jpg"},
-  {n:"Dumont Nitro Red Dumont", b:"Dumont", g:"a", img:"img/pa_102.jpg"},
-  {n:"French Avenue Liquid Brun French Avenue", b:"French Avenue", g:"a", img:"img/pa_75.jpg"},
-  {n:"Lattafa Khamrah Dukhan", b:"Lattafa", g:"a", img:"img/pa_36.jpg"},
-  {n:"Lattafa Lataffa Jasoor", b:"Lattafa", g:"a", img:"img/pa_108.jpg"},
-  {n:"Lattafa Al Maleky", b:"Lattafa", g:"a", img:"img/pa_64.jpg"},
-  {n:"Lattafa Hayaati Florence", b:"Lattafa", g:"a", img:"img/pa_62.jpg"},
-  {n:"Armaf Ventana Black", b:"Armaf", g:"a", img:"img/pa_77.jpg"},
-  {n:"Maison Alhambra Salvo", b:"Maison Alhambra", g:"a", img:"img/pa_87.jpg"},
-  {n:"Rasasi Hawas For Him", b:"Rasasi", g:"a", img:"img/pa_49.jpg"},
-  {n:"French Avenue Vulcan Feu", b:"French Avenue", g:"a", img:"img/pa_new_10.jpg"},
-  {n:"Bharara Rome Pour Homme", b:"Bharara", g:"a", img:"img/pa_97.jpg"},
-  {n:"Bharara Rome Ivory", b:"Bharara", g:"a", img:"img/pa_new_11.jpg"},
-  {n:"Bharara Rome Fantasmagory", b:"Bharara", g:"a", img:"img/pa_new_12.jpg"},
-  {n:"Lattafa Haya Lattafa", b:"Lattafa", g:"a", img:"img/pa_104.jpg"},
-  {n:"Lattafa Mini Set Badee Al Oud", b:"Lattafa", g:"a", img:"img/pa_new_13.jpg"},
-  {n:"Lattafa Mini Set Yara", b:"Lattafa", g:"a", img:"img/pa_new_14.jpg"},
-  {n:"Lattafa Set Lattafa Eclaire", b:"Lattafa", g:"a", img:"img/pa_new_15.jpg"},
-  {n:"Armaf Set Armaf Tag Uomo Rosso", b:"Armaf", g:"a", img:"img/pa_new_16.jpg"},
-  {n:"Lattafa Set Yara Rosa y Candy", b:"Lattafa", g:"a", img:"img/pa_new_17.jpg"},
-  {n:"Lattafa Set Mayar Lattafa", b:"Lattafa", g:"a", img:"img/pa_new_18.jpg"},
-  {n:"Rasasi Set Hawas For Him", b:"Rasasi", g:"a", img:"img/pa_new_19.jpg"},
-  {n:"Lattafa Set Vintage Radio", b:"Lattafa", g:"a", img:"img/pa_new_20.jpg"},
-  {n:"Armaf Set Club de Nuit Man Classic", b:"Armaf", g:"a", img:"img/pa_new_21.jpg"},
-  {n:"Armaf Set Odyssey Acqua", b:"Armaf", g:"a", img:"img/pa_new_22.jpg"},
-  {n:"Gucci Guilty Pour Homme", b:"Gucci", g:"d", img:"img/pd_27.jpg"},
-  {n:"Valentino Uomo Born in Roma", b:"Valentino", g:"d", img:"img/pd_new_1.jpg"},
-  {n:"Versace Eros", b:"Versace", g:"d", img:"img/pd_21.jpg"},
-  {n:"Armani Stronger With You Intensely", b:"Armani", g:"d", img:"img/pd_23.jpg"},
-  {n:"Dolce & Gabbana Light Blue Women", b:"Dolce & Gabbana", g:"d", img:"img/pd_25.jpg"},
-  {n:"Dolce & Gabbana Light Blue Men", b:"Dolce & Gabbana", g:"d", img:"img/pd_26.jpg"},
-  {n:"Adidas Victory League", b:"Adidas", g:"d", img:"img/pd_new_2.jpg"},
-  {n:"Britney Spears Fantasy", b:"Britney Spears", g:"d", img:"img/pd_12.jpg"},
-  {n:"Jean Paul Gaultier Le Beau", b:"Jean Paul Gaultier", g:"d", img:"img/pd_20.jpg"},
-  {n:"Carolina Herrera Bad Boy", b:"Carolina Herrera", g:"d", img:"img/pd_new_3.jpg"},
-  {n:"Nautica Voyage", b:"Nautica", g:"d", img:"img/pd_6.jpg"},
-  {n:"Tommy Hilfiger Tommy Men", b:"Tommy Hilfiger", g:"d", img:"img/pd_34.jpg"},
-  {n:"Calvin Klein CK One", b:"Calvin Klein", g:"d", img:"img/pd_5.jpg"},
-  {n:"Calvin Klein CK Be", b:"Calvin Klein", g:"d", img:"img/pd_4.jpg"},
-  {n:"Paris Hilton Ruby Rush", b:"Paris Hilton", g:"d", img:"img/pd_32.jpg"},
-  {n:"Paris Hilton Can Can", b:"Paris Hilton", g:"d", img:"img/pd_36.jpg"},
-  {n:"Paris Hilton Women", b:"Paris Hilton", g:"d", img:"img/pd_35.jpg"},
-  {n:"Ariana Grande Thank U, Next", b:"Ariana Grande", g:"d", img:"img/pd_new_4.jpg"},
-  {n:"Ariana Grande Cloud", b:"Ariana Grande", g:"d", img:"img/pd_15.jpg"},
-  {n:"Ariana Grande Cloud Pink", b:"Ariana Grande", g:"d", img:"img/pd_33.jpg"},
-  {n:"Ariana Grande Sweet Like Candy", b:"Ariana Grande", g:"d", img:"img/pd_new_5.jpg"},
-  {n:"Cacharel Amor Amor", b:"Cacharel", g:"d", img:"img/pd_new_6.jpg"},
-  {n:"Antonio Banderas Queen of Seduction", b:"Antonio Banderas", g:"d", img:"img/pd_new_7.jpg"},
-  {n:"Paco Rabanne Olympéa Blossom", b:"Paco Rabanne", g:"d", img:"img/pd_new_8.jpg"},
-  {n:"Clinique Happy For Men", b:"Clinique", g:"d", img:"img/pd_new_9.jpg"},
-  {n:"Clinique Happy Heart", b:"Clinique", g:"d", img:"img/pd_new_10.jpg"},
-  {n:"Lacoste L.12.12 Blanc", b:"Lacoste", g:"d", img:"img/pd_new_11.jpg"},
-  {n:"Moschino Toy 2 Pearl", b:"Moschino", g:"d", img:"img/pd_new_12.jpg"},
-  {n:"Montblanc Legend", b:"Montblanc", g:"d", img:"img/pd_new_13.jpg"},
-  {n:"Paco Rabanne Black XS", b:"Paco Rabanne", g:"d", img:"img/pd_new_14.jpg"},
-  {n:"Guess Gold", b:"Guess", g:"d", img:"img/pd_3.jpg"},
-  {n:"Guess Girl", b:"Guess", g:"d", img:"img/pd_new_15.jpg"},
-  {n:"Guess Women", b:"Guess", g:"d", img:"img/pd_new_16.jpg"},
-  {n:"Paco Rabanne Invictus Victory Elixir Intense", b:"Paco Rabanne", g:"d", img:"img/pd_new_17.jpg"}
+  {n:"Armaf Odyssey Mandarin Sky", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_1.jpg"},
+  {n:"Armaf Odyssey Mandarin Sky Elixir", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_4.jpg"},
+  {n:"Armaf Odyssey Mandarin Sky Vintage", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_1.jpg"},
+  {n:"Armaf Odyssey Wild", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_2.jpg"},
+  {n:"Armaf Odyssey White Man", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_8.jpg"},
+  {n:"Armaf Odyssey Artisto", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_13.jpg"},
+  {n:"Armaf Odyssey Go Mango", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_2.jpg"},
+  {n:"Armaf Odyssey Bahamas", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_3.jpg"},
+  {n:"Armaf Odyssey Spectra", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_9.jpg"},
+  {n:"Armaf Odyssey Mega", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_6.jpg"},
+  {n:"Armaf Odyssey Dubai Chocolate", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_11.jpg"},
+  {n:"Armaf Odyssey Black Forest", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_5.jpg"},
+  {n:"Armaf Odyssey Limoni", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_10.jpg"},
+  {n:"Armaf Odyssey Eau De Montagne", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_101.jpg"},
+  {n:"Armaf Beach Party", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_4.jpg"},
+  {n:"Lattafa Yara Rosa", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_15.jpg"},
+  {n:"Lattafa Yara Candy", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_18.jpg"},
+  {n:"Armaf Club de Nuit Intense", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_37.jpg"},
+  {n:"Armaf Club de Nuit Woman", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_41.jpg"},
+  {n:"Armaf Club de Nuit Urban Elixir", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_43.jpg"},
+  {n:"Armaf Club de Nuit Urban Man", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_42.jpg"},
+  {n:"Armaf Club De Nuit Maleka", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_100.jpg"},
+  {n:"Armaf Club de Nuit Bling", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_5.jpg"},
+  {n:"Armaf Club de Nuit Sillage", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_40.jpg"},
+  {n:"Armaf Club de Nuit Untold", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_45.jpg"},
+  {n:"Armaf Club De Nuit Milestone", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_46.jpg"},
+  {n:"Armaf Club de Nuit Iconic", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_39.jpg"},
+  {n:"Armaf Island Bliss", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_32.jpg"},
+  {n:"Armaf Yum Yum", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_33.jpg"},
+  {n:"Armaf Island Breeze", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_6.jpg"},
+  {n:"Lattafa Badee Al Oud Sublime", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_56.jpg"},
+  {n:"Lattafa Qaed Al Fursan Blanco", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_60.jpg"},
+  {n:"Lattafa Qaed Al Fursan Negro", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_59.jpg"},
+  {n:"Lattafa Qaed Al Fursan Untamed", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_61.jpg"},
+  {n:"Lattafa Eclaire Banoffi", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_7.jpg"},
+  {n:"Lattafa Mayar Lattafa", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_72.jpg"},
+  {n:"Lattafa Mayar Cherry Intense", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_73.jpg"},
+  {n:"Al Haramain Amber Oud Gold Edition", b:"Al Haramain", g:"a", img:"https://jesusperfumes.com/perfumes/pa_83.jpg"},
+  {n:"Lattafa Fakhar Black", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_68.jpg"},
+  {n:"Lattafa Fakhar Platin", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_8.jpg"},
+  {n:"Emper Stallion 53", b:"Emper", g:"a", img:"https://jesusperfumes.com/perfumes/pa_86.jpg"},
+  {n:"Bharara Champagne Black", b:"Bharara", g:"a", img:"https://jesusperfumes.com/perfumes/pa_103.jpg"},
+  {n:"Maison Alhambra Jean Lowe Matiere", b:"Maison Alhambra", g:"a", img:"https://jesusperfumes.com/perfumes/pa_95.jpg"},
+  {n:"Bharara King EDP", b:"Bharara", g:"a", img:"https://jesusperfumes.com/perfumes/pa_52.jpg"},
+  {n:"Bharara Rome Pour Femme", b:"Bharara", g:"a", img:"https://jesusperfumes.com/perfumes/pa_96.jpg"},
+  {n:"Bharara Rome Imagine", b:"Bharara", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_9.jpg"},
+  {n:"Armaf Tag Donna Di Terra", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_29.jpg"},
+  {n:"Dumont Nitro Red Dumont", b:"Dumont", g:"a", img:"https://jesusperfumes.com/perfumes/pa_102.jpg"},
+  {n:"French Avenue Liquid Brun French Avenue", b:"French Avenue", g:"a", img:"https://jesusperfumes.com/perfumes/pa_75.jpg"},
+  {n:"Lattafa Khamrah Dukhan", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_36.jpg"},
+  {n:"Lattafa Lataffa Jasoor", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_108.jpg"},
+  {n:"Lattafa Al Maleky", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_64.jpg"},
+  {n:"Lattafa Hayaati Florence", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_62.jpg"},
+  {n:"Armaf Ventana Black", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_77.jpg"},
+  {n:"Maison Alhambra Salvo", b:"Maison Alhambra", g:"a", img:"https://jesusperfumes.com/perfumes/pa_87.jpg"},
+  {n:"Rasasi Hawas For Him", b:"Rasasi", g:"a", img:"https://jesusperfumes.com/perfumes/pa_49.jpg"},
+  {n:"French Avenue Vulcan Feu", b:"French Avenue", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_10.jpg"},
+  {n:"Bharara Rome Pour Homme", b:"Bharara", g:"a", img:"https://jesusperfumes.com/perfumes/pa_97.jpg"},
+  {n:"Bharara Rome Ivory", b:"Bharara", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_11.jpg"},
+  {n:"Bharara Rome Fantasmagory", b:"Bharara", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_12.jpg"},
+  {n:"Lattafa Haya Lattafa", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_104.jpg"},
+  {n:"Lattafa Mini Set Badee Al Oud", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_13.jpg"},
+  {n:"Lattafa Mini Set Yara", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_14.jpg"},
+  {n:"Lattafa Set Lattafa Eclaire", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_15.jpg"},
+  {n:"Armaf Set Armaf Tag Uomo Rosso", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_16.jpg"},
+  {n:"Lattafa Set Yara Rosa y Candy", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_17.jpg"},
+  {n:"Lattafa Set Mayar Lattafa", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_18.jpg"},
+  {n:"Rasasi Set Hawas For Him", b:"Rasasi", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_19.jpg"},
+  {n:"Lattafa Set Vintage Radio", b:"Lattafa", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_20.jpg"},
+  {n:"Armaf Set Club de Nuit Man Classic", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_21.jpg"},
+  {n:"Armaf Set Odyssey Acqua", b:"Armaf", g:"a", img:"https://jesusperfumes.com/perfumes/pa_new_22.jpg"},
+  {n:"Gucci Guilty Pour Homme", b:"Gucci", g:"d", img:"https://jesusperfumes.com/perfumes/pd_27.jpg"},
+  {n:"Valentino Uomo Born in Roma", b:"Valentino", g:"d", img:"https://jesusperfumes.com/perfumes/pd_new_1.jpg"},
+  {n:"Versace Eros", b:"Versace", g:"d", img:"https://jesusperfumes.com/perfumes/pd_21.jpg"},
+  {n:"Armani Stronger With You Intensely", b:"Armani", g:"d", img:"https://jesusperfumes.com/perfumes/pd_23.jpg"},
+  {n:"Dolce & Gabbana Light Blue Women", b:"Dolce & Gabbana", g:"d", img:"https://jesusperfumes.com/perfumes/pd_25.jpg"},
+  {n:"Dolce & Gabbana Light Blue Men", b:"Dolce & Gabbana", g:"d", img:"https://jesusperfumes.com/perfumes/pd_26.jpg"},
+  {n:"Adidas Victory League", b:"Adidas", g:"d", img:"https://jesusperfumes.com/perfumes/pd_new_2.jpg"},
+  {n:"Britney Spears Fantasy", b:"Britney Spears", g:"d", img:"https://jesusperfumes.com/perfumes/pd_12.jpg"},
+  {n:"Jean Paul Gaultier Le Beau", b:"Jean Paul Gaultier", g:"d", img:"https://jesusperfumes.com/perfumes/pd_20.jpg"},
+  {n:"Carolina Herrera Bad Boy", b:"Carolina Herrera", g:"d", img:"https://jesusperfumes.com/perfumes/pd_new_3.jpg"},
+  {n:"Nautica Voyage", b:"Nautica", g:"d", img:"https://jesusperfumes.com/perfumes/pd_6.jpg"},
+  {n:"Tommy Hilfiger Tommy Men", b:"Tommy Hilfiger", g:"d", img:"https://jesusperfumes.com/perfumes/pd_34.jpg"},
+  {n:"Calvin Klein CK One", b:"Calvin Klein", g:"d", img:"https://jesusperfumes.com/perfumes/pd_5.jpg"},
+  {n:"Calvin Klein CK Be", b:"Calvin Klein", g:"d", img:"https://jesusperfumes.com/perfumes/pd_4.jpg"},
+  {n:"Paris Hilton Ruby Rush", b:"Paris Hilton", g:"d", img:"https://jesusperfumes.com/perfumes/pd_32.jpg"},
+  {n:"Paris Hilton Can Can", b:"Paris Hilton", g:"d", img:"https://jesusperfumes.com/perfumes/pd_36.jpg"},
+  {n:"Paris Hilton Women", b:"Paris Hilton", g:"d", img:"https://jesusperfumes.com/perfumes/pd_35.jpg"},
+  {n:"Ariana Grande Thank U, Next", b:"Ariana Grande", g:"d", img:"https://jesusperfumes.com/perfumes/pd_new_4.jpg"},
+  {n:"Ariana Grande Cloud", b:"Ariana Grande", g:"d", img:"https://jesusperfumes.com/perfumes/pd_15.jpg"},
+  {n:"Ariana Grande Cloud Pink", b:"Ariana Grande", g:"d", img:"https://jesusperfumes.com/perfumes/pd_33.jpg"},
+  {n:"Ariana Grande Sweet Like Candy", b:"Ariana Grande", g:"d", img:"https://jesusperfumes.com/perfumes/pd_new_5.jpg"},
+  {n:"Cacharel Amor Amor", b:"Cacharel", g:"d", img:"https://jesusperfumes.com/perfumes/pd_new_6.jpg"},
+  {n:"Antonio Banderas Queen of Seduction", b:"Antonio Banderas", g:"d", img:"https://jesusperfumes.com/perfumes/pd_new_7.jpg"},
+  {n:"Paco Rabanne Olympéa Blossom", b:"Paco Rabanne", g:"d", img:"https://jesusperfumes.com/perfumes/pd_new_8.jpg"},
+  {n:"Clinique Happy For Men", b:"Clinique", g:"d", img:"https://jesusperfumes.com/perfumes/pd_new_9.jpg"},
+  {n:"Clinique Happy Heart", b:"Clinique", g:"d", img:"https://jesusperfumes.com/perfumes/pd_new_10.jpg"},
+  {n:"Lacoste L.12.12 Blanc", b:"Lacoste", g:"d", img:"https://jesusperfumes.com/perfumes/pd_new_11.jpg"},
+  {n:"Moschino Toy 2 Pearl", b:"Moschino", g:"d", img:"https://jesusperfumes.com/perfumes/pd_new_12.jpg"},
+  {n:"Montblanc Legend", b:"Montblanc", g:"d", img:"https://jesusperfumes.com/perfumes/pd_new_13.jpg"},
+  {n:"Paco Rabanne Black XS", b:"Paco Rabanne", g:"d", img:"https://jesusperfumes.com/perfumes/pd_new_14.jpg"},
+  {n:"Guess Gold", b:"Guess", g:"d", img:"https://jesusperfumes.com/perfumes/pd_3.jpg"},
+  {n:"Guess Girl", b:"Guess", g:"d", img:"https://jesusperfumes.com/perfumes/pd_new_15.jpg"},
+  {n:"Guess Women", b:"Guess", g:"d", img:"https://jesusperfumes.com/perfumes/pd_new_16.jpg"},
+  {n:"Paco Rabanne Invictus Victory Elixir Intense", b:"Paco Rabanne", g:"d", img:"https://jesusperfumes.com/perfumes/pd_new_17.jpg"}
 ];
 
 /* fichas: la de esta tienda va "a pedido" (se entrega por WhatsApp) */
@@ -1022,7 +1023,8 @@ function pintarCatalogo(){
       <div class="frasco">
         <span class="mini-tag t-${p.g}">${TAG[p.g]}</span>
         <button class="like" data-like="p-${p.id}" aria-label="Me gusta ${esc(p.n)}"><span class="cor">❤</span> <span class="n">0</span></button>
-        <img src="${p.img}" alt="${esc(p.n)}" loading="lazy" decoding="async" width="260" height="260">
+        <span class="mono" aria-hidden="true">${iniciales(p.n)}</span>
+        <img src="${p.img}" alt="${esc(p.n)}" loading="lazy" decoding="async" width="260" height="260" onerror="this.remove()">
       </div>
       <div class="card-txt">
         <h3>${esc(p.n)}</h3>
@@ -1086,7 +1088,7 @@ function abrirProducto(id){
        </div>`;
 
   document.getElementById("modalCuerpo").innerHTML = `
-    <div class="modal-frasco"><img src="${p.img}" alt="${esc(p.n)}" width="300" height="300" loading="lazy"></div>
+    <div class="modal-frasco"><span class="mono" aria-hidden="true">${iniciales(p.n)}</span><img src="${p.img}" alt="${esc(p.n)}" width="300" height="300" loading="lazy" onerror="this.remove()"></div>
     <div class="modal-info">
       <span class="tag t-${p.g}">${TAG[p.g]}</span>
       <h2 id="mpTitulo">${esc(p.n)}</h2>
@@ -1230,7 +1232,7 @@ function renderCarrito(){
   cont.innerHTML = pedido.map((i, x) => {
     const p = CATALOGO.find(c => c.n === i.n) || { n:i.n, g:"u", id:0 };
     return `<div class="item">
-      <div class="item-frasco"><img src="${p.img}" alt="" width="40" height="52" loading="lazy"></div>
+      <div class="item-frasco"><img src="${p.img}" alt="" width="40" height="52" loading="lazy" onerror="this.remove()"></div>
       <div class="item-info">
         <strong>${esc(i.n)}</strong>
         <span>${i.t} ml · ${dinero(CONFIG.precios[i.t])} c/u</span>
@@ -1534,5 +1536,5 @@ function irArriba(){ window.scrollTo({ top:0, behavior:"smooth" }); }
   }
 })();
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a513990898078c9f',t:'MTc5MzEyNDAwMA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a513a58a8d36513f',t:'MTc5MzEyNDUxMg=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
