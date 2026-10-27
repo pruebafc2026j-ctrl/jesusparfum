@@ -484,6 +484,30 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
 @media(min-width:861px){footer{padding-bottom:34px}}
 
 [hidden]{display:none !important}
+
+/* aviso "no lo encuentras" */
+.aviso-pedido{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;
+  max-width:900px;margin:16px auto 0;padding:14px 18px;
+  background:linear-gradient(135deg,rgba(212,175,55,.14),rgba(212,175,55,.04));
+  border:1px solid rgba(212,175,55,.45);border-radius:14px;
+  box-shadow:0 0 0 1px rgba(212,175,55,.06) inset;
+}
+.aviso-pedido .aviso-ico{font-size:22px;line-height:1}
+.aviso-pedido p{margin:0;font-size:15px;line-height:1.45;color:#f3efe6;text-align:left;flex:1 1 320px}
+.aviso-pedido b{color:#e8c964}
+.aviso-pedido .btn-aviso{
+  display:inline-flex;align-items:center;gap:8px;white-space:nowrap;
+  background:#25d366;color:#08331b;font-weight:700;text-decoration:none;
+  padding:10px 18px;border-radius:999px;font-size:14px;
+  transition:transform .15s ease,box-shadow .15s ease;
+}
+.aviso-pedido .btn-aviso:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(37,211,102,.35)}
+@media(max-width:560px){
+  .aviso-pedido{padding:13px 14px;gap:10px}
+  .aviso-pedido p{font-size:14px;text-align:center;flex:1 1 100%}
+  .aviso-pedido .btn-aviso{width:100%;justify-content:center}
+}
 </style>
 </head>
 <body>
@@ -601,6 +625,12 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
           <button class="chip-filtro" data-f="f" aria-pressed="false" onclick="setFiltro('f',this)">Mujer</button>
           <button class="chip-filtro" data-f="m" aria-pressed="false" onclick="setFiltro('m',this)">Hombre</button>
           <button class="chip-filtro" data-f="u" aria-pressed="false" onclick="setFiltro('u',this)">Unisex</button>
+        </div>
+
+        <div class="aviso-pedido">
+          <span class="aviso-ico" aria-hidden="true">✨</span>
+          <p><b>¿Tu perfume en especial no está en la lista?</b> Escríbenos y lo conseguimos por ti: tenemos acceso a muchas más fragancias.</p>
+          <a class="btn-aviso" id="waAviso" href="#" target="_blank" rel="noopener">💬 Hablar con nosotros</a>
         </div>
       </div>
     </div>
@@ -1068,7 +1098,8 @@ function pintarCatalogo(){
   if(!arr.length){
     cont.innerHTML = `<div class="sin-resultados">
       <b>No encontramos “${esc(query)}”</b>
-      Prueba con el nombre de la marca (Dior, Carolina Herrera) o con una familia (vainilla, amaderado).<br><br>
+      Prueba con el nombre de la marca (Dior, Carolina Herrera) o con una familia (vainilla, amaderado).<br>
+      <span style="color:#e8c964">Y si tu perfume en especial no lo encuentras, habla con nosotros: ¡podemos resolverlo!</span><br><br>
       <a class="btn btn-fantasma" id="waSin" href="#" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
     </div>`;
     enlazarWhatsApp();
@@ -1379,7 +1410,7 @@ function enviarWhatsApp(){
 
 function enlazarWhatsApp(){
   const saludo = encodeURIComponent("¡Hola JESÚS PARFUM! 👋 Quiero información sobre las fragancias.");
-  ["waHeader","waHero","waFooter","waSin","waPromo","waGuia"].forEach(id => {
+  ["waHeader","waHero","waFooter","waSin","waPromo","waGuia","waAviso"].forEach(id => {
     const el = document.getElementById(id);
     if(el){ el.href = `https://wa.me/${CONFIG.whatsapp}?text=${saludo}`; el.target = "_blank"; el.rel = "noopener"; }
   });
@@ -1599,5 +1630,5 @@ function irArriba(){ window.scrollTo({ top:0, behavior:"smooth" }); }
   }
 })();
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5140905ac30513f',t:'MTc5MzEyODU4Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a51414bebceb8c9f',t:'MTc5MzEyOTA2Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
