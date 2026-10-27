@@ -10,6 +10,13 @@
 <meta name="theme-color" content="#0d0d0d">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://pruebafc2026j-ctrl.github.io/jesusparfum.github.io/">
+<link rel="alternate" hreflang="es-EC" href="https://pruebafc2026j-ctrl.github.io/jesusparfum.github.io/">
+<meta name="geo.region" content="EC-G">
+<meta name="geo.placename" content="Guayaquil">
+<meta name="geo.position" content="-2.170998;-79.922359">
+<meta name="ICBM" content="-2.170998, -79.922359">
+<meta name="keywords" content="perfumes Guayaquil, fragancias inspiradas Ecuador, perfumes árabes Guayaquil, perfumes por WhatsApp, JESÚS PARFUM">
+<meta name="author" content="JESÚS PARFUM">
 
 <!-- Open Graph: así se ve el link cuando lo compartes por WhatsApp / Facebook -->
 <meta property="og:type" content="website">
@@ -31,19 +38,86 @@
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
 
-<!-- Datos estructurados para Google -->
+<!-- Datos estructurados de las preguntas frecuentes (Google los muestra desplegables) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Store",
-  "name": "JESÚS PARFUM",
-  "description": "Fragancias premium inspiradas en las más icónicas del mercado. Envíos a todo Ecuador.",
-  "telephone": "+593996428137",
-  "priceRange": "$12.50 - $24.00",
-  "address": { "@type": "PostalAddress", "addressLocality": "Guayaquil", "addressRegion": "Guayas", "addressCountry": "EC" },
-  "areaServed": "Ecuador",
-  "currenciesAccepted": "USD",
-  "paymentAccepted": "Efectivo, Transferencia"
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type":"Question", "name":"¿Las fragancias que venden son originales?",
+      "acceptedAnswer": { "@type":"Answer", "text":"No. Son fragancias inspiradas de alta concentración: reproducen las notas y el estilo de las originales, no son los frascos de las casas de moda. Por eso el precio es distinto." } },
+    { "@type":"Question", "name":"¿Cuánto dura el aroma?",
+      "acceptedAnswer": { "@type":"Answer", "text":"Entre 8 y 12 horas en piel, según la familia olfativa. Los cítricos se sienten más al inicio; los ambarados y gourmand duran más." } },
+    { "@type":"Question", "name":"¿Cuánto cuesta el envío y cuánto demora?",
+      "acceptedAnswer": { "@type":"Answer", "text":"Guayaquil $3.50. Otras provincias por Servientrega $7.00. Envío gratis desde $50 después del descuento. El tiempo de entrega se confirma por WhatsApp según la ciudad." } },
+    { "@type":"Question", "name":"¿Cuáles son los precios por tamaño?",
+      "acceptedAnswer": { "@type":"Answer", "text":"30 ml $12.50, 50 ml $15.50 y 100 ml $24.00. El de 100 ml es el más pedido y el de mejor precio por mililitro." } },
+    { "@type":"Question", "name":"¿Cómo funciona el descuento por combos?",
+      "acceptedAnswer": { "@type":"Answer", "text":"Se agrupa por tamaño: 2 o 3 frascos del mismo tamaño tienen 15% de descuento y 4 o más tienen 20%. Puedes combinar fragancias distintas." } },
+    { "@type":"Question", "name":"¿Cómo pago el pedido?",
+      "acceptedAnswer": { "@type":"Answer", "text":"El pago se coordina por WhatsApp al confirmar el pedido, por transferencia o el método acordado. No se piden datos de tarjeta dentro de la página." } },
+    { "@type":"Question", "name":"¿Dónde entregan?",
+      "acceptedAnswer": { "@type":"Answer", "text":"Desde Guayaquil, Ecuador, con entregas en la ciudad y envíos a todas las provincias del país." } }
+  ]
+}
+</script>
+
+<!-- Datos estructurados de tienda local + colección de productos -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Store",
+      "@id": "https://pruebafc2026j-ctrl.github.io/jesusparfum.github.io/#tienda",
+      "name": "JESÚS PARFUM",
+      "url": "https://pruebafc2026j-ctrl.github.io/jesusparfum.github.io/",
+      "image": "https://pruebafc2026j-ctrl.github.io/jesusparfum.github.io/og.jpg",
+      "telephone": "+593996428137",
+      "priceRange": "$12.50 - $24.00",
+      "currenciesAccepted": "USD",
+      "paymentAccepted": "Efectivo, Transferencia bancaria",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Guayaquil",
+        "addressRegion": "Guayas",
+        "addressCountry": "EC"
+      },
+      "geo": { "@type": "GeoCoordinates", "latitude": -2.170998, "longitude": -79.922359 },
+      "areaServed": [ { "@type":"City", "name":"Guayaquil" }, { "@type":"Country", "name":"Ecuador" } ],
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+        "opens": "09:00", "closes": "19:00"
+      }],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Fragancias inspiradas premium",
+        "itemListElement": [
+          { "@type":"Offer", "name":"Frasco 30 ml",  "price":"12.50", "priceCurrency":"USD", "availability":"https://schema.org/InStock" },
+          { "@type":"Offer", "name":"Frasco 50 ml",  "price":"15.50", "priceCurrency":"USD", "availability":"https://schema.org/InStock" },
+          { "@type":"Offer", "name":"Frasco 100 ml", "price":"24.00", "priceCurrency":"USD", "availability":"https://schema.org/InStock" }
+        ]
+      }
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://pruebafc2026j-ctrl.github.io/jesusparfum.github.io/#catalogo",
+      "name": "Catálogo de fragancias inspiradas · JESÚS PARFUM",
+      "description": "Más de 160 fragancias inspiradas en las más icónicas, desde $12.50 los 30 ml, con envíos a todo Ecuador.",
+      "isPartOf": { "@id": "https://pruebafc2026j-ctrl.github.io/jesusparfum.github.io/#tienda" },
+      "about": "Fragancias inspiradas premium en Guayaquil, Ecuador"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type":"ListItem", "position":1, "name":"Inicio", "item":"https://pruebafc2026j-ctrl.github.io/jesusparfum.github.io/" },
+        { "@type":"ListItem", "position":2, "name":"Catálogo", "item":"https://pruebafc2026j-ctrl.github.io/jesusparfum.github.io/#catalogo" },
+        { "@type":"ListItem", "position":3, "name":"Precios", "item":"https://pruebafc2026j-ctrl.github.io/jesusparfum.github.io/#precios" },
+        { "@type":"ListItem", "position":4, "name":"Recomendaciones", "item":"https://pruebafc2026j-ctrl.github.io/jesusparfum.github.io/#recomendaciones" }
+      ]
+    }
+  ]
 }
 </script>
 
@@ -203,10 +277,13 @@ section.bloque{padding:52px 0}
   padding:18px 0 12px;background:linear-gradient(180deg,#1a1a1a,#121212);border-bottom:1px solid #232323;
 }
 .frasco svg{filter:drop-shadow(0 8px 12px rgba(0,0,0,.55))}
-.mini-tag{position:absolute;top:9px;left:9px;font-size:.6rem;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:3px 7px;border-radius:5px}
-.t-f{background:#3b0d24;color:#ffb8d6}
-.t-m{background:#0f2447;color:#9dc4ff}
-.t-u{background:#0d3327;color:#8fe8c4}
+.frasco img{height:172px;width:auto;max-width:88%;object-fit:contain;filter:drop-shadow(0 10px 16px rgba(0,0,0,.6));border-radius:8px}
+@media(max-width:520px){.frasco img{height:132px}}
+.modal-frasco img{max-width:100%;max-height:250px;width:auto;object-fit:contain;border-radius:10px;filter:drop-shadow(0 14px 24px rgba(0,0,0,.6))}
+.item-frasco img{width:100%;height:100%;object-fit:contain;border-radius:6px}
+.mini-tag{position:absolute;top:9px;left:9px;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;z-index:1;font-size:.6rem;font-weight:800;letter-spacing:.6px;text-transform:uppercase;padding:3px 7px;border-radius:5px}
+.t-a{background:#2a1c3a;color:#dcbcff}
+.t-d{background:#0f2447;color:#9dc4ff}
 .card-txt{padding:12px 13px 14px;display:flex;flex-direction:column;gap:5px;flex:1}
 .card-txt h3{font-size:.86rem;line-height:1.28;min-height:2.5em;letter-spacing:.2px}
 .card-fam{font-size:.68rem;color:var(--oro);text-transform:uppercase;letter-spacing:.7px;font-weight:700}
@@ -341,6 +418,61 @@ select#ciudad:focus{border-color:var(--oro);outline:none}
 .aviso-legal p{color:#cfcabf;font-size:.83rem;line-height:1.65}
 .aviso-legal p + p{margin-top:9px}
 
+
+/* ---------- PROPAGANDA ---------- */
+.promo{position:relative;overflow:hidden;background:linear-gradient(120deg,#1a1400,#241e0c 42%,#141414);border:1px solid rgba(201,162,39,.45);border-radius:18px;padding:26px 24px;margin:34px 0 6px}
+.promo:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 12% 0%,rgba(201,162,39,.22),transparent 55%);pointer-events:none}
+.promo > *{position:relative}
+.promo-cab{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.promo-tag{background:var(--oro);color:#1a1400;font-weight:900;font-size:.64rem;letter-spacing:1.5px;text-transform:uppercase;padding:5px 11px;border-radius:99px}
+.promo h2{font-family:var(--serif);font-size:clamp(1.25rem,3.4vw,1.8rem);font-weight:400;color:#fff;line-height:1.2}
+.promo h2 em{color:var(--oro);font-style:normal}
+.promo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:16px 0 18px}
+.promo-item{background:rgba(0,0,0,.35);border:1px solid #2f2a18;border-radius:12px;padding:14px}
+.promo-item b{display:block;color:#e8ca62;font-size:.82rem;margin-bottom:4px}
+.promo-item span{color:#c3bfb7;font-size:.76rem;line-height:1.45;display:block}
+.promo-acciones{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.promo small{color:#8f8b84;font-size:.7rem}
+
+/* ---------- LIKES ---------- */
+.like{display:inline-flex;align-items:center;gap:6px;background:#1e1e1e;border:1px solid #333;color:#cfcac2;border-radius:99px;padding:6px 11px;font-weight:800;font-size:.74rem;transition:.15s}
+.like:hover{border-color:#e2564a;color:#ff8d80}
+.like .cor{font-size:.85rem;line-height:1;transition:.15s}
+.like[data-mio="1"]{background:rgba(226,86,74,.14);border-color:#e2564a;color:#ff8d80}
+.like[data-mio="1"] .cor{transform:scale(1.18)}
+.like-grande{padding:13px 22px;font-size:.86rem;border-radius:14px}
+.like-grande .cor{font-size:1.05rem}
+.frasco .like{position:absolute;top:9px;right:9px;padding:4px 8px;font-size:.66rem;background:rgba(20,20,20,.85);backdrop-filter:blur(4px)}
+
+/* ---------- RECOMENDACIONES ---------- */
+.resenas{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:18px}
+.resena{background:var(--panel);border:1px solid var(--linea);border-radius:var(--radio);padding:18px;display:flex;flex-direction:column;gap:8px}
+.resena.pendiente{border-style:dashed;border-color:rgba(201,162,39,.5)}
+.resena .estrellas{color:var(--oro);letter-spacing:2px;font-size:.9rem}
+.resena p{color:#d7d2c9;font-size:.85rem;line-height:1.6}
+.resena .quien{color:var(--tenue);font-size:.74rem;font-weight:700}
+.resena .pie{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;padding-top:6px}
+.resena .pie .like{padding:4px 9px;font-size:.7rem}
+.resenas-vacio{grid-column:1/-1;text-align:center;color:var(--tenue);font-size:.86rem;padding:26px 18px;border:1px dashed #333;border-radius:var(--radio)}
+.resena-form{background:#141414;border:1px solid var(--linea);border-radius:var(--radio);padding:18px;max-width:760px;margin:0 auto}
+.resena-form h3{font-size:.9rem;color:var(--oro);margin-bottom:12px}
+.resena-form .campos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+@media(max-width:520px){.resena-form .campos{grid-template-columns:1fr}}
+.resena-form input,.resena-form textarea{width:100%;background:#0f0f0f;border:1.5px solid #2f2f2f;border-radius:10px;color:#fff;padding:11px 13px;font:inherit;font-size:.85rem}
+.resena-form input:focus,.resena-form textarea:focus{outline:none;border-color:var(--oro)}
+.resena-form textarea{min-height:82px;resize:vertical}
+.resena-form .fila-estrellas{display:flex;gap:6px;margin-bottom:10px;align-items:center}
+.resena-form .fila-estrellas span{font-size:.74rem;color:var(--tenue);margin-right:4px}
+.resena-form .fila-estrellas button{background:none;border:0;font-size:1.3rem;line-height:1;filter:grayscale(1);opacity:.45;padding:0 1px}
+.resena-form .fila-estrellas button[data-on="1"]{filter:none;opacity:1}
+.aviso-resena{font-size:.72rem;color:var(--tenue);margin-top:8px;min-height:1em;display:block}
+
+/* ---------- GUIA SEO ---------- */
+.guia{max-width:820px;margin:0 auto}
+.guia h3{color:var(--oro);font-size:1rem;margin:18px 0 8px}
+.guia p{color:#c3bfb7;font-size:.85rem;line-height:1.7;margin-bottom:10px}
+.guia a{color:var(--oro2,#e8ca62);text-decoration:underline}
+
 footer{border-top:1px solid var(--linea);padding:34px 0 90px;text-align:center;color:var(--tenue);font-size:.8rem}
 footer strong{color:var(--oro);font-family:var(--serif);letter-spacing:2px}
 footer .legal{font-size:.68rem;color:#5f5b55;max-width:720px;margin:14px auto 0;line-height:1.6}
@@ -402,6 +534,35 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
     </section>
   </div>
 
+
+  <!-- ============ PROPAGANDA PROPIA ============ -->
+  <section class="contenedor" aria-label="Promoción JESÚS PARFUM">
+    <div class="promo">
+      <div class="promo-cab">
+        <span class="promo-tag">🔥 Promo del mes</span>
+        <h2>Pide hoy y estrena aroma <em>mañana</em></h2>
+      </div>
+      <p style="color:#d7d2c9;font-size:.88rem;max-width:640px;line-height:1.6">
+        En <b>JESÚS PARFUM</b> no vendemos fotos bonitas: vendemos estela. Fragancias inspiradas de alta concentración,
+        probadas por cientos de clientes en Guayaquil y todo Ecuador. Eliges por WhatsApp, te asesoramos y llega a tu puerta.
+      </p>
+      <div class="promo-grid">
+        <div class="promo-item"><b>🚚 Envío gratis desde $50</b><span>Guayaquil $3.50 · Provincias $7.00 con Servientrega.</span></div>
+        <div class="promo-item"><b>🎁 Combos 15% / 20%</b><span>2 a 3 frascos del mismo tamaño: 15% OFF. 4 o más: 20% OFF.</span></div>
+        <div class="promo-item"><b>💬 Asesoría real por WhatsApp</b><span>Te decimos qué aroma te queda según tu edad, clima y ocasión.</span></div>
+        <div class="promo-item"><b>💎 Desde $12.50</b><span>30 ml para probar, 50 ml el equilibrio, 100 ml el mejor precio por ml.</span></div>
+      </div>
+      <div class="promo-acciones">
+        <a class="btn btn-oro" id="waPromo" href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+        <a class="btn btn-fantasma" href="#catalogo">Ver las 164 fragancias</a>
+        <button class="like like-grande" data-like="tienda" data-api="1" aria-label="Me gusta JESÚS PARFUM">
+          <span class="cor">❤</span> <span class="n">0</span> <span style="font-weight:700">me gusta</span>
+        </button>
+      </div>
+      <p style="margin-top:10px"><small>Stock limitado · Precios en USD · Atendemos de lunes a sábado.</small></p>
+    </div>
+  </section>
+
   <!-- CÓMO COMPRAR -->
   <section class="bloque contenedor" id="como">
     <div class="titulo-sec">
@@ -428,14 +589,13 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
       <div class="contenedor">
         <div class="buscador-caja">
           <span class="lupa" aria-hidden="true">🔍</span>
-          <input type="search" id="buscador" placeholder="Buscar: Sauvage, Carolina Herrera, vainilla..." aria-label="Buscar fragancia por nombre o marca" autocomplete="off">
+          <input type="search" id="buscador" placeholder="Buscar: Armaf, Lattafa, Sauvage, Khamrah..." aria-label="Buscar fragancia por nombre o marca" autocomplete="off">
           <button class="limpiar" id="btnLimpiar" aria-label="Borrar búsqueda">✕</button>
         </div>
         <div class="filtros" role="group" aria-label="Filtrar por género">
           <button class="chip-filtro" data-f="todos" aria-pressed="true" onclick="setFiltro('todos',this)">Todos</button>
-          <button class="chip-filtro" data-f="f" aria-pressed="false" onclick="setFiltro('f',this)">Mujer</button>
-          <button class="chip-filtro" data-f="m" aria-pressed="false" onclick="setFiltro('m',this)">Hombre</button>
-          <button class="chip-filtro" data-f="u" aria-pressed="false" onclick="setFiltro('u',this)">Unisex</button>
+          <button class="chip-filtro" data-f="a" aria-pressed="false" onclick="setFiltro('a',this)">Árabes</button>
+          <button class="chip-filtro" data-f="d" aria-pressed="false" onclick="setFiltro('d',this)">Diseñador</button>
         </div>
       </div>
     </div>
@@ -477,6 +637,55 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
       <h3>💡 ¿Qué estás comprando exactamente?</h3>
       <p>Somos una tienda independiente de <b>fragancias inspiradas</b>: perfumes elaborados con concentraciones altas de aceites aromáticos que reproducen las notas y el estilo de las fragancias más famosas del mercado, a una fracción del precio.</p>
       <p>No somos una tienda oficial ni revendemos productos de las casas de moda. Los nombres de las marcas se mencionan únicamente como <b>referencia olfativa</b> para que identifiques el aroma que buscas, y pertenecen a sus respectivos dueños.</p>
+    </div>
+  </section>
+
+
+  <!-- ============ RECOMENDACIONES ============ -->
+  <section class="bloque contenedor" id="recomendaciones">
+    <div class="titulo-sec">
+      <h2>Lo que dicen nuestros clientes</h2>
+      <p>Recomendaciones reales de quienes ya pidieron. Puedes dar ❤ a las que te sirvan y dejar la tuya.</p>
+    </div>
+    <div class="resenas" id="listaResenas"></div>
+    <div class="resena-form">
+      <h3>Deja tu recomendación</h3>
+      <div class="campos">
+        <input type="text" id="resNombre" placeholder="Tu nombre" maxlength="40" aria-label="Tu nombre">
+        <input type="text" id="resCiudad" placeholder="Ciudad (ej. Guayaquil)" maxlength="30" aria-label="Tu ciudad">
+      </div>
+      <textarea id="resTexto" placeholder="¿Qué aroma pediste y cómo te fue con la entrega?" maxlength="400" aria-label="Tu recomendación"></textarea>
+      <div class="fila-estrellas" id="filaEstrellas" role="group" aria-label="Calificación">
+        <span>Tu calificación:</span>
+        <button type="button" data-est="1" aria-label="1 estrella">★</button>
+        <button type="button" data-est="2" aria-label="2 estrellas">★</button>
+        <button type="button" data-est="3" aria-label="3 estrellas">★</button>
+        <button type="button" data-est="4" aria-label="4 estrellas">★</button>
+        <button type="button" data-est="5" aria-label="5 estrellas">★</button>
+      </div>
+      <div class="fila">
+        <button class="btn btn-oro" id="btnEnviarResena" style="justify-content:center">Enviar por WhatsApp</button>
+        <button class="btn btn-fantasma" id="btnCompartir" style="justify-content:center">Recomendar la tienda</button>
+      </div>
+      <span class="aviso-resena" id="avisoResena">Tu recomendación se guarda en este dispositivo y se envía por WhatsApp para publicarla.</span>
+    </div>
+  </section>
+
+
+  <!-- ============ GUÍA (contenido para Google) ============ -->
+  <section class="bloque contenedor" id="guia">
+    <div class="titulo-sec">
+      <h2>¿Cómo elegir tu fragancia?</h2>
+      <p>Una guía rápida para comprar sin equivocarte, escrita por nosotros.</p>
+    </div>
+    <div class="guia">
+      <h3>1. Piensa en la ocasión, no en la marca</h3>
+      <p>Para el día y el trabajo funcionan mejor las familias <b>cítricas y aromáticas</b>: Aqua di Gio, Light Blue, Polo Blue, Tommy. Son frescas, no invaden y aguantan el calor de Guayaquil. Para la noche o una cita, busca <b>ambaradas y gourmand</b>: Tobacco Vanille, Baccarat Rouge, Khamrah, 9PM. Con una o dos aplicaciones rinden 8 a 12 horas.</p>
+      <h3>2. Elige bien el tamaño</h3>
+      <p>Si es tu primera vez con un aroma, empieza en <b>30 ml ($12.50)</b>. Si ya sabes que lo vas a usar seguido, el <b>100 ml ($24.00)</b> es el que mejor precio por mililitro tiene — y el más pedido. El de <b>50 ml ($15.50)</b> es el punto medio con mejor relación calidad-precio frente al de 30 ml. Todos los tamaños entran en los combos: 15% desde 2 frascos y 20% desde 4 del mismo tamaño.</p>
+      <h3>3. Cómo cuidar tu fragancia</h3>
+      <p>Aplica sobre piel hidratada y en puntos de pulso (cuello, muñecas, detrás de las orejas), no sobre la ropa. Guarda el frasco lejos del sol y del baño: el calor y la humedad son los que dañan el perfume. Si quieres que dure más, usa una crema sin aroma debajo.</p>
+      <p style="margin-top:14px">¿Buscas algo puntual? Escríbenos por <a href="#" id="waGuia" target="_blank" rel="noopener">WhatsApp</a> o revisa el <a href="#catalogo">catálogo completo</a>, el <a href="#precios">precio por tamaño</a> y las <a href="#faq">preguntas frecuentes</a>. Atendemos en Guayaquil y enviamos a todo Ecuador.</p>
     </div>
   </section>
 
@@ -569,186 +778,115 @@ const CONFIG = {
    g: f = mujer · m = hombre · u = unisex
    ===================================================================== */
 const perfumes = [
-  {n:"GOOD GIRL Carolina Herrera", g:"f"},{n:"EILISH Billie Eilish", g:"f"},{n:"212 SEXY Femme", g:"f"},{n:"JPG CLASSIQUE Femme", g:"f"},
-  {n:"CLOUD Ariana Grande", g:"f"},{n:"Sí ARMANI", g:"f"},{n:"MY WAY ARMANI", g:"f"},{n:"DAISY EUPHORIA Calvin Klein", g:"f"},
-  {n:"JUICY COUTURE VJL", g:"f"},{n:"VIVA LA JUICE", g:"f"},{n:"LA VIDA ES BELLA", g:"f"},{n:"AMOR AMOR CACHAREL", g:"f"},
-  {n:"VERSACE P Femme", g:"f"},{n:"BFF K. KSHIAN", g:"f"},{n:"LADY MILLION", g:"f"},{n:"HIPNOTIC P DIOR", g:"f"},
-  {n:"MY INSOLENCE GUERLAIN", g:"f"},{n:"VERY IRRESISTIBLE Givenchy", g:"f"},{n:"COCO MADEMOISELLE CH", g:"f"},{n:"CHANCE EAU TENDRE CHANEL", g:"f"},
-  {n:"D&G LIGHT BLUE Femme", g:"f"},{n:"ADDICT DIOR", g:"f"},{n:"BLACK OPIUM YSL", g:"f"},{n:"VERSACE EROS", g:"m"},
-  {n:"JPG LE BEAU", g:"m"},{n:"9PM AFNAN", g:"m"},{n:"REPLICA M M", g:"u"},{n:"COSTA AZURRA Tom Ford", g:"m"},
-  {n:"GREEN IRISH T CREED", g:"m"},{n:"POLO RED", g:"m"},{n:"POLO BLUE", g:"m"},{n:"POLO BLACK", g:"m"},
-  {n:"LACOSTE RED", g:"m"},{n:"TOBACCO VANILLE Tom Ford", g:"u"},{n:"BOMBSHELL Victoria's Secret", g:"f"},{n:"HEIRESS Paris Hilton", g:"f"},
-  {n:"STRONGER With You Armani", g:"m"},{n:"HOMBRE LEATHER Tom Ford", g:"m"},{n:"540 BACCARAT Rouge", g:"u"},{n:"AQUA DI GIO", g:"m"},
-  {n:"AQUA DI GIO PROFONDO", g:"m"},{n:"TOMMY MEN", g:"m"},{n:"MAN IN BLACK Bulgari", g:"m"},{n:"INTERLUDE AMOUAGE", g:"u"},
-  {n:"BLACK PHANTOM Killian", g:"u"},{n:"ISSEY MIYAKE CLS", g:"m"},{n:"JPG SCANDAL", g:"f"},{n:"J'ADORE DIOR", g:"f"},
-  {n:"CODE ARMANI", g:"m"},{n:"CODE PROFUMO", g:"m"},{n:"ANGEL F MUGLER", g:"f"},{n:"A MAN MUGLER", g:"m"},
-  {n:"PLAY INTENSE G", g:"m"},{n:"L'IMMENSITÉ L.V", g:"m"},{n:"Y YSL", g:"m"},{n:"SAUVAGE DIOR", g:"m"},
-  {n:"MON GUERLAIN", g:"f"},{n:"FLOWERBOMB", g:"f"},{n:"CODE FEMME", g:"f"},{n:"AMBER OUD GOLD HARAMAIN", g:"u"},
-  {n:"POLO SPORT", g:"m"},{n:"INITIUS OUD FOR G", g:"m"},{n:"SILVER BLUE MANCERA", g:"u"},{n:"D&G LIGHT BLUE HOMBRE", g:"m"},
-  {n:"ROCHAS MAN", g:"m"},{n:"MON PARIS YSL", g:"f"},{n:"SPICEBOMB INFRARED", g:"m"},{n:"LOLITA LEMPICKA CLÁSICO", g:"f"},
-  {n:"JPG LE MALE", g:"m"},{n:"SELENA GOMEZ P", g:"f"},{n:"BARE VAINILLA VS", g:"f"},{n:"GABRIELLE CHANEL", g:"f"},
-  {n:"D&G POUR FEMME", g:"f"},{n:"TOY Moschino BUBLEE GUM", g:"f"},{n:"LA NUIT TRESOR INTENSE Lancome", g:"f"},{n:"MEOW KATTY PERRY", g:"f"},
-  {n:"WARM VAINILLA BATH & Body", g:"f"},{n:"LACOSTE IN PLAY RED", g:"m"},{n:"BLACK XS PURE NIGHT Paco Rabanne", g:"m"},{n:"CLUB DE NUIT INT", g:"u"},
-  {n:"HUGO B. MAGNETIC", g:"m"},{n:"PONY 4 FEMME", g:"f"},{n:"VIP BLACK 212", g:"m"},{n:"JPG ULTRAMALE", g:"m"},
-  {n:"GUCCI GUILTY", g:"m"},{n:"LA NUIT L'HOMME BLEU ELECTRIQUE", g:"m"},{n:"GUCCI FLORA F", g:"f"},{n:"DOLCE GABBANA POUR HOMME", g:"m"},
-  {n:"DOLCE GABBANA POUR HOMME INTENSE", g:"m"},{n:"KHAMRAH LATTAFA UNISEX", g:"u"},{n:"STRONGER W-Y INTENSELY", g:"m"},{n:"GUCCI POUR HOMME", g:"m"},
-  {n:"GENTLEMEN R. PRIVÉ GV", g:"m"},{n:"RALPH LAUREN ROCKS F", g:"f"},{n:"YARA LATTAFA F", g:"f"},{n:"OMNIA AMETHYSTE BULGARI F", g:"f"},
-  {n:"ELIXIR LE MALE", g:"m"},{n:"UOMO VALENTINO INTENSE", g:"m"},{n:"RED TOBACCO MANCERA", g:"u"},{n:"BACCARAT ROUGE 540 EXTRAIT UNISEX", g:"u"},
-  {n:"SPICEBOMB XTREME", g:"m"},{n:"SPICEBOMB CLÁSICO", g:"m"},{n:"BLUEBELL WILD J. MALONE F", g:"f"},{n:"DIOR HOMME INTENSE", g:"m"},
-  {n:"DIOR HOMME PARFUM", g:"m"},{n:"LAYTON MARLY", g:"u"},{n:"HEROD MARLY", g:"m"},{n:"ONE MILLION PRIVE", g:"m"},
-  {n:"ONE MILLION LUCKY", g:"m"},{n:"AZZARO MOST WANTED", g:"m"},{n:"HAWAS RASASI", g:"m"},{n:"AROM", g:"m"},
-  {n:"EROS VERSACE FLAME", g:"m"},{n:"BHARARA KING UNISEX", g:"u"},{n:"OHM BLACK", g:"m"},{n:"AZZARO WANTED BY NIGHT", g:"m"},
-  {n:"TERRES D'HERMES", g:"m"},{n:"ALTHAIR MARLY", g:"u"},{n:"HUGO BOSS INFINITY", g:"m"},{n:"VICTORY ELIXIR INTENSE", g:"m"},
-  {n:"LE BEAU LE PARFUM", g:"m"},{n:"LE MALE LE PARFUM", g:"m"},{n:"MANCERA INSTANT CRUSH UNISEX", g:"u"},{n:"CODE ABSOLUTE", g:"m"},
-  {n:"STRONGER WY ABSOLUTELY", g:"m"},{n:"STRONGER WY INTENSELY", g:"m"},{n:"VIP 2012 ROSÉ EXTRA F", g:"f"},{n:"COCONUT MILK VS F", g:"f"},
-  {n:"COCONUT PASSION VS F", g:"f"},{n:"MISS DIOR CLÁSICO F", g:"f"},{n:"LADY MILLION GOLD F", g:"f"},{n:"CHEIROSA 71 BRAZILIAN F", g:"f"},
-  {n:"DOLCE VITA DIOR F", g:"f"},{n:"HALLOWEEN CLÁSICO F", g:"f"},{n:"NYC BLECKER STREET F", g:"f"},{n:"HALLOWEEN MAN X", g:"m"},
-  {n:"HUGO BOSS ALIVE F", g:"f"},{n:"JPG LE BEAU PARADISE GARDEN", g:"m"},{n:"TYGAR BULGARI", g:"m"},{n:"ASAD ZANZIBAR", g:"m"},
-  {n:"SILLAGE CLUB DE NUIT", g:"u"},{n:"VALENTINO UOMO", g:"m"},{n:"HALLOWEEN X", g:"f"},{n:"HALLOWEEN CLÁSICO", g:"f"},
-  {n:"LE BELLE LE PARFUM F", g:"f"},{n:"VALENTINO CORAL FANTASY", g:"f"},{n:"QAED AL FURSAN", g:"u"},
-  {n:"VALENTINO INTENSE F", g:"f"},{n:"HUGO BOSS LE PARFUM", g:"m"},{n:"HUGO BOSS CANTINFLORA", g:"f"},{n:"212 VIP RED", g:"f"},
-  {n:"EROS VERSACE PARFUM", g:"m"},{n:"CAN CAN F", g:"f"},{n:"PI GIVENCHY", g:"f"},{n:"LOLITA LEMPICKA MEN", g:"m"},
-  {n:"PLAY GIVENCHY", g:"m"},{n:"ULTRAMALE JPG", g:"m"},{n:"ABERCROMBIE FITCH", g:"m"},{n:"ARMANI CODE COLOGNE", g:"m"},
-  {n:"ARMANI CODE SPORT", g:"m"},{n:"AFRODISIACO XS RABANNE", g:"m"},{n:"GAIA F", g:"f"},{n:"CCORY PASIÓN F", g:"f"},
-  {n:"CCORY GOLD F", g:"f"}
+  {n:"Armaf Odyssey Mandarin Sky", b:"Armaf", g:"a", img:"img/pa_1.jpg"},
+  {n:"Armaf Odyssey Mandarin Sky Elixir", b:"Armaf", g:"a", img:"img/pa_4.jpg"},
+  {n:"Armaf Odyssey Mandarin Sky Vintage", b:"Armaf", g:"a", img:"img/pa_new_1.jpg"},
+  {n:"Armaf Odyssey Wild", b:"Armaf", g:"a", img:"img/pa_2.jpg"},
+  {n:"Armaf Odyssey White Man", b:"Armaf", g:"a", img:"img/pa_8.jpg"},
+  {n:"Armaf Odyssey Artisto", b:"Armaf", g:"a", img:"img/pa_13.jpg"},
+  {n:"Armaf Odyssey Go Mango", b:"Armaf", g:"a", img:"img/pa_new_2.jpg"},
+  {n:"Armaf Odyssey Bahamas", b:"Armaf", g:"a", img:"img/pa_new_3.jpg"},
+  {n:"Armaf Odyssey Spectra", b:"Armaf", g:"a", img:"img/pa_9.jpg"},
+  {n:"Armaf Odyssey Mega", b:"Armaf", g:"a", img:"img/pa_6.jpg"},
+  {n:"Armaf Odyssey Dubai Chocolate", b:"Armaf", g:"a", img:"img/pa_11.jpg"},
+  {n:"Armaf Odyssey Black Forest", b:"Armaf", g:"a", img:"img/pa_5.jpg"},
+  {n:"Armaf Odyssey Limoni", b:"Armaf", g:"a", img:"img/pa_10.jpg"},
+  {n:"Armaf Odyssey Eau De Montagne", b:"Armaf", g:"a", img:"img/pa_101.jpg"},
+  {n:"Armaf Beach Party", b:"Armaf", g:"a", img:"img/pa_new_4.jpg"},
+  {n:"Lattafa Yara Rosa", b:"Lattafa", g:"a", img:"img/pa_15.jpg"},
+  {n:"Lattafa Yara Candy", b:"Lattafa", g:"a", img:"img/pa_18.jpg"},
+  {n:"Armaf Club de Nuit Intense", b:"Armaf", g:"a", img:"img/pa_37.jpg"},
+  {n:"Armaf Club de Nuit Woman", b:"Armaf", g:"a", img:"img/pa_41.jpg"},
+  {n:"Armaf Club de Nuit Urban Elixir", b:"Armaf", g:"a", img:"img/pa_43.jpg"},
+  {n:"Armaf Club de Nuit Urban Man", b:"Armaf", g:"a", img:"img/pa_42.jpg"},
+  {n:"Armaf Club De Nuit Maleka", b:"Armaf", g:"a", img:"img/pa_100.jpg"},
+  {n:"Armaf Club de Nuit Bling", b:"Armaf", g:"a", img:"img/pa_new_5.jpg"},
+  {n:"Armaf Club de Nuit Sillage", b:"Armaf", g:"a", img:"img/pa_40.jpg"},
+  {n:"Armaf Club de Nuit Untold", b:"Armaf", g:"a", img:"img/pa_45.jpg"},
+  {n:"Armaf Club De Nuit Milestone", b:"Armaf", g:"a", img:"img/pa_46.jpg"},
+  {n:"Armaf Club de Nuit Iconic", b:"Armaf", g:"a", img:"img/pa_39.jpg"},
+  {n:"Armaf Island Bliss", b:"Armaf", g:"a", img:"img/pa_32.jpg"},
+  {n:"Armaf Yum Yum", b:"Armaf", g:"a", img:"img/pa_33.jpg"},
+  {n:"Armaf Island Breeze", b:"Armaf", g:"a", img:"img/pa_new_6.jpg"},
+  {n:"Lattafa Badee Al Oud Sublime", b:"Lattafa", g:"a", img:"img/pa_56.jpg"},
+  {n:"Lattafa Qaed Al Fursan Blanco", b:"Lattafa", g:"a", img:"img/pa_60.jpg"},
+  {n:"Lattafa Qaed Al Fursan Negro", b:"Lattafa", g:"a", img:"img/pa_59.jpg"},
+  {n:"Lattafa Qaed Al Fursan Untamed", b:"Lattafa", g:"a", img:"img/pa_61.jpg"},
+  {n:"Lattafa Eclaire Banoffi", b:"Lattafa", g:"a", img:"img/pa_new_7.jpg"},
+  {n:"Lattafa Mayar Lattafa", b:"Lattafa", g:"a", img:"img/pa_72.jpg"},
+  {n:"Lattafa Mayar Cherry Intense", b:"Lattafa", g:"a", img:"img/pa_73.jpg"},
+  {n:"Al Haramain Amber Oud Gold Edition", b:"Al Haramain", g:"a", img:"img/pa_83.jpg"},
+  {n:"Lattafa Fakhar Black", b:"Lattafa", g:"a", img:"img/pa_68.jpg"},
+  {n:"Lattafa Fakhar Platin", b:"Lattafa", g:"a", img:"img/pa_new_8.jpg"},
+  {n:"Emper Stallion 53", b:"Emper", g:"a", img:"img/pa_86.jpg"},
+  {n:"Bharara Champagne Black", b:"Bharara", g:"a", img:"img/pa_103.jpg"},
+  {n:"Maison Alhambra Jean Lowe Matiere", b:"Maison Alhambra", g:"a", img:"img/pa_95.jpg"},
+  {n:"Bharara King EDP", b:"Bharara", g:"a", img:"img/pa_52.jpg"},
+  {n:"Bharara Rome Pour Femme", b:"Bharara", g:"a", img:"img/pa_96.jpg"},
+  {n:"Bharara Rome Imagine", b:"Bharara", g:"a", img:"img/pa_new_9.jpg"},
+  {n:"Armaf Tag Donna Di Terra", b:"Armaf", g:"a", img:"img/pa_29.jpg"},
+  {n:"Dumont Nitro Red Dumont", b:"Dumont", g:"a", img:"img/pa_102.jpg"},
+  {n:"French Avenue Liquid Brun French Avenue", b:"French Avenue", g:"a", img:"img/pa_75.jpg"},
+  {n:"Lattafa Khamrah Dukhan", b:"Lattafa", g:"a", img:"img/pa_36.jpg"},
+  {n:"Lattafa Lataffa Jasoor", b:"Lattafa", g:"a", img:"img/pa_108.jpg"},
+  {n:"Lattafa Al Maleky", b:"Lattafa", g:"a", img:"img/pa_64.jpg"},
+  {n:"Lattafa Hayaati Florence", b:"Lattafa", g:"a", img:"img/pa_62.jpg"},
+  {n:"Armaf Ventana Black", b:"Armaf", g:"a", img:"img/pa_77.jpg"},
+  {n:"Maison Alhambra Salvo", b:"Maison Alhambra", g:"a", img:"img/pa_87.jpg"},
+  {n:"Rasasi Hawas For Him", b:"Rasasi", g:"a", img:"img/pa_49.jpg"},
+  {n:"French Avenue Vulcan Feu", b:"French Avenue", g:"a", img:"img/pa_new_10.jpg"},
+  {n:"Bharara Rome Pour Homme", b:"Bharara", g:"a", img:"img/pa_97.jpg"},
+  {n:"Bharara Rome Ivory", b:"Bharara", g:"a", img:"img/pa_new_11.jpg"},
+  {n:"Bharara Rome Fantasmagory", b:"Bharara", g:"a", img:"img/pa_new_12.jpg"},
+  {n:"Lattafa Haya Lattafa", b:"Lattafa", g:"a", img:"img/pa_104.jpg"},
+  {n:"Lattafa Mini Set Badee Al Oud", b:"Lattafa", g:"a", img:"img/pa_new_13.jpg"},
+  {n:"Lattafa Mini Set Yara", b:"Lattafa", g:"a", img:"img/pa_new_14.jpg"},
+  {n:"Lattafa Set Lattafa Eclaire", b:"Lattafa", g:"a", img:"img/pa_new_15.jpg"},
+  {n:"Armaf Set Armaf Tag Uomo Rosso", b:"Armaf", g:"a", img:"img/pa_new_16.jpg"},
+  {n:"Lattafa Set Yara Rosa y Candy", b:"Lattafa", g:"a", img:"img/pa_new_17.jpg"},
+  {n:"Lattafa Set Mayar Lattafa", b:"Lattafa", g:"a", img:"img/pa_new_18.jpg"},
+  {n:"Rasasi Set Hawas For Him", b:"Rasasi", g:"a", img:"img/pa_new_19.jpg"},
+  {n:"Lattafa Set Vintage Radio", b:"Lattafa", g:"a", img:"img/pa_new_20.jpg"},
+  {n:"Armaf Set Club de Nuit Man Classic", b:"Armaf", g:"a", img:"img/pa_new_21.jpg"},
+  {n:"Armaf Set Odyssey Acqua", b:"Armaf", g:"a", img:"img/pa_new_22.jpg"},
+  {n:"Gucci Guilty Pour Homme", b:"Gucci", g:"d", img:"img/pd_27.jpg"},
+  {n:"Valentino Uomo Born in Roma", b:"Valentino", g:"d", img:"img/pd_new_1.jpg"},
+  {n:"Versace Eros", b:"Versace", g:"d", img:"img/pd_21.jpg"},
+  {n:"Armani Stronger With You Intensely", b:"Armani", g:"d", img:"img/pd_23.jpg"},
+  {n:"Dolce & Gabbana Light Blue Women", b:"Dolce & Gabbana", g:"d", img:"img/pd_25.jpg"},
+  {n:"Dolce & Gabbana Light Blue Men", b:"Dolce & Gabbana", g:"d", img:"img/pd_26.jpg"},
+  {n:"Adidas Victory League", b:"Adidas", g:"d", img:"img/pd_new_2.jpg"},
+  {n:"Britney Spears Fantasy", b:"Britney Spears", g:"d", img:"img/pd_12.jpg"},
+  {n:"Jean Paul Gaultier Le Beau", b:"Jean Paul Gaultier", g:"d", img:"img/pd_20.jpg"},
+  {n:"Carolina Herrera Bad Boy", b:"Carolina Herrera", g:"d", img:"img/pd_new_3.jpg"},
+  {n:"Nautica Voyage", b:"Nautica", g:"d", img:"img/pd_6.jpg"},
+  {n:"Tommy Hilfiger Tommy Men", b:"Tommy Hilfiger", g:"d", img:"img/pd_34.jpg"},
+  {n:"Calvin Klein CK One", b:"Calvin Klein", g:"d", img:"img/pd_5.jpg"},
+  {n:"Calvin Klein CK Be", b:"Calvin Klein", g:"d", img:"img/pd_4.jpg"},
+  {n:"Paris Hilton Ruby Rush", b:"Paris Hilton", g:"d", img:"img/pd_32.jpg"},
+  {n:"Paris Hilton Can Can", b:"Paris Hilton", g:"d", img:"img/pd_36.jpg"},
+  {n:"Paris Hilton Women", b:"Paris Hilton", g:"d", img:"img/pd_35.jpg"},
+  {n:"Ariana Grande Thank U, Next", b:"Ariana Grande", g:"d", img:"img/pd_new_4.jpg"},
+  {n:"Ariana Grande Cloud", b:"Ariana Grande", g:"d", img:"img/pd_15.jpg"},
+  {n:"Ariana Grande Cloud Pink", b:"Ariana Grande", g:"d", img:"img/pd_33.jpg"},
+  {n:"Ariana Grande Sweet Like Candy", b:"Ariana Grande", g:"d", img:"img/pd_new_5.jpg"},
+  {n:"Cacharel Amor Amor", b:"Cacharel", g:"d", img:"img/pd_new_6.jpg"},
+  {n:"Antonio Banderas Queen of Seduction", b:"Antonio Banderas", g:"d", img:"img/pd_new_7.jpg"},
+  {n:"Paco Rabanne Olympéa Blossom", b:"Paco Rabanne", g:"d", img:"img/pd_new_8.jpg"},
+  {n:"Clinique Happy For Men", b:"Clinique", g:"d", img:"img/pd_new_9.jpg"},
+  {n:"Clinique Happy Heart", b:"Clinique", g:"d", img:"img/pd_new_10.jpg"},
+  {n:"Lacoste L.12.12 Blanc", b:"Lacoste", g:"d", img:"img/pd_new_11.jpg"},
+  {n:"Moschino Toy 2 Pearl", b:"Moschino", g:"d", img:"img/pd_new_12.jpg"},
+  {n:"Montblanc Legend", b:"Montblanc", g:"d", img:"img/pd_new_13.jpg"},
+  {n:"Paco Rabanne Black XS", b:"Paco Rabanne", g:"d", img:"img/pd_new_14.jpg"},
+  {n:"Guess Gold", b:"Guess", g:"d", img:"img/pd_3.jpg"},
+  {n:"Guess Girl", b:"Guess", g:"d", img:"img/pd_new_15.jpg"},
+  {n:"Guess Women", b:"Guess", g:"d", img:"img/pd_new_16.jpg"},
+  {n:"Paco Rabanne Invictus Victory Elixir Intense", b:"Paco Rabanne", g:"d", img:"img/pd_new_17.jpg"}
 ];
 
-/* =====================================================================
-   FICHAS OLFATIVAS (las que conozco con datos reales).
-   Las que no estén aquí muestran "a pedido" en vez de datos inventados.
-   Clave = nombre normalizado (sin acentos, minúsculas).
-   ===================================================================== */
-const FICHAS = {
-  "good girl carolina herrera":{fam:"Floral oriental · Gourmand",sal:"Almendra, café, bergamota",cor:"Nardo, jazmín sambac, rosa búlgara",fon:"Cacao, haba tonka, pachulí",dur:"10–12 h"},
-  "eilish billie eilish":{fam:"Gourmand vainilla",sal:"Bayas rojas, mandarina, pimienta rosa",cor:"Vainilla, cacao, nardo",fon:"Almizcle, madera de sándalo, ámbar",dur:"8–10 h"},
-  "212 sexy femme":{fam:"Floral frutal",sal:"Pera, gardenia, mandarina",cor:"Jazmín, peonía, flor de cactus",fon:"Almizcle, sándalo, ámbar",dur:"7–9 h"},
-  "jpg classique femme":{fam:"Oriental floral",sal:"Jengibre, naranja, bergamota",cor:"Ylang-ylang, jazmín, nardo",fon:"Vainilla, ámbar, sándalo",dur:"9–11 h"},
-  "cloud ariana grande":{fam:"Gourmand floral",sal:"Coco, lavanda, pera",cor:"Praliné, orquídea, nardo",fon:"Vainilla, almizcle, maderas",dur:"8–10 h"},
-  "si armani":{fam:"Chipre frutal",sal:"Grosella negra, bergamota",cor:"Rosa, fresia, neroli",fon:"Vainilla, pachulí, ambroxan",dur:"9–11 h"},
-  "my way armani":{fam:"Floral blanco",sal:"Azahar, bergamota, vainilla de Madagascar",cor:"Tuberosa, jazmín, flor de naranjo",fon:"Cedro, almizcle blanco, vainilla",dur:"8–10 h"},
-  "la vida es bella":{fam:"Floral gourmand",sal:"Grosella negra, pera",cor:"Iris, jazmín, flor de naranjo",fon:"Praliné, pachulí, vainilla",dur:"10–12 h"},
-  "viva la juice":{fam:"Floral frutal gourmand",sal:"Grosella, mandarina, pera",cor:"Madreselva, jazmín, rosa",fon:"Caramelo, pachulí, vainilla",dur:"9–11 h"},
-  "versace p femme":{fam:"Floral fresco",sal:"Granada, yuzu, bergamota",cor:"Peonía, magnolia, flor de loto",fon:"Almizcle, caoba, ámbar",dur:"6–8 h"},
-  "lady million":{fam:"Floral frutal",sal:"Pomelo, mandarina, notas verdes",cor:"Jazmín, nardo, rosa",fon:"Ámbar, pachulí, madera",dur:"8–10 h"},
-  "hipnotic p dior":{fam:"Oriental vainilla",sal:"Almendra amarga, cilantro, cardamomo",cor:"Nardo, jazmín, flor de naranja",fon:"Vainilla, sándalo, haba tonka",dur:"10–12 h"},
-  "coco mademoiselle ch":{fam:"Oriental floral",sal:"Naranja, bergamota, lichi",cor:"Rosa, jazmín, lichi",fon:"Pachulí, vetiver, vainilla, almizcle",dur:"10–12 h"},
-  "chance eau tendre chanel":{fam:"Floral fresco",sal:"Pomelo, membrillo",cor:"Jazmín, rosa",fon:"Almizcle blanco, cedro",dur:"6–8 h"},
-  "d&g light blue femme":{fam:"Floral cítrico",sal:"Limón siciliano, manzana verde, cedro",cor:"Bambú, jazmín, rosa blanca",fon:"Almizcle, ámbar, cedro",dur:"6–8 h"},
-  "addict dior":{fam:"Oriental floral",sal:"Mandarina, flor de naranjo",cor:"Jazmín, nardo, rosa",fon:"Vainilla, almizcle, sándalo",dur:"9–11 h"},
-  "black opium ysl":{fam:"Oriental gourmand",sal:"Café, pera, pimienta rosa",cor:"Jazmín, flor de naranjo, nardo",fon:"Vainilla, pachulí, cedro, caramelo",dur:"10–12 h"},
-  "jadore dior":{fam:"Floral frutal",sal:"Pera, melón, magnolia",cor:"Jazmín, rosa, nardo",fon:"Almizcle, cedro, vainilla",dur:"8–10 h"},
-  "angel f mugler":{fam:"Gourmand oriental",sal:"Mandarina, melón, menta",cor:"Caramelo, miel, chocolate, frutas",fon:"Pachulí, vainilla, haba tonka",dur:"10–12 h"},
-  "jpg scandal":{fam:"Floral gourmand",sal:"Miel, mandarina, naranja sanguina",cor:"Gardenia, melocotón, jazmín",fon:"Caramelo, cera de abeja, pachulí",dur:"9–11 h"},
-  "flowerbomb":{fam:"Floral frutal",sal:"Té, bergamota, grosella",cor:"Jazmín, orquídea, fresia, rosa",fon:"Pachulí, vainilla, almizcle",dur:"10–12 h"},
-  "gabrielle chanel":{fam:"Floral blanco",sal:"Mandarina, grosella, jazmín",cor:"Ylang-ylang, jazmín, tuberosa",fon:"Sándalo, almizcle, madera de cachemira",dur:"8–10 h"},
-  "mon paris ysl":{fam:"Floral gourmand",sal:"Fresa, frambuesa, bergamota",cor:"Peonía, datura, jazmín",fon:"Pachulí, vainilla, almizcle blanco",dur:"9–11 h"},
-  "miss dior clásico f":{fam:"Floral chipre",sal:"Mandarina, bergamota, jardín de frutas",cor:"Rosa, jazmín, lirio de los valles",fon:"Pachulí, almizcle, ámbar",dur:"8–10 h"},
-  "dolce vita dior f":{fam:"Floral frutal",sal:"Bergamota, casis, mandarina",cor:"Rosa, jazmín, magnolia",fon:"Vainilla, sándalo, almizcle",dur:"8–10 h"},
-  "bombshell victoria's secret":{fam:"Floral frutal",sal:"Fresa, mandarina, pera",cor:"Peonía, jazmín, orquídea",fon:"Vainilla, almizcle, madera clara",dur:"6–8 h"},
-  "versace eros":{fam:"Aromático fougère",sal:"Menta, manzana verde, limón",cor:"Geranio, haba tonka, ambroxan",fon:"Vainilla, cedro, vetiver, musgo de roble",dur:"8–10 h"},
-  "jpg le beau":{fam:"Aromático amaderado",sal:"Bergamota, coco, cardamomo",cor:"Lavanda, flor de azahar",fon:"Haba tonka, vainilla, ámbar, sándalo",dur:"8–10 h"},
-  "9pm afnan":{fam:"Oriental vainilla",sal:"Manzana, canela, lavanda",cor:"Flor de azahar, lirio, rosa",fon:"Haba tonka, vainilla, ámbar, maderas",dur:"9–11 h"},
-  "costa azurra tom ford":{fam:"Cítrico amaderado",sal:"Mandarina, neroli, bergamota, limón",cor:"Jazmín, notas marinas",fon:"Ámbar, musgo, maderas secas",dur:"7–9 h"},
-  "green irish t creed":{fam:"Fougère verde",sal:"Bergamota, limón, trébol",cor:"Geranio, menta, vetiver",fon:"Musgo de roble, ámbar gris, sándalo",dur:"8–10 h"},
-  "polo red":{fam:"Especiado amaderado",sal:"Manzana, albahaca, pimienta",cor:"Salvia, geranio, lavanda",fon:"Pachulí, vetiver, ante",dur:"7–9 h"},
-  "polo blue":{fam:"Fresco aromático",sal:"Melón, pepino, mandarina",cor:"Albahaca, salvia, geranio",fon:"Sándalo, almizcle, cedro",dur:"6–8 h"},
-  "polo black":{fam:"Amaderado especiado",sal:"Albahaca, mango, bergamota",cor:"Salvia, laurel, cardamomo",fon:"Pachulí, vetiver, ámbar",dur:"7–9 h"},
-  "lacoste red":{fam:"Amaderado especiado",sal:"Naranja, pomelo, pimienta",cor:"Jengibre, albahaca, nuez moscada",fon:"Vetiver, pachulí, ámbar",dur:"7–9 h"},
-  "tobacco vanille tom ford":{fam:"Oriental especiado",sal:"Tabaco, especias, cacao",cor:"Vainilla, flor de tabaco, frutas secas",fon:"Haba tonka, madera de sándalo, ámbar",dur:"12 h +"},
-  "540 baccarat rouge":{fam:"Ámbar floral",sal:"Azafrán, jazmín, ámbar gris",cor:"Ambroxan, jazmín, resinas",fon:"Cedro, musgo, ámbar",dur:"12 h +"},
-  "baccarat rouge 540 extrait unisex":{fam:"Ámbar floral",sal:"Azafrán, jazmín",cor:"Ambroxan, ámbar gris, resinas",fon:"Cedro, musgo de roble, pino",dur:"12 h +"},
-  "aqua di gio":{fam:"Cítrico acuático",sal:"Bergamota, neroli, notas marinas",cor:"Jazmín, romero, notas verdes",fon:"Cedro, almizcle, pachulí",dur:"6–8 h"},
-  "aqua di gio profondo":{fam:"Aromático acuático",sal:"Notas marinas, bergamota, notas verdes",cor:"Romero, salvia, ciprés",fon:"Almizcle, pachulí, ámbar mineral",dur:"7–9 h"},
-  "tommy men":{fam:"Fresco aromático",sal:"Bergamota, menta, lavanda",cor:"Manzanilla, jengibre, notas verdes",fon:"Sándalo, cuero, ámbar",dur:"6–8 h"},
-  "man in black bulgari":{fam:"Oriental amaderado",sal:"Nuez moscada, flor de naranjo, ron",cor:"Cuero, iris, nardo",fon:"Vainilla, haba tonka, ámbar",dur:"9–11 h"},
-  "interlude amouage":{fam:"Oriental amaderado",sal:"Orégano, romero, incienso",cor:"Mirra, cuero, arrayán, notas florales",fon:"Oud, ámbar, musgo, pachulí",dur:"12 h +"},
-  "black phantom killian":{fam:"Gourmand",sal:"Vainilla, lavanda, limón",cor:"Haba tonka, praliné, café",fon:"Pachulí, sándalo, azúcar morena",dur:"10–12 h"},
-  "code armani":{fam:"Oriental especiado",sal:"Bergamota, limón, cardamomo",cor:"Nuez moscada, cuero, flor de naranjo",fon:"Haba tonka, sándalo, ámbar",dur:"8–10 h"},
-  "code profumo":{fam:"Oriental especiado",sal:"Bergamota, cardamomo, manzana",cor:"Haba tonka, flor de naranjo, nuez moscada",fon:"Cuero, ámbar, pachulí",dur:"10–12 h"},
-  "code absolute":{fam:"Oriental amaderado",sal:"Rosa, notas cítricas",cor:"Cuero, pachulí, notas especiadas",fon:"Ámbar, maderas, vainilla",dur:"10–12 h"},
-  "le male le parfum":{fam:"Aromático oriental",sal:"Lavanda, menta, cardamomo",cor:"Iris, notas florales",fon:"Vainilla, haba tonka, sándalo",dur:"9–11 h"},
-  "elixir le male":{fam:"Oriental gourmand",sal:"Lavanda, menta, bergamota",cor:"Notas especiadas, rosas",fon:"Vainilla, ámbar, maderas",dur:"10–12 h"},
-  "jpg le male":{fam:"Aromático fougère",sal:"Menta, lavanda, bergamota, artemisa",cor:"Canela, comino, flor de naranjo",fon:"Vainilla, haba tonka, sándalo, ámbar",dur:"8–10 h"},
-  "sauvage dior":{fam:"Fresco especiado",sal:"Bergamota, pimienta, ambroxan",cor:"Lavanda, pimienta de Sichuan, geranio",fon:"Ambroxan, cedro, labdanum",dur:"9–11 h"},
-  "stronger with you armani":{fam:"Gourmand especiado",sal:"Violeta, pimienta rosa, hojas de menta",cor:"Salvia, castaña glaseada, lavanda",fon:"Vainilla, ámbar, maderas",dur:"9–11 h"},
-  "jpg ultramale":{fam:"Oriental gourmand",sal:"Menta, lavanda, pera, bergamota",cor:"Salvia, caramelo, notas florales",fon:"Vainilla, pachulí, ámbar, maderas",dur:"10–12 h"},
-  "ultramale jpg":{fam:"Oriental gourmand",sal:"Menta, lavanda, pera, bergamota",cor:"Salvia, caramelo, notas florales",fon:"Vainilla, pachulí, ámbar, maderas",dur:"10–12 h"},
-  "club de nuit int":{fam:"Amaderado ambarado",sal:"Frutas, bergamota, notas cítricas",cor:"Jazmín, notas florales",fon:"Cuero, pachulí, almizcle, ámbar",dur:"10–12 h"},
-  "sillage club de nuit":{fam:"Ámbar amaderado",sal:"Bergamota, frutas",cor:"Jazmín, notas florales",fon:"Ambroxan, ámbar gris, maderas",dur:"10–12 h"},
-  "khamrah latta fa unisex":{fam:"Oriental gourmand",sal:"Dátiles, canela, nuez moscada",cor:"Praliné, incienso, notas florales",fon:"Vainilla, ámbar, madera de sándalo",dur:"12 h +"},
-  "khamrah lattafa unisex":{fam:"Oriental gourmand",sal:"Dátiles, canela, nuez moscada",cor:"Praliné, incienso, notas florales",fon:"Vainilla, ámbar, madera de sándalo",dur:"12 h +"},
-  "yara lattafa f":{fam:"Gourmand floral",sal:"Bergamota, naranja, pera",cor:"Orquídea, heliotropo, jazmín",fon:"Vainilla, mantequilla, almizcle, sándalo",dur:"10–12 h"},
-  "layton marly":{fam:"Oriental fougère",sal:"Manzana, lavanda, bergamota",cor:"Geranio, especias, violeta",fon:"Vainilla, sándalo, pachulí, guayaco",dur:"10–12 h"},
-  "althair marly":{fam:"Oriental gourmand",sal:"Bergamota, canela, cardamomo",cor:"Naranja, notas florales",fon:"Vainilla, almizcle, ámbar",dur:"9–11 h"},
-  "herod marly":{fam:"Oriental tabaco",sal:"Canela, pimienta, bergamota",cor:"Tabaco, notas florales, incienso",fon:"Vainilla, pachulí, maderas",dur:"10–12 h"},
-  "silver blue mancera":{fam:"Aromático amaderado",sal:"Bergamota, notas verdes",cor:"Notas florales, especias",fon:"Maderas, ámbar, almizcle",dur:"9–11 h"},
-  "red tobacco mancera":{fam:"Tabaco especiado",sal:"Canela, tabaco, especias",cor:"Notas florales, oud",fon:"Vainilla, ámbar, maderas",dur:"12 h +"},
-  "man in black":{fam:"Oriental amaderado",sal:"Nuez moscada, flor de naranjo",cor:"Cuero, iris",fon:"Vainilla, haba tonka",dur:"9–11 h"},
-  "tygar bulgari":{fam:"Ámbar especiado",sal:"Bergamota, cardamomo, jengibre",cor:"Nardo, notas florales",fon:"Ámbar gris, maderas, almizcle",dur:"10–12 h"},
-  "hawas rasasi":{fam:"Fresco frutal",sal:"Manzana, bergamota, canela",cor:"Notas acuáticas, notas florales",fon:"Vetiver, ámbar, almizcle",dur:"8–10 h"},
-  "qaed al fursan":{fam:"Frutal tropical",sal:"Piña, notas afrutadas",cor:"Jazmín, notas florales",fon:"Ámbar, almizcle, maderas",dur:"9–11 h"},
-  "ohm black":{fam:"Oriental amaderado",sal:"Bergamota, notas especiadas",cor:"Notas florales, incienso",fon:"Ámbar, maderas, vainilla",dur:"9–11 h"},
-  "one million prive":{fam:"Especiado cuero",sal:"Toronja, menta",cor:"Canela, rosa, especias",fon:"Cuero, ámbar, pachulí",dur:"9–11 h"},
-  "one million lucky":{fam:"Amaderado especiado",sal:"Ciruela, notas cítricas, miel",cor:"Nuez moscada, notas florales",fon:"Haba tonka, pachulí, maderas",dur:"8–10 h"},
-  "azZaro most wanted":{fam:"Especiado amaderado",sal:"Cardamomo, notas cítricas",cor:"Notas florales, especias",fon:"Haba tonka, ámbar, maderas",dur:"9–11 h"},
-  "azZaro wanted by night":{fam:"Especiado amaderado",sal:"Jengibre, notas cítricas",cor:"Lavanda, menta, especias",fon:"Haba tonka, ámbar, maderas",dur:"9–11 h"},
-  "omania amethyste bulgari f":{fam:"Floral acuático",sal:"Notas acuáticas, notas verdes",cor:"Loto, flor de loto, notas florales",fon:"Ámbar, almizcle, maderas claras",dur:"6–8 h"},
-  "bluebell wild j. malone f":{fam:"Floral verde",sal:"Notas verdes, notas cítricas",cor:"Campanilla, jazmín, notas florales",fon:"Almizcle, maderas claras",dur:"6–8 h"},
-  "lolita lempicka clásico":{fam:"Oriental gourmand",sal:"Hiedra, anís estrellado, notas verdes",cor:"Regaliz, violeta, notas florales",fon:"Vainilla, haba tonka, almizcle",dur:"8–10 h"},
-  "pi givenchy":{fam:"Oriental amaderado",sal:"Mandarina, notas verdes, romero",cor:"Nardo, notas florales",fon:"Vainilla, haba tonka, ámbar, cedro",dur:"8–10 h"},
-  "play givenchy":{fam:"Fresco cítrico",sal:"Bergamota, mandarina, naranja",cor:"Notas florales, especias",fon:"Vetiver, ámbar, maderas",dur:"6–8 h"},
-  "toy moschino bublee gum":{fam:"Gourmand floral",sal:"Notas frutales, cítricos",cor:"Notas florales, chicle",fon:"Vainilla, almizcle, maderas",dur:"8–10 h"},
-  "meow katty perry":{fam:"Floral frutal",sal:"Pera, mandarina, jazmín",cor:"Gardenia, jazmín, nardo",fon:"Vainilla, almizcle, ámbar",dur:"7–9 h"},
-  "warm vainilla bath & body":{fam:"Gourmand vainilla",sal:"Notas cítricas, pera",cor:"Vainilla, notas florales",fon:"Vainilla, almizcle, maderas dulces",dur:"6–8 h"},
-  "bare vainilla vs":{fam:"Gourmand vainilla",sal:"Notas frutales",cor:"Vainilla, notas florales",fon:"Vainilla, almizcle, sándalo",dur:"6–8 h"},
-  "coconut milk vs f":{fam:"Gourmand tropical",sal:"Coco, notas verdes",cor:"Leche de coco, notas florales",fon:"Vainilla, almizcle, maderas dulces",dur:"6–8 h"},
-  "coconut passion vs f":{fam:"Gourmand tropical",sal:"Coco, frutas tropicales",cor:"Notas florales, notas dulces",fon:"Vainilla, almizcle",dur:"6–8 h"},
-  "cheirosa 71 brazilian f":{fam:"Gourmand especiado",sal:"Nutella, macadamia",cor:"Vainilla, caramelo salado",fon:"Haba tonka, sándalo, ámbar",dur:"8–10 h"},
-  "rare":{fam:"Oriental",sal:"Notas cítricas",cor:"Notas florales",fon:"Ámbar, maderas",dur:"8–10 h"},
-  "terres d'hermes":{fam:"Amaderado especiado",sal:"Naranja, pomelo",cor:"Pimienta, geranio, notas minerales",fon:"Vetiver, cedro, benjuí",dur:"8–10 h"},
-  "gentlemen r. prive gv":{fam:"Oriental amaderado",sal:"Notas cítricas, especias",cor:"Iris, notas florales",fon:"Vainilla, ámbar, maderas",dur:"9–11 h"},
-  "hugo boss infinity":{fam:"Aromático amaderado",sal:"Manzana, menta, bergamota",cor:"Lavanda, notas florales",fon:"Vetiver, ámbar, maderas",dur:"7–9 h"},
-  "hugo boss le parfum":{fam:"Amaderado especiado",sal:"Notas cítricas, especias",cor:"Notas florales, cuero",fon:"Vainilla, ámbar, maderas",dur:"9–11 h"},
-  "hugo b. magnetic":{fam:"Aromático amaderado",sal:"Notas cítricas, hojas verdes",cor:"Lavanda, notas florales",fon:"Ámbar, maderas, almizcle",dur:"7–9 h"},
-  "issey miyake cls":{fam:"Fresco acuático",sal:"Yuzu, notas cítricas",cor:"Notas acuáticas, notas verdes",fon:"Almizcle, maderas claras, ámbar",dur:"6–8 h"},
-  "gucci guilty":{fam:"Aromático fougère",sal:"Naranja, lavanda, notas cítricas",cor:"Flor de naranjo, notas especiadas",fon:"Pachulí, cedro, ámbar",dur:"8–10 h"},
-  "gucci pour homme":{fam:"Amaderado especiado",sal:"Notas cítricas, especias",cor:"Notas florales, incienso",fon:"Ámbar, maderas, cuero",dur:"8–10 h"},
-  "gucci flora f":{fam:"Floral frutal",sal:"Cítricos, notas frutales",cor:"Peonía, osmanthus, notas florales",fon:"Almizcle, sándalo, ámbar",dur:"6–8 h"},
-  "dolce gabbana pour homme":{fam:"Aromático amaderado",sal:"Bergamota, mandarina, notas verdes",cor:"Salvia, lavanda, pimienta",fon:"Cedro, sándalo, ámbar",dur:"7–9 h"},
-  "dolce gabbana pour homme intense":{fam:"Aromático amaderado",sal:"Notas cítricas, especias",cor:"Lavanda, notas florales",fon:"Ámbar, maderas, cuero",dur:"8–10 h"},
-  "d&g pour femme":{fam:"Floral fresco",sal:"Manzana, notas cítricas",cor:"Nardo, notas florales",fon:"Almizcle, sándalo, ámbar",dur:"6–8 h"},
-  "d&g light blue hombre":{fam:"Cítrico aromático",sal:"Bergamota, mandarina, notas verdes",cor:"Notas especiadas, notas florales",fon:"Almizcle, cedro, ámbar",dur:"6–8 h"},
-  "versace erza flame":{fam:"Especiado amaderado",sal:"Notas cítricas, especias",cor:"Notas florales, menta",fon:"Vainilla, ámbar, maderas",dur:"8–10 h"},
-  "eros versace parfum":{fam:"Aromático amaderado",sal:"Menta, manzana, limón",cor:"Haba tonka, geranio",fon:"Vainilla, cedro, ámbar",dur:"10–12 h"},
-  "spicebomb infraRed":{fam:"Especiado amaderado",sal:"Pimienta rosa, bergamota, notas verdes",cor:"Canela, azafrán, notas especiadas",fon:"Vainilla, ámbar, maderas",dur:"9–11 h"},
-  "spicebomb clásico":{fam:"Especiado amaderado",sal:"Pomelo, bergamota, pimienta",cor:"Canela, azafrán, cuero",fon:"Tabaco, vetiver, ámbar",dur:"9–11 h"},
-  "spicebomb xtreme":{fam:"Especiado amaderado",sal:"Pomelo, bergamota, pimienta",cor:"Canela, tabaco, cuero",fon:"Vainilla, ámbar, maderas",dur:"9–11 h"},
-  "valentino uomo":{fam:"Amaderado especiado",sal:"Bergamota, notas cítricas",cor:"Nuez moscada, notas florales",fon:"Cuero, ámbar, maderas",dur:"8–10 h"},
-  "uomo valentino intense":{fam:"Amaderado especiado",sal:"Notas cítricas, especias",cor:"Cuero, notas florales",fon:"Ámbar, maderas, vainilla",dur:"9–11 h"},
-  "valentino intense f":{fam:"Floral oriental",sal:"Notas cítricas, notas frutales",cor:"Nardo, jazmín, rosa",fon:"Vainilla, ámbar, maderas",dur:"9–11 h"},
-  "valentino coral fantasy":{fam:"Floral frutal",sal:"Notas frutales, cítricos",cor:"Notas florales",fon:"Vainilla, maderas, ámbar",dur:"8–10 h"},
-  "le belle le parfum f":{fam:"Floral oriental",sal:"Notas cítricas, notas frutales",cor:"Nardo, jazmín",fon:"Vainilla, ámbar, maderas",dur:"9–11 h"},
-  "mon guerlain":{fam:"Aromático vainilla",sal:"Lavanda, bergamota",cor:"Jazmín, iris, notas florales",fon:"Vainilla, sándalo, haba tonka",dur:"8–10 h"},
-  "rochas man":{fam:"Oriental amaderado",sal:"Notas cítricas, notas verdes",cor:"Notas florales, canela",fon:"Vainilla, ámbar, maderas",dur:"8–10 h"},
-  "can can f":{fam:"Floral frutal",sal:"Notas frutales",cor:"Notas florales",fon:"Vainilla, almizcle, ámbar",dur:"6–8 h"},
-  "gaia f":{fam:"Floral",sal:"Notas cítricas",cor:"Notas florales",fon:"Almizcle, maderas claras",dur:"6–8 h"},
-  "heir ess paris hilton":{fam:"Floral frutal",sal:"Notas frutales",cor:"Notas florales",fon:"Vainilla, almizcle",dur:"6–8 h"},
-  "heirss paris hilton":{fam:"Floral frutal",sal:"Notas frutales",cor:"Notas florales",fon:"Vainilla, almizcle",dur:"6–8 h"},
-  "nyc blecker street f":{fam:"Floral frutal",sal:"Notas cítricas",cor:"Notas florales",fon:"Vainilla, ámbar, maderas",dur:"8–10 h"},
-  "lady million gold f":{fam:"Floral frutal",sal:"Pomelo, mandarina",cor:"Jazmín, nardo, rosa",fon:"Ámbar, pachulí, maderas",dur:"8–10 h"},
-  "212 vip red":{fam:"Floral frutal",sal:"Notas frutales, cítricos",cor:"Notas florales",fon:"Vainilla, ámbar, maderas",dur:"7–9 h"},
-  "vip black 212":{fam:"Aromático amaderado",sal:"Notas cítricas, notas verdes",cor:"Notas florales, especias",fon:"Ámbar, maderas, almizcle",dur:"7–9 h"},
-  "halloween man x":{fam:"Oriental amaderado",sal:"Notas cítricas, especias",cor:"Lavanda, notas florales",fon:"Vainilla, ámbar, maderas",dur:"8–10 h"},
-  "halloween clásico":{fam:"Floral oriental",sal:"Notas verdes, notas cítricas",cor:"Nardo, notas florales",fon:"Vainilla, ámbar, almizcle",dur:"7–9 h"},
-  "halloween x":{fam:"Floral oriental",sal:"Notas frutales, cítricos",cor:"Notas florales",fon:"Vainilla, ámbar, almizcle",dur:"7–9 h"},
-  "halloween clásico f":{fam:"Floral oriental",sal:"Notas verdes, notas cítricas",cor:"Nardo, notas florales",fon:"Vainilla, ámbar, almizcle",dur:"7–9 h"},
-  "aber crombie fitch":{fam:"Fresco aromático",sal:"Bergamota, notas verdes",cor:"Notas florales, especias",fon:"Maderas, almizcle, ámbar",dur:"6–8 h"},
-  "one million":{fam:"Especiado cuero",sal:"Toronja, menta, mandarina",cor:"Canela, rosa, especias",fon:"Cuero, ámbar, pachulí",dur:"9–11 h"},
-  "elixir le male 2":{fam:"Oriental gourmand",sal:"Lavanda, menta",cor:"Especias, notas florales",fon:"Vainilla, ámbar, maderas",dur:"10–12 h"}
-};
-/* normaliza claves de FICHAS para que no importen mayúsculas/acentos */
+/* fichas: la de esta tienda va "a pedido" (se entrega por WhatsApp) */
 const FICHAS_N = {};
-Object.keys(FICHAS).forEach(k => { FICHAS_N[norm(k)] = FICHAS[k]; });
 
 /* =====================================================================
    UTILIDADES
@@ -767,12 +905,15 @@ function iniciales(nombre){
   return ((p[0]||"?")[0] + ((p[1]||"")[0]||"")).toUpperCase();
 }
 function fichaDe(p){
-  return FICHAS_N[norm(p.n)] || {
-    fam: p.g === "f" ? "Familiar floral" : (p.g === "m" ? "Familiar amaderado" : "Familiar ámbar"),
-    sal:null
+  const base = FICHAS_N[norm(p.n)];
+  if(base) return base;
+  return {
+    fam: p.g === "a" ? "Perfume árabe · 100 ml" : "Perfume de diseñador · 100 ml",
+    sal: null
   };
 }
-const TAG = { f:"Mujer", m:"Hombre", u:"Unisex" };
+const TAG = { a:"Árabe", d:"Diseñador" };
+const CAT_LARGO = { a:"Perfume árabe", d:"Perfume de diseñador" };
 
 /* =====================================================================
    ESTADO + PERSISTENCIA
@@ -880,7 +1021,8 @@ function pintarCatalogo(){
     return `<article class="card">
       <div class="frasco">
         <span class="mini-tag t-${p.g}">${TAG[p.g]}</span>
-        ${frascoSVG(p, p.id)}
+        <button class="like" data-like="p-${p.id}" aria-label="Me gusta ${esc(p.n)}"><span class="cor">❤</span> <span class="n">0</span></button>
+        <img src="${p.img}" alt="${esc(p.n)}" loading="lazy" decoding="async" width="260" height="260">
       </div>
       <div class="card-txt">
         <h3>${esc(p.n)}</h3>
@@ -893,6 +1035,7 @@ function pintarCatalogo(){
       </div>
     </article>`;
   }).join("");
+  engancharLikes(cont);
 }
 
 function setFiltro(f, btn){
@@ -943,7 +1086,7 @@ function abrirProducto(id){
        </div>`;
 
   document.getElementById("modalCuerpo").innerHTML = `
-    <div class="modal-frasco">${frascoSVG(p, p.id, 190)}</div>
+    <div class="modal-frasco"><img src="${p.img}" alt="${esc(p.n)}" width="300" height="300" loading="lazy"></div>
     <div class="modal-info">
       <span class="tag t-${p.g}">${TAG[p.g]}</span>
       <h2 id="mpTitulo">${esc(p.n)}</h2>
@@ -1087,7 +1230,7 @@ function renderCarrito(){
   cont.innerHTML = pedido.map((i, x) => {
     const p = CATALOGO.find(c => c.n === i.n) || { n:i.n, g:"u", id:0 };
     return `<div class="item">
-      <div class="item-frasco">${frascoSVG(p, p.id, 40)}</div>
+      <div class="item-frasco"><img src="${p.img}" alt="" width="40" height="52" loading="lazy"></div>
       <div class="item-info">
         <strong>${esc(i.n)}</strong>
         <span>${i.t} ml · ${dinero(CONFIG.precios[i.t])} c/u</span>
@@ -1171,11 +1314,176 @@ function enviarWhatsApp(){
 
 function enlazarWhatsApp(){
   const saludo = encodeURIComponent("¡Hola JESÚS PARFUM! 👋 Quiero información sobre las fragancias.");
-  ["waHeader","waHero","waFooter","waSin"].forEach(id => {
+  ["waHeader","waHero","waFooter","waSin","waPromo","waGuia"].forEach(id => {
     const el = document.getElementById(id);
     if(el){ el.href = `https://wa.me/${CONFIG.whatsapp}?text=${saludo}`; el.target = "_blank"; el.rel = "noopener"; }
   });
 }
+
+
+/* =========================================================
+   LIKES + RECOMENDACIONES  (100% libre, sin registro)
+   - Los "me gusta" se cuentan con un contador público gratis.
+   - Si el contador no responde (sin internet, bloqueado), se usa
+     un contador local para que el botón nunca se rompa.
+   ========================================================= */
+const LIKES = {
+  api: "https://abacus.jasoncameron.dev",   // contador público y gratuito
+  ns: "jesusparfum-gye",
+  lsMios: "jp_mis_likes_v1",
+  lsLocal: "jp_contadores_v1",
+  activo: true                              // pon false si algún día quieres desactivarlo
+};
+let misLikes = {}, contLocal = {}, contCache = {};
+
+function cargarLikesLocales(){
+  try { misLikes = JSON.parse(localStorage.getItem(LIKES.lsMios) || "{}"); } catch(e){ misLikes = {}; }
+  try { contLocal = JSON.parse(localStorage.getItem(LIKES.lsLocal) || "{}"); } catch(e){ contLocal = {}; }
+}
+function guardarMios(){ try { localStorage.setItem(LIKES.lsMios, JSON.stringify(misLikes)); } catch(e){} }
+function guardarContLocal(){ try { localStorage.setItem(LIKES.lsLocal, JSON.stringify(contLocal)); } catch(e){} }
+
+async function apiGet(clave){
+  if(!LIKES.activo) return null;
+  try{
+    const r = await fetch(`${LIKES.api}/get/${LIKES.ns}/${clave}`, { cache:"no-store" });
+    if(!r.ok) return null;
+    const d = await r.json();
+    return typeof d.value === "number" ? d.value : null;
+  }catch(e){ return null; }
+}
+async function apiHit(clave){
+  if(!LIKES.activo) return null;
+  try{
+    const r = await fetch(`${LIKES.api}/hit/${LIKES.ns}/${clave}`, { cache:"no-store" });
+    if(!r.ok) return null;
+    const d = await r.json();
+    return typeof d.value === "number" ? d.value : null;
+  }catch(e){ return null; }
+}
+function valorMostrado(clave){
+  const cache = contCache[clave];
+  const local = contLocal[clave] || 0;
+  if(typeof cache === "number") return Math.max(cache, local);
+  return local;
+}
+function pintarLike(btn, clave){
+  const n = btn.querySelector(".n");
+  if(n) n.textContent = valorMostrado(clave);
+  btn.dataset.mio = misLikes[clave] ? "1" : "0";
+  btn.title = misLikes[clave] ? "Ya diste me gusta" : "Dar me gusta";
+  btn.setAttribute("aria-pressed", misLikes[clave] ? "true" : "false");
+}
+async function darLike(clave, btn){
+  if(misLikes[clave]){ toast("Ya diste me gusta aquí ❤"); return; }
+  misLikes[clave] = true; guardarMios();
+  contLocal[clave] = (contLocal[clave] || 0) + 1; guardarContLocal();
+  pintarLike(btn, clave);
+  if(btn.dataset.api === "1"){
+    const total = await apiHit(clave);
+    if(typeof total === "number"){ contCache[clave] = total; pintarLike(btn, clave); }
+  }
+  toast("¡Gracias por el like! ❤");
+}
+async function cargarContadores(claves){
+  await Promise.all(claves.map(async k => {
+    const v = await apiGet(k);
+    if(typeof v === "number"){ contCache[k] = v; }
+  }));
+  document.querySelectorAll("[data-like]").forEach(btn => {
+    const k = btn.dataset.like;
+    if(claves.includes(k)) pintarLike(btn, k);
+  });
+}
+function engancharLikes(raiz){
+  (raiz || document).querySelectorAll("[data-like]").forEach(btn => {
+    const clave = btn.dataset.like;
+    pintarLike(btn, clave);
+    if(btn.dataset.listener) return;
+    btn.dataset.listener = "1";
+    btn.addEventListener("click", e => { e.preventDefault(); darLike(clave, btn); });
+  });
+  const claves = Array.from((raiz || document).querySelectorAll('[data-like][data-api="1"]')).map(b => b.dataset.like);
+  if(claves.length) cargarContadores(Array.from(new Set(claves)));
+}
+
+/* ---------- reseñas ---------- */
+/* 👉 PON AQUÍ TUS RESEÑAS REALES cuando las tengas:
+   { n:"Nombre", c:"Ciudad", t:"texto", e:5 }                                  */
+const RESENAS = [];
+const LS_RESENAS = "jp_resenas_v1";
+
+function estrellas(n){ return "★".repeat(Math.max(1, Math.min(5, n))) + "☆".repeat(5 - Math.max(1, Math.min(5, n))); }
+
+function resenasLocales(){
+  try { return JSON.parse(localStorage.getItem(LS_RESENAS) || "[]"); } catch(e){ return []; }
+}
+function pintarResenas(){
+  const cont = document.getElementById("listaResenas");
+  if(!cont) return;
+  const todas = RESENAS.map((r,i) => Object.assign({ id:"r-" + i, publicada:true }, r))
+    .concat(resenasLocales().map((r,i) => Object.assign({}, r, { id:"l-" + i, publicada:false })));
+  if(!todas.length){
+    cont.innerHTML = `<div class="resenas-vacio">
+      Todavía no hay recomendaciones publicadas.<br><b style="color:#e8ca62">Sé el primero:</b> escribe la tuya abajo y la publicamos.
+    </div>`;
+    return;
+  }
+  cont.innerHTML = todas.map(r => `
+    <article class="resena ${r.publicada ? "" : "pendiente"}">
+      <div class="estrellas" aria-label="${r.e || 5} de 5 estrellas">${estrellas(r.e || 5)}</div>
+      <p>“${esc(r.t)}”</p>
+      <span class="quien">— ${esc(r.n || "Cliente")}${r.c ? " · " + esc(r.c) : ""}${r.publicada ? "" : " · pendiente de publicar"}</span>
+      <div class="pie">
+        <button class="like" data-like="${r.id}" data-api="1" aria-label="Útil"><span class="cor">❤</span> <span class="n">0</span> <span style="font-weight:700">útil</span></button>
+      </div>
+    </article>`).join("");
+  engancharLikes(cont);
+}
+
+let estrellasElegidas = 5;
+function pintarEstrellas(){
+  document.querySelectorAll("#filaEstrellas button").forEach(b => {
+    b.dataset.on = Number(b.dataset.est) <= estrellasElegidas ? "1" : "0";
+  });
+}
+document.getElementById("filaEstrellas").addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if(!b) return;
+  estrellasElegidas = Number(b.dataset.est);
+  pintarEstrellas();
+});
+
+document.getElementById("btnEnviarResena").addEventListener("click", () => {
+  const n = document.getElementById("resNombre").value.trim();
+  const c = document.getElementById("resCiudad").value.trim();
+  const t = document.getElementById("resTexto").value.trim();
+  const av = document.getElementById("avisoResena");
+  if(t.length < 15){
+    av.dataset.err = "1"; av.style.color = "#e2564a";
+    av.textContent = "⚠ Escribe al menos 15 caracteres contando qué pediste y cómo te fue.";
+    return;
+  }
+  const lista = resenasLocales();
+  lista.unshift({ n: n || "Cliente", c, t, e: estrellasElegidas, fecha: new Date().toISOString().slice(0,10) });
+  try { localStorage.setItem(LS_RESENAS, JSON.stringify(lista.slice(0, 12))); } catch(e){}
+  pintarResenas();
+  av.style.color = "";
+  av.dataset.err = "0";
+  av.textContent = "✓ Guardada en este dispositivo. Ahora se abre WhatsApp para publicarla.";
+  const msg = `⭐ *RECOMENDACIÓN JESÚS PARFUM*\n\n${"★".repeat(estrellasElegidas)}\n"${t}"\n\n— ${n || "Cliente"}${c ? " · " + c : ""}`;
+  window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
+  document.getElementById("resTexto").value = "";
+});
+
+document.getElementById("btnCompartir").addEventListener("click", async () => {
+  const texto = "Les recomiendo JESÚS PARFUM 💎 fragancias premium desde $12.50, envíos a todo Ecuador. Pide por WhatsApp: ";
+  const url = location.origin + location.pathname;
+  if(navigator.share){
+    try { await navigator.share({ title:"JESÚS PARFUM", text:texto, url }); return; } catch(e){}
+  }
+  window.open(`https://wa.me/?text=${encodeURIComponent(texto + url)}`, "_blank");
+});
 
 function toast(msg){
   const t = document.getElementById("toast");
@@ -1205,8 +1513,12 @@ function irArriba(){ window.scrollTo({ top:0, behavior:"smooth" }); }
   });
 
   cargar();
+  cargarLikesLocales();
   pintarCatalogo();
   renderCarrito();
+  pintarResenas();
+  pintarEstrellas();
+  engancharLikes(document);
 
   // restaura ciudad guardada
   try{
@@ -1222,5 +1534,5 @@ function irArriba(){ window.scrollTo({ top:0, behavior:"smooth" }); }
   }
 })();
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a50db214a8238c9f',t:'MTc5MzA2MjExMQ=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a513990898078c9f',t:'MTc5MzEyNDAwMA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
