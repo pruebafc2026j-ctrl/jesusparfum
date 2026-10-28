@@ -190,7 +190,20 @@ nav.menu a:hover{color:var(--oro)}
 }
 .btn-carrito:hover #contadorCarrito{background:#000;color:var(--oro)}
 #contadorCarrito[data-vacio="1"]{display:none}
-@media(max-width:860px){nav.menu{display:none}}
+/* menú móvil (hamburguesa) */
+.btn-menu{display:none;background:transparent;border:1.5px solid #333;border-radius:10px;color:var(--oro);width:40px;height:36px;align-items:center;justify-content:center;font-size:1.15rem;line-height:1;padding:0}
+.btn-menu:hover{border-color:var(--oro)}
+.menu-movil{display:none;border-top:1px solid var(--linea);background:rgba(10,10,10,.98);backdrop-filter:blur(12px)}
+.menu-movil.abierto{display:block}
+.menu-movil a{display:block;padding:14px 20px;color:var(--texto);text-decoration:none;font-size:.95rem;font-weight:600;border-bottom:1px solid #1d1d1d}
+.menu-movil a:last-child{border-bottom:0}
+.menu-movil a:active{background:#161616;color:var(--oro)}
+@media(max-width:860px){
+  nav.menu{display:none}
+  .btn-menu{display:inline-flex}
+  .barra{gap:8px}
+  .logo{margin-right:auto}
+}
 @media(max-width:520px){
   .logo{font-size:.95rem;letter-spacing:2px}
   .btn-wa span.txt{display:none}
@@ -538,10 +551,17 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
       <a href="#faq">Preguntas</a>
       <a href="#nosotros">Nosotros</a>
     </nav>
+    <button class="btn-menu" id="btnMenu" aria-label="Abrir menú" aria-expanded="false" aria-controls="menuMovil">☰</button>
     <a class="btn-wa" id="waHeader" href="#" target="_blank" rel="noopener">💬 <span class="txt">WhatsApp</span></a>
     <button class="btn-carrito" onclick="abrirCarrito()" aria-label="Ver mi pedido">
       🛒 <span class="txt">Pedido</span> <span id="contadorCarrito" data-vacio="1">0</span>
     </button>
+  </div>
+  <div class="menu-movil" id="menuMovil">
+    <a href="#catalogo">🛍️ Catálogo</a>
+    <a href="#precios">💵 Precios</a>
+    <a href="#faq">❓ Preguntas</a>
+    <a href="#nosotros">👤 Nosotros</a>
   </div>
 </header>
 
@@ -729,7 +749,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
       <h3>2. Elige bien el tamaño</h3>
       <p>Si es tu primera vez con un aroma, empieza en <b>30 ml ($12.50)</b>. Si ya sabes que lo vas a usar seguido, el <b>100 ml ($24.00)</b> es el que mejor precio por mililitro tiene — y el más pedido. El de <b>50 ml ($15.50)</b> es el punto medio con mejor relación calidad-precio frente al de 30 ml. Todos los tamaños entran en los combos: 15% desde 2 frascos y 20% desde 4 del mismo tamaño.</p>
       <h3>3. Cómo cuidar tu fragancia</h3>
-      <p>Aplica sobre piel hidratada y en puntos de pulso (cuello, muñecas, detrás de las orejas), no sobre la ropa. Guarda el frasco lejos del sol y del baño: el calor y la humedad son los que dañan el perfume. Si quieres que dure más, usa una crema sin aroma debajo.</p>
+      <p>Aplica sobre piel hidratada y en puntos de pulso (cuello, muñecas, detrás de las orejas) y <b>también puedes aplicar sobre la ropa</b>: en la tela el aroma se queda y <b>dura más de 24 horas</b> (mejor en algodón, lino o tejidos claros, y desde unos 20 cm de distancia para no manchar). Guarda el frasco lejos del sol y del baño: el calor y la humedad son los que dañan el perfume.</p>
       <p style="margin-top:14px">¿Buscas algo puntual? Escríbenos por <a href="#" id="waGuia" target="_blank" rel="noopener">WhatsApp</a> o revisa el <a href="#catalogo">catálogo completo</a>, el <a href="#precios">precio por tamaño</a> y las <a href="#faq">preguntas frecuentes</a>. Atendemos en Guayaquil y enviamos a todo Ecuador.</p>
     </div>
   </section>
@@ -1419,6 +1439,22 @@ function enviarWhatsApp(){
   window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(m)}`, "_blank");
 }
 
+/* ---------- MENÚ MÓVIL ---------- */
+(function(){
+  const btn = document.getElementById("btnMenu");
+  const panel = document.getElementById("menuMovil");
+  if(!btn || !panel) return;
+  const cerrar = () => { panel.classList.remove("abierto"); btn.setAttribute("aria-expanded","false"); btn.textContent = "☰"; btn.setAttribute("aria-label","Abrir menú"); };
+  btn.addEventListener("click", () => {
+    const abierto = panel.classList.toggle("abierto");
+    btn.setAttribute("aria-expanded", abierto ? "true" : "false");
+    btn.textContent = abierto ? "✕" : "☰";
+    btn.setAttribute("aria-label", abierto ? "Cerrar menú" : "Abrir menú");
+  });
+  panel.querySelectorAll("a").forEach(a => a.addEventListener("click", cerrar));
+  window.addEventListener("resize", () => { if(window.innerWidth > 860) cerrar(); });
+})();
+
 function enlazarWhatsApp(){
   const saludo = encodeURIComponent("¡Hola JESÚS PARFUM! 👋 Quiero información sobre las fragancias.");
   ["waHeader","waHero","waFooter","waSin","waPromo","waGuia","waAviso"].forEach(id => {
@@ -1641,5 +1677,5 @@ function irArriba(){ window.scrollTo({ top:0, behavior:"smooth" }); }
   }
 })();
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5163a25edb7513f',t:'MTc5MzE1MTU3MA=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a51d7d733cb651c2',t:'MTc5MzIyNzcyNw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
