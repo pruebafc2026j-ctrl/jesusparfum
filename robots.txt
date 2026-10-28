@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pruebafc2026j-ctrl.github.io/jesusparfum.github.io/sitemap.xml
+Sitemap: https://pruebafc2026j-ctrl.github.io/jesusparfum/sitemap.xml
