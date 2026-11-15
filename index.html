@@ -136,15 +136,16 @@
   --radio:14px;
   --serif:"Georgia","Times New Roman",serif;
 }
+/* fondo de marca: capa fija compuesta (60 fps), no repinta al hacer scroll */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background-image:linear-gradient(180deg,rgba(9,9,9,.90),rgba(8,8,8,.95) 55%,rgba(7,7,7,.96)),var(--fondo-marca);
+  background-size:cover;background-position:center top;background-repeat:no-repeat;
+}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
   background-color:var(--negro);
-  background-image:linear-gradient(180deg,rgba(9,9,9,.90),rgba(8,8,8,.95) 55%,rgba(7,7,7,.96)),var(--fondo-marca);
-  background-size:cover,cover;
-  background-position:center top,center top;
-  background-repeat:no-repeat,no-repeat;
-  background-attachment:fixed,fixed;
   color:var(--texto);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   line-height:1.55;
@@ -168,7 +169,6 @@ a{color:inherit}
 header{
   position:sticky;top:0;z-index:60;
   background:rgba(11,11,11,.92);
-  backdrop-filter:blur(12px);
   border-bottom:1px solid var(--linea);
 }
 .barra{display:flex;align-items:center;gap:14px;height:64px}
@@ -268,7 +268,7 @@ section.bloque{padding:52px 0}
 .paso p{color:var(--tenue);font-size:.83rem}
 
 /* ---------- CATÁLOGO ---------- */
-.catalogo-cab{position:sticky;top:64px;z-index:40;background:rgba(11,11,11,.96);backdrop-filter:blur(10px);padding:14px 0 12px;border-bottom:1px solid #1c1c1c}
+.catalogo-cab{position:sticky;top:64px;z-index:40;background:#0b0b0b;padding:14px 0 12px;border-bottom:1px solid #1c1c1c}
 .buscador-caja{position:relative;max-width:520px;margin:0 auto 12px}
 #buscador{
   width:100%;padding:13px 44px 13px 42px;border-radius:99px;border:1.5px solid var(--linea);
@@ -292,9 +292,15 @@ section.bloque{padding:52px 0}
 @media(max-width:520px){.grid{grid-template-columns:repeat(2,1fr);gap:10px}}
 .card{
   background:var(--panel);border:1px solid var(--linea);border-radius:var(--radio);
-  overflow:hidden;display:flex;flex-direction:column;transition:.22s;
+  overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s;
+  contain:layout style paint;
+  content-visibility:auto;contain-intrinsic-size:auto 430px;
 }
-.card:hover{border-color:rgba(201,162,39,.6);transform:translateY(-3px);box-shadow:0 14px 28px -18px rgba(0,0,0,.9)}
+@media(hover:hover){
+  .card:hover{border-color:rgba(201,162,39,.6);transform:translateY(-3px);box-shadow:0 14px 28px -18px rgba(0,0,0,.9)}
+}
+.botonera-catalogo{display:flex;justify-content:center;margin:26px 0 8px}
+#cargarMas{min-width:240px}
 .frasco{
   position:relative;display:flex;align-items:center;justify-content:center;
   padding:18px 0 12px;background:linear-gradient(180deg,#1a1a1a,#121212);border-bottom:1px solid #232323;
@@ -327,7 +333,7 @@ section.bloque{padding:52px 0}
 .sin-resultados b{color:var(--texto);display:block;font-size:1.05rem;margin-bottom:6px}
 
 /* ---------- MODAL PRODUCTO ---------- */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(3px);z-index:100;display:none;align-items:center;justify-content:center;padding:18px}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.86);z-index:100;display:none;align-items:center;justify-content:center;padding:18px}
 .overlay.abierto{display:flex}
 .modal{
   background:var(--panel);border:1px solid var(--linea);border-radius:18px;
@@ -469,7 +475,7 @@ select#ciudad:focus{border-color:var(--oro);outline:none}
 .like[data-mio="1"] .cor{transform:scale(1.18)}
 .like-grande{padding:13px 22px;font-size:.86rem;border-radius:14px}
 .like-grande .cor{font-size:1.05rem}
-.frasco .like{position:absolute;top:9px;right:9px;padding:4px 8px;font-size:.66rem;background:rgba(20,20,20,.85);backdrop-filter:blur(4px)}
+.frasco .like{position:absolute;top:9px;right:9px;padding:4px 8px;font-size:.66rem;background:rgba(20,20,20,.92)}
 
 /* ---------- RECOMENDACIONES ---------- */
 .resenas{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:18px}
@@ -2134,30 +2140,13 @@ function listaVisible(){
   return arr;
 }
 
-function pintarCatalogo(){
-  numCatEl();
-  const arr = listaVisible();
-  const cont = document.getElementById("productos");
-  const cuenta = document.getElementById("cuenta");
-  cuenta.innerHTML = arr.length
-    ? `Mostrando <b>${arr.length}</b> de ${CATALOGO.length} fragancias${query ? ` para “${esc(query)}”` : ""}`
-    : "";
+let arrActual = [], pintados = 0;
+const TANDA = 48;   /* tarjetas que se dibujan por tanda (render progresivo) */
 
-  if(!arr.length){
-    cont.innerHTML = `<div class="sin-resultados">
-      <b>No encontramos “${esc(query)}”</b>
-      Prueba con el nombre de la marca (Dior, Carolina Herrera) o con una familia (vainilla, amaderado).<br>
-      <span style="color:#e8c964">Y si tu perfume en especial no lo encuentras, habla con nosotros: ¡podemos resolverlo!</span><br><br>
-      <a class="btn btn-fantasma" id="waSin" href="#" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
-    </div>`;
-    enlazarWhatsApp();
-    return;
-  }
-
-  cont.innerHTML = arr.map(p => {
-    const f = fichaDe(p);
-    const notas = f.notas ? f.notas : (f.sal ? `${f.sal} · ${f.cor||""}` : "Pirámide olfativa a pedido");
-    return `<article class="card">
+function tarjetaHTML(p){
+  const f = fichaDe(p);
+  const notas = f.notas ? f.notas : (f.sal ? `${f.sal} · ${f.cor||""}` : "Pirámide olfativa a pedido");
+  return `<article class="card">
       <div class="frasco">
         <span class="mini-tag t-${p.g}">${TAG[p.g]}</span>
         <button class="like" data-like="p-${p.id}" aria-label="Me gusta ${esc(p.n)}"><span class="cor">❤</span> <span class="n">0</span></button>
@@ -2174,8 +2163,80 @@ function pintarCatalogo(){
         </div>
       </div>
     </article>`;
-  }).join("");
-  engancharLikes(cont);
+}
+
+function actualizarCuenta(){
+  const cuenta = document.getElementById("cuenta");
+  cuenta.innerHTML = arrActual.length
+    ? `Mostrando <b>${pintados.toLocaleString("es-EC")}</b> de ${arrActual.length.toLocaleString("es-EC")} fragancias${query ? ` para “${esc(query)}”` : ""}`
+    : "";
+}
+
+function actualizarBotonera(){
+  const cont = document.getElementById("productos");
+  let bar = document.getElementById("botoneraCatalogo");
+  if(pintados >= arrActual.length){ if(bar) bar.remove(); return; }
+  if(!bar){
+    bar = document.createElement("div");
+    bar.id = "botoneraCatalogo";
+    bar.className = "botonera-catalogo";
+    cont.insertAdjacentElement("afterend", bar);
+    observarBotonera(bar);
+  }
+  const rest = arrActual.length - pintados;
+  bar.innerHTML = `<button class="btn btn-fantasma" id="cargarMas">Ver más fragancias (${rest.toLocaleString("es-EC")} restantes)</button>`;
+  document.getElementById("cargarMas").onclick = () => agregarTanda();
+}
+
+let observador = null;
+function observarBotonera(bar){
+  if(!("IntersectionObserver" in window)) return;
+  if(!observador){
+    observador = new IntersectionObserver(entradas => {
+      if(entradas.some(e => e.isIntersecting)) agregarTanda();
+    }, { rootMargin: "900px 0px" });
+  }
+  observador.disconnect();
+  observador.observe(bar);
+}
+
+function agregarTanda(){
+  if(pintados >= arrActual.length) return;
+  const cont = document.getElementById("productos");
+  const hasta = Math.min(pintados + TANDA, arrActual.length);
+  const html = arrActual.slice(pintados, hasta).map(tarjetaHTML).join("");
+  /* se enganchan los likes solo de las tarjetas nuevas */
+  const caja = document.createElement("div");
+  caja.innerHTML = html;
+  engancharLikes(caja);
+  while(caja.firstChild) cont.appendChild(caja.firstChild);
+  pintados = hasta;
+  actualizarCuenta();
+  actualizarBotonera();
+}
+
+function pintarCatalogo(){
+  numCatEl();
+  arrActual = listaVisible();
+  pintados = 0;
+  const cont = document.getElementById("productos");
+  const bar = document.getElementById("botoneraCatalogo");
+  if(bar) bar.remove();
+
+  if(!arrActual.length){
+    document.getElementById("cuenta").innerHTML = "";
+    cont.innerHTML = `<div class="sin-resultados">
+      <b>No encontramos “${esc(query)}”</b>
+      Prueba con el nombre de la marca (Dior, Carolina Herrera) o con una familia (vainilla, amaderado).<br>
+      <span style="color:#e8c964">Y si tu perfume en especial no lo encuentras, habla con nosotros: ¡podemos resolverlo!</span><br><br>
+      <a class="btn btn-fantasma" id="waSin" href="#" target="_blank" rel="noopener">Preguntar por WhatsApp</a>
+    </div>`;
+    enlazarWhatsApp();
+    return;
+  }
+
+  cont.innerHTML = "";
+  agregarTanda();
 }
 
 function setFiltro(f, btn){
@@ -2184,14 +2245,19 @@ function setFiltro(f, btn){
   pintarCatalogo();
 }
 
+let tmpBusqueda = null;
 document.getElementById("buscador").addEventListener("input", e => {
-  query = e.target.value;
-  if(query){                                  // al buscar, se limpia el filtro para no ocultar resultados
-    filtroActual = "todos";
-    document.querySelectorAll(".chip-filtro").forEach(b => b.setAttribute("aria-pressed", b.dataset.f === "todos" ? "true" : "false"));
-  }
-  document.getElementById("btnLimpiar").dataset.visible = query ? "1" : "0";
-  pintarCatalogo();
+  const valor = e.target.value;
+  document.getElementById("btnLimpiar").dataset.visible = valor ? "1" : "0";
+  clearTimeout(tmpBusqueda);
+  tmpBusqueda = setTimeout(() => {
+    query = valor;
+    if(query){                                // al buscar, se limpia el filtro para no ocultar resultados
+      filtroActual = "todos";
+      document.querySelectorAll(".chip-filtro").forEach(b => b.setAttribute("aria-pressed", b.dataset.f === "todos" ? "true" : "false"));
+    }
+    requestAnimationFrame(pintarCatalogo);
+  }, 140);
 });
 document.getElementById("btnLimpiar").addEventListener("click", () => {
   query = "";
@@ -2696,5 +2762,5 @@ function irArriba(){ window.scrollTo({ top:0, behavior:"smooth" }); }
   }
 })();
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a53e3f37adc67b8f',t:'MTc5MzU3MTIwOA=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a53e3f37adc67b8f',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
