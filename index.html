@@ -2189,16 +2189,51 @@ function actualizarBotonera(){
 }
 
 let observador = null;
+let navEnCurso = 0;        /* momento del último salto a una sección */
 function observarBotonera(bar){
   if(!("IntersectionObserver" in window)) return;
   if(!observador){
     observador = new IntersectionObserver(entradas => {
+      if(Date.now() - navEnCurso < 1500) return;   /* no agregar tarjetas mientras se salta a Precios/Preguntas/Nosotros */
       if(entradas.some(e => e.isIntersecting)) agregarTanda();
     }, { rootMargin: "900px 0px" });
   }
   observador.disconnect();
   observador.observe(bar);
 }
+
+/* ---------- navegación por secciones (salto exacto, sin pelear con la carga progresiva) ---------- */
+function altoHeader(){
+  const h = document.querySelector("header");
+  return (h ? h.offsetHeight : 64) + 8;
+}
+function irASeccion(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  navEnCurso = Date.now();
+  const html = document.documentElement;
+  const previo = html.style.scrollBehavior;
+  html.style.scrollBehavior = "auto";            /* salto exacto, sin animación suave */
+  const y = el.getBoundingClientRect().top + window.scrollY - altoHeader();
+  window.scrollTo(0, Math.max(0, y));
+  html.style.scrollBehavior = previo || "";
+  /* segundo ajuste: por si el navegador recalcula alturas al pintar */
+  requestAnimationFrame(() => {
+    const y2 = el.getBoundingClientRect().top + window.scrollY - altoHeader();
+    if(Math.abs(y2 - window.scrollY) > 4) window.scrollTo(0, Math.max(0, y2));
+  });
+}
+document.addEventListener("click", e => {
+  const a = e.target.closest('a[href^="#"]');
+  if(!a) return;
+  const id = a.getAttribute("href").slice(1);
+  if(!id) return;
+  const el = document.getElementById(id);
+  if(!el) return;
+  e.preventDefault();
+  irASeccion(id);
+  if(history.replaceState) history.replaceState(null, "", "#" + id);
+});
 
 function agregarTanda(){
   if(pintados >= arrActual.length) return;
@@ -2762,5 +2797,5 @@ function irArriba(){ window.scrollTo({ top:0, behavior:"smooth" }); }
   }
 })();
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5b1f6f78c718c9f',t:'MTc5NDc4NDU5Nw=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5b1f6f78c718c9f',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5b239b6da81da4d',t:'MTc5NDc4NzMzMQ=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5b239b6da81da4d',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
