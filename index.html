@@ -147,6 +147,10 @@ body::before{
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition:none!important;animation:none!important}
+}
 body{
   background-color:var(--negro);
   color:var(--texto);
@@ -196,7 +200,7 @@ nav.menu a:hover{color:var(--oro)}
 /* menú móvil (hamburguesa) */
 .btn-menu{display:none;background:transparent;border:1.5px solid #333;border-radius:10px;color:var(--oro);width:40px;height:36px;align-items:center;justify-content:center;font-size:1.15rem;line-height:1;padding:0}
 .btn-menu:hover{border-color:var(--oro)}
-.menu-movil{display:none;border-top:1px solid var(--linea);background:rgba(10,10,10,.98);backdrop-filter:blur(12px)}
+.menu-movil{display:none;border-top:1px solid var(--linea);background:rgba(10,10,10,.98)}
 .menu-movil.abierto{display:block}
 .menu-movil a{display:block;padding:14px 20px;color:var(--texto);text-decoration:none;font-size:.95rem;font-weight:600;border-bottom:1px solid #1d1d1d}
 .menu-movil a:last-child{border-bottom:0}
@@ -295,7 +299,7 @@ section.bloque{padding:52px 0}
 @media(max-width:520px){.grid{grid-template-columns:repeat(2,1fr);gap:10px}}
 .card{
   background:var(--panel);border:1px solid var(--linea);border-radius:var(--radio);
-  overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,box-shadow .2s;
+  overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,transform .2s;
   contain:layout style paint;
   content-visibility:auto;contain-intrinsic-size:auto 430px;
 }
@@ -308,10 +312,10 @@ section.bloque{padding:52px 0}
   position:relative;display:flex;align-items:center;justify-content:center;
   padding:18px 0 12px;background:linear-gradient(180deg,#1a1a1a,#121212);border-bottom:1px solid #232323;
 }
-.frasco svg{filter:drop-shadow(0 8px 12px rgba(0,0,0,.55))}
+.frasco svg{display:block}
 .frasco img.foto{position:absolute;inset:0;margin:auto;height:174px;width:auto;max-width:92%;object-fit:contain;z-index:3;opacity:0;background:#141414;border-radius:10px}
 .frasco img.foto.ok{opacity:1;padding:4px}
-.frasco img{position:relative;z-index:2;height:172px;width:auto;max-width:88%;object-fit:contain;filter:drop-shadow(0 10px 16px rgba(0,0,0,.6));border-radius:8px}
+.frasco img{position:relative;z-index:2;height:172px;width:auto;max-width:88%;object-fit:contain;border-radius:8px}
 @media(max-width:520px){.frasco img{height:132px}}
 .modal-frasco img.foto{position:absolute;inset:0;margin:auto;max-height:250px;width:auto;max-width:92%;object-fit:contain;z-index:3;opacity:0;border-radius:12px;background:#101010}
 .modal-frasco img.foto.ok{opacity:1;padding:6px}
@@ -2132,6 +2136,7 @@ function frascoSVG(p, i, alto){
         <stop offset="0" stop-color="${paleta[0]}"/><stop offset=".55" stop-color="${paleta[1]}"/><stop offset="1" stop-color="${paleta[2]}"/>
       </linearGradient>
     </defs>
+    <ellipse cx="36" cy="94" rx="27" ry="5" fill="#000" opacity=".5"/>
     <rect x="24" y="4" width="24" height="12" rx="3" fill="#c9a227" opacity=".92"/>
     <rect x="30" y="15" width="12" height="10" fill="#8a8a8a" opacity=".55"/>
     <rect x="12" y="24" width="48" height="66" rx="9" fill="url(#${id})" stroke="rgba(255,255,255,.28)" stroke-width="1.2"/>
