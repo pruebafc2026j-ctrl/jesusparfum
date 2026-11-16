@@ -36,6 +36,9 @@
 
 <!-- PWA -->
 <link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="JESÚS PARFUM">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
 
 <!-- Datos estructurados de las preguntas frecuentes (Google los muestra desplegables) -->
@@ -797,6 +800,28 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
       </details>
     </div>
   </section>
+  <section class="bloque contenedor" id="legal">
+    <div class="titulo-sec">
+      <h2>Envíos, cambios y privacidad</h2>
+      <p>Las reglas claras, sin letra chiquita.</p>
+    </div>
+    <div class="guia">
+      <h3>1. Envíos y entregas</h3>
+      <p><b>Guayaquil:</b> $5.00, con entrega <b>únicamente en centros comerciales</b> de la ciudad (coordinamos día, hora y punto por WhatsApp).
+      <b>Provincias:</b> $7.00 por Servientrega. <b>Gratis</b> en pedidos desde $50 después del descuento. El tiempo exacto se confirma por WhatsApp según tu ciudad.</p>
+      <h3>2. Cambios y devoluciones</h3>
+      <p>Revisa tu frasco al recibirlo. Si llega <b>dañado, derramado o no es el que pediste</b>, escríbenos por WhatsApp <b>el mismo día de la entrega</b> con una foto y lo cambiamos sin costo.
+      Por tratarse de un producto de uso personal, no hacemos cambios por cambio de opinión una vez abierto el frasco; si tienes dudas de un aroma, pide el de <b>30 ml</b> o solicítanos asesoría antes de comprar.</p>
+      <h3>3. Precios y pagos</h3>
+      <p>Todos los precios están en <b>dólares (USD)</b> e incluyen impuestos. El pago se coordina por WhatsApp al confirmar el pedido (transferencia o el método acordado). <b>No pedimos datos de tarjeta</b> dentro de la página. Los combos (15% en 2–3 frascos y 20% en 4 o más del mismo tamaño) se aplican automático en el pedido.</p>
+      <h3>4. Datos personales (privacidad)</h3>
+      <p>Los datos que nos envías por WhatsApp (nombre, dirección, ciudad y teléfono) se usan <b>solo para entregar tu pedido</b> y no se comparten con terceros, salvo la empresa de courier para el envío.
+      Esta página <b>no crea cuentas ni pide contraseñas</b>. Tus "me gusta", reseñas y el carrito se guardan <b>en tu propio navegador</b> y puedes borrarlos limpiando los datos del sitio. Los contadores de "me gusta" son públicos y anónimos: no guardan tu nombre ni tu número.</p>
+      <h3>5. Sobre las fragancias</h3>
+      <p>JESÚS PARFUM comercializa <b>fragancias inspiradas</b> de alta concentración, <b>no productos originales</b> de las casas de moda. Los nombres y marcas citados pertenecen a sus titulares y se usan únicamente como referencia olfativa.</p>
+      <p style="margin-top:14px">¿Dudas con tu pedido? <a href="#" id="waLegal" target="_blank" rel="noopener">Escríbenos por WhatsApp</a> y te respondemos personalmente.</p>
+    </div>
+  </section>
 </main>
 
 <footer>
@@ -804,6 +829,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
     <p><strong>JESÚS PARFUM</strong> — Guayaquil, Ecuador</p>
     <p>WhatsApp: <a id="waFooter" href="#" target="_blank" rel="noopener">+593 99 642 8137</a></p>
     <p>Envío Guayaquil $5.00 (solo centros comerciales) · Provincias (Servientrega) $7.00 · Gratis desde $50</p>
+    <p><a href="#legal" data-seccion="legal">Envíos, cambios y privacidad</a></p>
     <p class="legal">© <span id="anio">2026</span> JESÚS PARFUM. Fragancias inspiradas, no productos originales de las marcas mencionadas. Los nombres comerciales citados son propiedad de sus respectivos titulares y se usan solo como referencia olfativa.</p>
   </div>
 </footer>
@@ -2207,7 +2233,7 @@ function altoHeader(){
   const h = document.querySelector("header");
   return (h ? h.offsetHeight : 64) + 8;
 }
-function irASeccion(id){
+window.irASeccion = function irASeccion(id){
   const el = document.getElementById(id);
   if(!el) return;
   navEnCurso = Date.now();
@@ -2222,7 +2248,8 @@ function irASeccion(id){
     const y2 = el.getBoundingClientRect().top + window.scrollY - altoHeader();
     if(Math.abs(y2 - window.scrollY) > 4) window.scrollTo(0, Math.max(0, y2));
   });
-}
+};
+
 document.addEventListener("click", e => {
   const a = e.target.closest('a[href^="#"]');
   if(!a) return;
@@ -2577,7 +2604,7 @@ function enviarWhatsApp(){
 
 function enlazarWhatsApp(){
   const saludo = encodeURIComponent("¡Hola JESÚS PARFUM! 👋 Quiero información sobre las fragancias.");
-  ["waHeader","waHero","waFooter","waSin","waPromo","waGuia","waAviso"].forEach(id => {
+  ["waHeader","waHero","waFooter","waSin","waPromo","waGuia","waAviso","waLegal"].forEach(id => {
     const el = document.getElementById(id);
     if(el){ el.href = `https://wa.me/${CONFIG.whatsapp}?text=${saludo}`; el.target = "_blank"; el.rel = "noopener"; }
   });
@@ -2797,5 +2824,5 @@ function irArriba(){ window.scrollTo({ top:0, behavior:"smooth" }); }
   }
 })();
 </script>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5b239b6da81da4d',t:'MTc5NDc4NzMzMQ=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5b239b6da81da4d',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5b2582c9a6eda4d',t:'MTc5NDc4ODU3OQ=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5b2582c9a6eda4d',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
