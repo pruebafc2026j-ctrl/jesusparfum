@@ -773,27 +773,8 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
       <h2>Lo que dicen nuestros clientes</h2>
       <p>Recomendaciones reales de quienes ya pidieron. Puedes dar ❤ a las que te sirvan y dejar la tuya.</p>
     </div>
-    <div class="resenas" id="listaResenas"></div>
-    <div class="resena-form">
-      <h3>Deja tu recomendación</h3>
-      <div class="campos">
-        <input type="text" id="resNombre" placeholder="Tu nombre" maxlength="40" aria-label="Tu nombre">
-        <input type="text" id="resCiudad" placeholder="Ciudad (ej. Guayaquil)" maxlength="30" aria-label="Tu ciudad">
-      </div>
-      <textarea id="resTexto" placeholder="¿Qué aroma pediste y cómo te fue con la entrega?" maxlength="400" aria-label="Tu recomendación"></textarea>
-      <div class="fila-estrellas" id="filaEstrellas" role="group" aria-label="Calificación">
-        <span>Tu calificación:</span>
-        <button type="button" data-est="1" aria-label="1 estrella">★</button>
-        <button type="button" data-est="2" aria-label="2 estrellas">★</button>
-        <button type="button" data-est="3" aria-label="3 estrellas">★</button>
-        <button type="button" data-est="4" aria-label="4 estrellas">★</button>
-        <button type="button" data-est="5" aria-label="5 estrellas">★</button>
-      </div>
-      <div class="fila">
-        <button class="btn btn-oro" id="btnEnviarResena" style="justify-content:center">Enviar por WhatsApp</button>
-        <button class="btn btn-fantasma" id="btnCompartir" style="justify-content:center">Recomendar la tienda</button>
-      </div>
-      <span class="aviso-resena" id="avisoResena">Tu recomendación se guarda en este dispositivo y se envía por WhatsApp para publicarla.</span>
+    <div class="botonera-catalogo">
+      <a class="btn btn-oro" href="recomendaciones.html">⭐ Ver recomendaciones</a>
     </div>
   </section>
 
@@ -2751,84 +2732,6 @@ function engancharLikes(raiz){
   if(claves.length) cargarContadores(Array.from(new Set(claves)));
 }
 
-/* ---------- reseñas ---------- */
-/* 👉 PON AQUÍ TUS RESEÑAS REALES cuando las tengas:
-   { n:"Nombre", c:"Ciudad", t:"texto", e:5 }                                  */
-const RESENAS = [];
-const LS_RESENAS = "jp_resenas_v1";
-
-function estrellas(n){ return "★".repeat(Math.max(1, Math.min(5, n))) + "☆".repeat(5 - Math.max(1, Math.min(5, n))); }
-
-function resenasLocales(){
-  try { return JSON.parse(localStorage.getItem(LS_RESENAS) || "[]"); } catch(e){ return []; }
-}
-function pintarResenas(){
-  const cont = document.getElementById("listaResenas");
-  if(!cont) return;
-  const todas = RESENAS.map((r,i) => Object.assign({ id:"r-" + i, publicada:true }, r))
-    .concat(resenasLocales().map((r,i) => Object.assign({}, r, { id:"l-" + i, publicada:false })));
-  if(!todas.length){
-    cont.innerHTML = `<div class="resenas-vacio">
-      Todavía no hay recomendaciones publicadas.<br><b style="color:#e8ca62">Sé el primero:</b> escribe la tuya abajo y la publicamos.
-    </div>`;
-    return;
-  }
-  cont.innerHTML = todas.map(r => `
-    <article class="resena ${r.publicada ? "" : "pendiente"}">
-      <div class="estrellas" aria-label="${r.e || 5} de 5 estrellas">${estrellas(r.e || 5)}</div>
-      <p>“${esc(r.t)}”</p>
-      <span class="quien">— ${esc(r.n || "Cliente")}${r.c ? " · " + esc(r.c) : ""}${r.publicada ? "" : " · pendiente de publicar"}</span>
-      <div class="pie">
-        <button class="like" data-like="${r.id}" data-api="1" aria-label="Útil"><span class="cor">❤</span> <span class="n">0</span> <span style="font-weight:700">útil</span></button>
-      </div>
-    </article>`).join("");
-  engancharLikes(cont);
-}
-
-let estrellasElegidas = 5;
-function pintarEstrellas(){
-  document.querySelectorAll("#filaEstrellas button").forEach(b => {
-    b.dataset.on = Number(b.dataset.est) <= estrellasElegidas ? "1" : "0";
-  });
-}
-document.getElementById("filaEstrellas").addEventListener("click", e => {
-  const b = e.target.closest("button");
-  if(!b) return;
-  estrellasElegidas = Number(b.dataset.est);
-  pintarEstrellas();
-});
-
-document.getElementById("btnEnviarResena").addEventListener("click", () => {
-  const n = document.getElementById("resNombre").value.trim();
-  const c = document.getElementById("resCiudad").value.trim();
-  const t = document.getElementById("resTexto").value.trim();
-  const av = document.getElementById("avisoResena");
-  if(t.length < 15){
-    av.dataset.err = "1"; av.style.color = "#e2564a";
-    av.textContent = "⚠ Escribe al menos 15 caracteres contando qué pediste y cómo te fue.";
-    return;
-  }
-  const lista = resenasLocales();
-  lista.unshift({ n: n || "Cliente", c, t, e: estrellasElegidas, fecha: new Date().toISOString().slice(0,10) });
-  try { localStorage.setItem(LS_RESENAS, JSON.stringify(lista.slice(0, 12))); } catch(e){}
-  pintarResenas();
-  av.style.color = "";
-  av.dataset.err = "0";
-  av.textContent = "✓ Guardada en este dispositivo. Ahora se abre WhatsApp para publicarla.";
-  const msg = `⭐ *RECOMENDACIÓN JESÚS PARFUM*\n\n${"★".repeat(estrellasElegidas)}\n"${t}"\n\n— ${n || "Cliente"}${c ? " · " + c : ""}`;
-  window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
-  document.getElementById("resTexto").value = "";
-});
-
-document.getElementById("btnCompartir").addEventListener("click", async () => {
-  const texto = "Les recomiendo JESÚS PARFUM 💎 fragancias premium desde $12.50, envíos a todo Ecuador. Pide por WhatsApp: ";
-  const url = location.origin + location.pathname;
-  if(navigator.share){
-    try { await navigator.share({ title:"JESÚS PARFUM", text:texto, url }); return; } catch(e){}
-  }
-  window.open(`https://wa.me/?text=${encodeURIComponent(texto + url)}`, "_blank");
-});
-
 function toast(msg){
   const t = document.getElementById("toast");
   t.textContent = msg;
@@ -2860,8 +2763,6 @@ function irArriba(){ window.scrollTo({ top:0, behavior:"smooth" }); }
   cargarLikesLocales();
   pintarCatalogo();
   renderCarrito();
-  pintarResenas();
-  pintarEstrellas();
   engancharLikes(document);
 
   // restaura ciudad guardada
