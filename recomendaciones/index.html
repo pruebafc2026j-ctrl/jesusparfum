@@ -265,11 +265,11 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
       <textarea id="resTexto" placeholder="¿Qué aroma pediste y cómo te fue con la entrega?" maxlength="400" aria-label="Tu recomendación"></textarea>
       <div class="fila-estrellas" id="filaEstrellas" role="group" aria-label="Calificación">
         <span>Tu calificación:</span>
-        <button type="button" data-est="1" aria-label="1 estrella">★</button>
-        <button type="button" data-est="2" aria-label="2 estrellas">★</button>
-        <button type="button" data-est="3" aria-label="3 estrellas">★</button>
-        <button type="button" data-est="4" aria-label="4 estrellas">★</button>
-        <button type="button" data-est="5" aria-label="5 estrellas">★</button>
+        <button type="button" data-est="1" aria-label="1 diamante">💎</button>
+        <button type="button" data-est="2" aria-label="2 diamantes">💎</button>
+        <button type="button" data-est="3" aria-label="3 diamantes">💎</button>
+        <button type="button" data-est="4" aria-label="4 diamantes">💎</button>
+        <button type="button" data-est="5" aria-label="5 diamantes">💎</button>
       </div>
       <div class="fila">
         <button class="btn btn-oro" id="btnEnviarResena" style="justify-content:center">Enviar por WhatsApp</button>
@@ -396,7 +396,7 @@ function engancharLikes(raiz){
 const RESENAS = [];
 const LS_RESENAS = "jp_resenas_v1";
 
-function estrellas(n){ return "★".repeat(Math.max(1, Math.min(5, n))) + "☆".repeat(5 - Math.max(1, Math.min(5, n))); }
+function estrellas(n){ return "💎".repeat(Math.max(1, Math.min(5, n))) + "◇".repeat(5 - Math.max(1, Math.min(5, n))); }
 
 function resenasLocales(){
   try { return JSON.parse(localStorage.getItem(LS_RESENAS) || "[]"); } catch(e){ return []; }
@@ -414,7 +414,7 @@ function pintarResenas(){
   }
   cont.innerHTML = todas.map(r => `
     <article class="resena ${r.publicada ? "" : "pendiente"}">
-      <div class="estrellas" aria-label="${r.e || 5} de 5 estrellas">${estrellas(r.e || 5)}</div>
+      <div class="estrellas" aria-label="${r.e || 5} de 5 diamantes">${estrellas(r.e || 5)}</div>
       <p>“${esc(r.t)}”</p>
       <span class="quien">— ${esc(r.n || "Cliente")}${r.c ? " · " + esc(r.c) : ""}${r.publicada ? "" : " · pendiente de publicar"}</span>
       <div class="pie">
@@ -454,7 +454,7 @@ document.getElementById("btnEnviarResena").addEventListener("click", () => {
   av.style.color = "";
   av.dataset.err = "0";
   av.textContent = "✓ Guardada en este dispositivo. Ahora se abre WhatsApp para publicarla.";
-  const msg = `⭐ *RECOMENDACIÓN JESÚS PARFUM*\n\n${"★".repeat(estrellasElegidas)}\n"${t}"\n\n— ${n || "Cliente"}${c ? " · " + c : ""}`;
+  const msg = `⭐ *RECOMENDACIÓN JESÚS PARFUM*\n\n${"💎".repeat(estrellasElegidas)}\n"${t}"\n\n— ${n || "Cliente"}${c ? " · " + c : ""}`;
   window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`, "_blank");
   document.getElementById("resTexto").value = "";
 });
