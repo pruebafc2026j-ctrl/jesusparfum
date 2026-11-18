@@ -397,11 +397,11 @@ function engancharLikes(raiz){
 const RESENAS = [];
 const LS_RESENAS = "jp_resenas_v1";
 
-/* 👉 BASE DE DATOS PÚBLICA (Firebase gratis): pega aquí la URL de tu base de datos
+/* 👉 BASE DE DATOS PÚBLICA (gratis, sin cuentas): pega aquí el ID de tu base
    para que las recomendaciones se vean para TODOS al instante.
-   Ejemplo: "https://jesusparfum-xxxx.firebaseio.com"
+   Se crea en https://jsonblob.com (pega [] y copia el ID).
    Mientras esté vacío, las reseñas se guardan solo en el dispositivo. */
-const FIREBASE = { url: "" };
+const STORE = { id: "" };   // ejemplo: "a1b2c3d4-...."
 let resenasPublicas = null;   // null = aún no cargadas desde la base pública
 
 function estrellas(n){ return "💎".repeat(Math.max(1, Math.min(5, n))) + "◇".repeat(5 - Math.max(1, Math.min(5, n))); }
@@ -435,14 +435,27 @@ function pintarResenas(){
 
 /* carga las recomendaciones públicas (visibles para todos) */
 async function cargarPublicas(){
-  if(!FIREBASE.url) return;
+  if(!STORE.id) return;
   try{
-    const r = await fetch(FIREBASE.url.replace(/\/$/,"") + "/resenas.json", { cache:"no-store" });
+    const r = await fetch("https://jsonblob.com/api/jsonBlob/" + STORE.id, { cache:"no-store" });
     if(!r.ok) return;
     const d = await r.json();
-    resenasPublicas = d ? Object.values(d).sort((x,y) => (y.fecha||"").localeCompare(x.fecha||"")) : [];
+    resenasPublicas = Array.isArray(d) ? d.sort((x,y) => (y.fecha||"").localeCompare(x.fecha||"")) : [];
     pintarResenas();
   }catch(e){ /* sin conexión: se queda con las locales */ }
+}
+
+/* publica una recomendación para TODOS (lee, agrega y guarda) */
+async function publicarPublica(nueva){
+  const base = "https://jsonblob.com/api/jsonBlob/" + STORE.id;
+  let lista = [];
+  const r0 = await fetch(base, { cache:"no-store" });
+  if(r0.ok){ const d = await r0.json(); if(Array.isArray(d)) lista = d; }
+  lista.unshift(nueva);
+  const r = await fetch(base, { method:"PUT", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(lista.slice(0, 100)) });
+  if(!r.ok) throw new Error("put");
+  resenasPublicas = lista;
+  pintarResenas();
 }
 
 let estrellasElegidas = 5;
@@ -470,24 +483,18 @@ document.getElementById("btnEnviarResena").addEventListener("click", async () =>
   }
   const nueva = { n: n || "Cliente", c, t, e: estrellasElegidas, fecha: new Date().toISOString().slice(0,10) };
   /* con base pública: se publica para TODOS al instante */
-  if(FIREBASE.url){
+  if(STORE.id){
     try{
-      const r = await fetch(FIREBASE.url.replace(/\/$/,"") + "/resenas.json", {
-        method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(nueva)
-      });
-      if(r.ok){
-        if(resenasPublicas === null) resenasPublicas = [];
-        resenasPublicas.unshift(nueva);
-        pintarResenas();
-        av.style.color = ""; av.dataset.err = "0";
-        av.textContent = "✓ ¡Publicada para todos! Gracias por tu recomendación.";
-        document.getElementById("resTexto").value = "";
-        return;
-      }
-    }catch(e){}
-    av.style.color = "#e2564a";
-    av.textContent = "⚠ No se pudo publicar (sin conexión). Inténtalo de nuevo.";
-    return;
+      await publicarPublica(nueva);
+      av.style.color = ""; av.dataset.err = "0";
+      av.textContent = "✓ ¡Publicada para todos! Gracias por tu recomendación.";
+      document.getElementById("resTexto").value = "";
+      return;
+    }catch(e){
+      av.style.color = "#e2564a";
+      av.textContent = "⚠ No se pudo publicar (sin conexión). Inténtalo de nuevo.";
+      return;
+    }
   }
   /* sin base pública: se guarda en el dispositivo y se envía por WhatsApp */
   const lista = resenasLocales();
