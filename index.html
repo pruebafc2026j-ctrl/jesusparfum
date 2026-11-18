@@ -187,6 +187,8 @@ nav.menu a{color:var(--tenue);text-decoration:none;font-size:.85rem;font-weight:
 nav.menu a:hover{color:var(--oro)}
 .btn-wa{display:inline-flex;align-items:center;gap:7px;background:var(--verde);color:#04331a;padding:9px 15px;border-radius:99px;text-decoration:none;font-weight:800;font-size:.8rem;border:0}
 .btn-wa:hover{filter:brightness(1.08)}
+.btn-tk{display:inline-flex;align-items:center;gap:7px;background:#000;color:#fff;padding:9px 15px;border-radius:99px;text-decoration:none;font-weight:800;font-size:.8rem;border:1.5px solid #3a3a3a}
+.btn-tk:hover{border-color:var(--oro);color:var(--oro-claro)}
 .btn-carrito{
   display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--oro);
   border:1.5px solid var(--oro);padding:8px 14px;border-radius:99px;font-weight:800;font-size:.8rem;
@@ -216,6 +218,8 @@ nav.menu a:hover{color:var(--oro)}
   .logo{font-size:.95rem;letter-spacing:2px}
   .btn-wa span.txt{display:none}
   .btn-wa{padding:9px 11px}
+  .btn-tk span.txt{display:none}
+  .btn-tk{padding:9px 11px}
   .btn-carrito{padding:8px 11px}
 }
 
@@ -575,6 +579,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
     </nav>
     <button class="btn-menu" id="btnMenu" aria-label="Abrir menú" aria-expanded="false" aria-controls="menuMovil">☰</button>
     <a class="btn-wa" id="waHeader" href="#" target="_blank" rel="noopener">💬 <span class="txt">WhatsApp</span></a>
+    <a class="btn-tk" href="https://www.tiktok.com/@jesusparfumec" target="_blank" rel="noopener">🎵 <span class="txt">TikTok</span></a>
     <button class="btn-carrito" onclick="abrirCarrito()" aria-label="Ver mi pedido">
       🛒 <span class="txt">Pedido</span> <span id="contadorCarrito" data-vacio="1">0</span>
     </button>
