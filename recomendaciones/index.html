@@ -397,6 +397,13 @@ function engancharLikes(raiz){
 const RESENAS = [];
 const LS_RESENAS = "jp_resenas_v1";
 
+/* 👉 BASE DE DATOS PÚBLICA (Firebase gratis): pega aquí la URL de tu base de datos
+   para que las recomendaciones se vean para TODOS al instante.
+   Ejemplo: "https://jesusparfum-xxxx.firebaseio.com"
+   Mientras esté vacío, las reseñas se guardan solo en el dispositivo. */
+const FIREBASE = { url: "" };
+let resenasPublicas = null;   // null = aún no cargadas desde la base pública
+
 function estrellas(n){ return "💎".repeat(Math.max(1, Math.min(5, n))) + "◇".repeat(5 - Math.max(1, Math.min(5, n))); }
 
 function resenasLocales(){
@@ -405,7 +412,8 @@ function resenasLocales(){
 function pintarResenas(){
   const cont = document.getElementById("listaResenas");
   if(!cont) return;
-  const todas = RESENAS.map((r,i) => Object.assign({ id:"r-" + i, publicada:true }, r))
+  const publicas = (resenasPublicas !== null ? resenasPublicas : RESENAS);
+  const todas = publicas.map((r,i) => Object.assign({ id:"r-" + i, publicada:true }, r))
     .concat(resenasLocales().map((r,i) => Object.assign({}, r, { id:"l-" + i, publicada:false })));
   if(!todas.length){
     cont.innerHTML = `<div class="resenas-vacio">
@@ -425,6 +433,18 @@ function pintarResenas(){
   engancharLikes(cont);
 }
 
+/* carga las recomendaciones públicas (visibles para todos) */
+async function cargarPublicas(){
+  if(!FIREBASE.url) return;
+  try{
+    const r = await fetch(FIREBASE.url.replace(/\/$/,"") + "/resenas.json", { cache:"no-store" });
+    if(!r.ok) return;
+    const d = await r.json();
+    resenasPublicas = d ? Object.values(d).sort((x,y) => (y.fecha||"").localeCompare(x.fecha||"")) : [];
+    pintarResenas();
+  }catch(e){ /* sin conexión: se queda con las locales */ }
+}
+
 let estrellasElegidas = 5;
 function pintarEstrellas(){
   document.querySelectorAll("#filaEstrellas button").forEach(b => {
@@ -438,7 +458,7 @@ document.getElementById("filaEstrellas").addEventListener("click", e => {
   pintarEstrellas();
 });
 
-document.getElementById("btnEnviarResena").addEventListener("click", () => {
+document.getElementById("btnEnviarResena").addEventListener("click", async () => {
   const n = document.getElementById("resNombre").value.trim();
   const c = document.getElementById("resCiudad").value.trim();
   const t = document.getElementById("resTexto").value.trim();
@@ -448,8 +468,30 @@ document.getElementById("btnEnviarResena").addEventListener("click", () => {
     av.textContent = "⚠ Escribe al menos 15 caracteres contando qué pediste y cómo te fue.";
     return;
   }
+  const nueva = { n: n || "Cliente", c, t, e: estrellasElegidas, fecha: new Date().toISOString().slice(0,10) };
+  /* con base pública: se publica para TODOS al instante */
+  if(FIREBASE.url){
+    try{
+      const r = await fetch(FIREBASE.url.replace(/\/$/,"") + "/resenas.json", {
+        method:"POST", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(nueva)
+      });
+      if(r.ok){
+        if(resenasPublicas === null) resenasPublicas = [];
+        resenasPublicas.unshift(nueva);
+        pintarResenas();
+        av.style.color = ""; av.dataset.err = "0";
+        av.textContent = "✓ ¡Publicada para todos! Gracias por tu recomendación.";
+        document.getElementById("resTexto").value = "";
+        return;
+      }
+    }catch(e){}
+    av.style.color = "#e2564a";
+    av.textContent = "⚠ No se pudo publicar (sin conexión). Inténtalo de nuevo.";
+    return;
+  }
+  /* sin base pública: se guarda en el dispositivo y se envía por WhatsApp */
   const lista = resenasLocales();
-  lista.unshift({ n: n || "Cliente", c, t, e: estrellasElegidas, fecha: new Date().toISOString().slice(0,10) });
+  lista.unshift(nueva);
   try { localStorage.setItem(LS_RESENAS, JSON.stringify(lista.slice(0, 12))); } catch(e){}
   pintarResenas();
   av.style.color = "";
@@ -468,9 +510,11 @@ document.getElementById("btnCompartir").addEventListener("click", async () => {
   }
   window.open(`https://wa.me/?text=${encodeURIComponent(texto + url)}`, "_blank");
 });
+
 document.getElementById("anio").textContent = new Date().getFullYear();
 cargarLikesLocales();
 pintarResenas();
+cargarPublicas();
 pintarEstrellas();
 engancharLikes(document);
 </script>
