@@ -911,12 +911,13 @@ const CONFIG = {
 
 /* =====================================================================
    CÓDIGOS DE DESCUENTO (5%, un solo uso por cliente)
-   - JESUS-TEST es de prueba: se puede usar varias veces.
+   - Hay 100 códigos: uno es de prueba reutilizable (aspecto normal).
    - Los demás son de un solo uso: al confirmar el pedido quedan usados.
+   - Cada compra genera además un código nuevo para la próxima compra.
    - Para crear más códigos, pide a tu asistente y los agrega aquí.
    ===================================================================== */
 const CODIGOS = {
-  "JESUS-TEST": true,   // true = reutilizable (prueba)
+  "JESUS-244Z5N": true,   // código de prueba reutilizable (aspecto normal)
   "JESUS-2BV3B4": false,
   "JESUS-4BHYUW": false,
   "JESUS-4TFP8C": false,
@@ -936,18 +937,113 @@ const CODIGOS = {
   "JESUS-NQMZS7": false,
   "JESUS-SAHWFX": false,
   "JESUS-TK6F89": false,
-  "JESUS-UF8YJ8": false
+  "JESUS-UF8YJ8": false,
+  "JESUS-2K2RAY": false,
+  "JESUS-2PW8RG": false,
+  "JESUS-2USSBN": false,
+  "JESUS-3A77CW": false,
+  "JESUS-4296Y3": false,
+  "JESUS-5255TY": false,
+  "JESUS-5GK4FW": false,
+  "JESUS-5JMFDA": false,
+  "JESUS-6DX35V": false,
+  "JESUS-6V44ZW": false,
+  "JESUS-6VV3NS": false,
+  "JESUS-7C7CAW": false,
+  "JESUS-8383HX": false,
+  "JESUS-83NWBG": false,
+  "JESUS-85XRXM": false,
+  "JESUS-8EJW7U": false,
+  "JESUS-9B6XAN": false,
+  "JESUS-9GCKQG": false,
+  "JESUS-9KCZPR": false,
+  "JESUS-AHQ6SH": false,
+  "JESUS-B6AQYK": false,
+  "JESUS-BCGJ36": false,
+  "JESUS-BJDC3E": false,
+  "JESUS-BQY6WG": false,
+  "JESUS-C7JPKY": false,
+  "JESUS-C7TSR7": false,
+  "JESUS-CF8GX2": false,
+  "JESUS-CSB4Q2": false,
+  "JESUS-EAR5PP": false,
+  "JESUS-EEDWC3": false,
+  "JESUS-F3PSPU": false,
+  "JESUS-FUUEXQ": false,
+  "JESUS-FVRJ8W": false,
+  "JESUS-G23TTE": false,
+  "JESUS-H6YRVT": false,
+  "JESUS-H7HWJN": false,
+  "JESUS-HHUNSJ": false,
+  "JESUS-J4ECFK": false,
+  "JESUS-JVGJ2W": false,
+  "JESUS-MPPSZT": false,
+  "JESUS-NDDMG7": false,
+  "JESUS-NGGNBE": false,
+  "JESUS-NM3T3Y": false,
+  "JESUS-NPRRB4": false,
+  "JESUS-NWTHPQ": false,
+  "JESUS-PBHK6S": false,
+  "JESUS-PVC4BJ": false,
+  "JESUS-QM26EU": false,
+  "JESUS-QRQ7WN": false,
+  "JESUS-QSEVT5": false,
+  "JESUS-QSPSSN": false,
+  "JESUS-QVDBGJ": false,
+  "JESUS-RGBKW4": false,
+  "JESUS-RHXHM4": false,
+  "JESUS-RJPP3B": false,
+  "JESUS-RQ4MQW": false,
+  "JESUS-RVX2QX": false,
+  "JESUS-S5QTRT": false,
+  "JESUS-SAVZY8": false,
+  "JESUS-SDX2AV": false,
+  "JESUS-U4NGGR": false,
+  "JESUS-UDAGYN": false,
+  "JESUS-UKCN57": false,
+  "JESUS-UMJXCE": false,
+  "JESUS-V3EE33": false,
+  "JESUS-V3ZGKJ": false,
+  "JESUS-VBE32W": false,
+  "JESUS-VTA55J": false,
+  "JESUS-W5KJEC": false,
+  "JESUS-X6J67W": false,
+  "JESUS-X88NZY": false,
+  "JESUS-XJ8K32": false,
+  "JESUS-Y26BFR": false,
+  "JESUS-YC5MSD": false,
+  "JESUS-YY4YVG": false,
+  "JESUS-Z8J86T": false,
+  "JESUS-ZQZ9DD": false,
+  "JESUS-ZTQQA4": false,
+  "JESUS-ZVFBDC": false
 };
-const LS_CODIGO = "jp_codigo_aplicado", LS_USADOS = "jp_codigos_usados";
+const LS_CODIGO = "jp_codigo_aplicado", LS_USADOS = "jp_codigos_usados", LS_GEN = "jp_codigos_gen";
 let codigoAplicado = "";
 try { codigoAplicado = localStorage.getItem(LS_CODIGO) || ""; } catch(e){}
 function codigosUsados(){
   try { return JSON.parse(localStorage.getItem(LS_USADOS) || "[]"); } catch(e){ return []; }
 }
+function codigosGen(){
+  try { return JSON.parse(localStorage.getItem(LS_GEN) || "[]"); } catch(e){ return []; }
+}
+function existeCodigo(cod){
+  return !!cod && ((cod in CODIGOS) || codigosGen().includes(cod));
+}
 function codigoValido(cod){
-  if(!cod || !(cod in CODIGOS)) return false;
-  if(CODIGOS[cod]) return true;               // código de prueba reutilizable
-  return !codigosUsados().includes(cod);      // un solo uso
+  if(!existeCodigo(cod)) return false;
+  if(cod in CODIGOS && CODIGOS[cod]) return true;   // código de prueba reutilizable
+  return !codigosUsados().includes(cod);              // un solo uso
+}
+/* genera un código nuevo para la próxima compra del cliente */
+function generarCodigo(){
+  const alf = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+  let cod;
+  do { cod = "JESUS-" + Array.from({length:6}, () => alf[Math.floor(Math.random()*alf.length)]).join(""); }
+  while((cod in CODIGOS) || codigosGen().includes(cod));
+  const g = codigosGen(); g.push(cod);
+  try { localStorage.setItem(LS_GEN, JSON.stringify(g)); } catch(e){}
+  return cod;
 }
 function marcarUsado(cod){
   if(!cod || CODIGOS[cod]) return;            // el de prueba no se gasta
@@ -958,7 +1054,7 @@ function aplicarCodigo(){
   const inp = document.getElementById("inpCodigo");
   const cod = (inp.value || "").trim().toUpperCase();
   if(!cod) return;
-  if(!(cod in CODIGOS)){ toast("❌ Ese código no existe."); return; }
+  if(!existeCodigo(cod)){ toast("❌ Ese código no existe."); return; }
   if(!codigoValido(cod)){ toast("❌ Ese código ya fue usado."); return; }
   codigoAplicado = cod;
   try { localStorage.setItem(LS_CODIGO, cod); } catch(e){}
@@ -2695,6 +2791,8 @@ function enviarWhatsApp(){
   if(c.descCodigo) m += `Código ${codigoAplicado} (−${CONFIG.descuentoCodigo}%): −${dinero(c.descCodigo)}\n`;
   m += `Envío (${c.ciudad === "guayaquil" ? "Guayaquil — centros comerciales" : "Servientrega — provincia"}): ${c.envio === 0 ? "GRATIS" : dinero(c.envio)}\n`;
   m += `*TOTAL: ${dinero(c.total)}*\n\n`;
+  const nuevoCod = generarCodigo();
+  m += `🎁 *Tu código para tu próxima compra (−${CONFIG.descuentoCodigo}%):* ${nuevoCod}\n\n`;
   m += "⚠️ *IMPORTANTE:* responde este mensaje con tus datos:\n";
   m += "1️⃣ Nombre completo:\n2️⃣ Dirección:\n3️⃣ Ciudad y provincia:\n4️⃣ Teléfono:\n\n";
   m += "❌ Sin estos datos no podemos procesar el envío.";
