@@ -388,6 +388,10 @@ p.conoce-ej{color:var(--oro-claro);font-size:.82rem;line-height:1.6}
 .fila-codigo input{flex:1;background:#0f0f0f;border:1.5px solid #2f2f2f;border-radius:10px;color:#fff;padding:10px 12px;font:inherit;font-size:.85rem;text-transform:uppercase;min-width:0}
 .fila-codigo input:focus{outline:none;border-color:var(--oro)}
 .fila-codigo input:disabled{opacity:.6}
+.ref-gen{max-width:520px;margin:20px auto 0;padding:16px;border:1px solid var(--linea);border-radius:var(--radio);background:var(--panel)}
+.ref-gen p{font-size:.82rem;color:#d7d2c9}
+.link-ref{margin-top:10px;font-size:.78rem;word-break:break-all;min-height:1em}
+.link-ref a{color:var(--oro-claro)}
 .stepper{display:inline-flex;align-items:center;border:1px solid var(--linea);border-radius:99px;overflow:hidden}
 .stepper button{width:34px;height:34px;background:#1f1f1f;border:0;color:#fff;font-size:1rem;line-height:1}
 .stepper button:hover{background:var(--oro);color:#000}
@@ -866,6 +870,14 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
     <p><strong>JESÚS PARFUM</strong> — Guayaquil, Ecuador</p>
     <p>WhatsApp: <a id="waFooter" href="#" target="_blank" rel="noopener">+593 99 642 8137</a></p>
     <p>TikTok: <a href="https://www.tiktok.com/@jesusparfumec" target="_blank" rel="noopener">@jesusparfumec</a></p>
+    <div class="ref-gen">
+      <p><b>¿Recomiendas Jesus Parfum?</b> Escribe tu nombre y te damos tu enlace personal para compartir.</p>
+      <div class="fila-codigo" style="max-width:420px;margin:8px auto 0">
+        <input type="text" id="inpRef" placeholder="Tu nombre" maxlength="40" autocomplete="off">
+        <button class="btn-mini" onclick="generarEnlaceRef()">Generar enlace</button>
+      </div>
+      <p id="linkRef" class="link-ref"></p>
+    </div>
     <p>Envío Guayaquil $5.00 (solo centros comerciales) · Provincias (Servientrega) $7.00 · Gratis desde $50</p>
     <p><a href="#legal" data-seccion="legal">Envíos, cambios y privacidad</a></p>
     <p class="legal">© <span id="anio">2026</span> JESÚS PARFUM. Fragancias inspiradas, no productos originales de las marcas mencionadas. Los nombres comerciales citados son propiedad de sus respectivos titulares y se usan solo como referencia olfativa.</p>
@@ -928,6 +940,19 @@ try {
 } catch(e){}
 function referido(){
   try { return localStorage.getItem(LS_REF) || ""; } catch(e){ return ""; }
+}
+/* genera el enlace personal de referido para compartir */
+function generarEnlaceRef(){
+  const n = (document.getElementById("inpRef").value || "").trim().slice(0, 40);
+  const out = document.getElementById("linkRef");
+  if(!n){ out.textContent = "Escribe tu nombre primero."; return; }
+  const url = location.origin + location.pathname + "?ref=" + encodeURIComponent(n);
+  out.innerHTML = "";
+  const a = document.createElement("a");
+  a.href = url; a.textContent = url; a.target = "_blank"; a.rel = "noopener";
+  out.appendChild(a);
+  if(navigator.clipboard) navigator.clipboard.writeText(url).catch(function(){});
+  toast("✅ Enlace listo y copiado. Compártelo por WhatsApp.");
 }
 
 /* Códigos especiales del dueño (reutilizables):
