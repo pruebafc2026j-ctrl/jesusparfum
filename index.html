@@ -911,10 +911,10 @@ const CONFIG = {
 
 /* =====================================================================
    CÓDIGOS DE DESCUENTO (5%, un solo uso por cliente)
+   - Son SOLO para quien recomienda la tienda y trae un cliente nuevo.
    - No hay códigos escritos: todos se generan al azar al momento.
    - JESUS-GENERA: genera un código al instante (para copiar y enviar).
    - JESUS-GENERA-2: al enviar el pedido incluye un código al azar en el mensaje.
-   - La primera compra genera un código para la próxima (solo la primera vez).
    - Cada código generado es de un solo uso: al usarse queda marcado.
    ===================================================================== */
 const CODIGOS = {};   // sin códigos escritos: todos se generan al azar
@@ -2733,17 +2733,9 @@ function enviarWhatsApp(){
   /* GENERA-2: incluye un código al azar en el mensaje */
   if(genAlEnviar){
     const codAuto = generarCodigo();
-    m += `🎁 *Código de descuento para ti (−${CONFIG.descuentoCodigo}%):* ${codAuto}\n\n`;
+    m += `🎁 *Código de descuento por recomendación (−${CONFIG.descuentoCodigo}%):* ${codAuto}\n\n`;
     genAlEnviar = false;
     try { localStorage.removeItem(LS_GEN_ENVIAR); } catch(e){}
-  }
-  /* el código de próxima compra SOLO se da en la primera compra */
-  let yaCompro = false;
-  try { yaCompro = localStorage.getItem("jp_ya_compro") === "1"; } catch(e){}
-  if(!yaCompro){
-    const nuevoCod = generarCodigo();
-    m += `🎁 *Tu código para tu próxima compra (−${CONFIG.descuentoCodigo}%):* ${nuevoCod}\n\n`;
-    try { localStorage.setItem("jp_ya_compro", "1"); } catch(e){}
   }
   m += "⚠️ *IMPORTANTE:* responde este mensaje con tus datos:\n";
   m += "1️⃣ Nombre completo:\n2️⃣ Dirección:\n3️⃣ Ciudad y provincia:\n4️⃣ Teléfono:\n\n";
