@@ -384,7 +384,7 @@ p.conoce-ej{color:var(--oro-claro);font-size:.82rem;line-height:1.6}
 .tamanos .t{display:block;font-weight:800;font-size:.85rem}
 .tamanos .p{display:block;font-size:.72rem;color:var(--oro);margin-top:2px}
 .fila-cant{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.fila-codigo{display:flex;gap:8px;margin:12px 0 4px}
+.fila-codigo{display:flex;gap:8px;margin:12px 0 4px;flex-wrap:wrap}
 .fila-codigo input{flex:1;background:#0f0f0f;border:1.5px solid #2f2f2f;border-radius:10px;color:#fff;padding:10px 12px;font:inherit;font-size:.85rem;text-transform:uppercase;min-width:0}
 .fila-codigo input:focus{outline:none;border-color:var(--oro)}
 .fila-codigo input:disabled{opacity:.6}
@@ -871,9 +871,10 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
     <p>WhatsApp: <a id="waFooter" href="#" target="_blank" rel="noopener">+593 99 642 8137</a></p>
     <p>TikTok: <a href="https://www.tiktok.com/@jesusparfumec" target="_blank" rel="noopener">@jesusparfumec</a></p>
     <div class="ref-gen">
-      <p><b>¿Recomiendas Jesus Parfum?</b> Escribe tu nombre y te damos tu enlace personal para compartir.</p>
-      <div class="fila-codigo" style="max-width:420px;margin:8px auto 0">
+      <p><b>¿Recomiendas Jesus Parfum?</b> Escribe tu nombre y tu WhatsApp, y te damos tu enlace personal para compartir.</p>
+      <div class="fila-codigo" style="max-width:460px;margin:8px auto 0">
         <input type="text" id="inpRef" placeholder="Tu nombre" maxlength="40" autocomplete="off">
+        <input type="tel" id="inpRefTel" placeholder="Tu WhatsApp (opcional)" maxlength="20" autocomplete="off">
         <button class="btn-mini" onclick="generarEnlaceRef()">Generar enlace</button>
       </div>
       <p id="linkRef" class="link-ref"></p>
@@ -935,18 +936,25 @@ const LS_CODIGO = "jp_codigo_aplicado", LS_USADOS = "jp_codigos_usados", LS_GEN 
    Cuando su amigo compra, el pedido dice quién lo recomendó. */
 const LS_REF = "jp_ref";
 try {
-  const refUrl = new URLSearchParams(location.search).get("ref");
+  const q = new URLSearchParams(location.search);
+  const refUrl = q.get("ref");
   if(refUrl) localStorage.setItem(LS_REF, refUrl.trim().slice(0, 40));
+  const telUrl = q.get("tel");
+  if(telUrl) localStorage.setItem("jp_ref_tel", telUrl.trim().slice(0, 20));
 } catch(e){}
 function referido(){
   try { return localStorage.getItem(LS_REF) || ""; } catch(e){ return ""; }
 }
+function referidoTel(){
+  try { return localStorage.getItem("jp_ref_tel") || ""; } catch(e){ return ""; }
+}
 /* genera el enlace personal de referido para compartir */
 function generarEnlaceRef(){
   const n = (document.getElementById("inpRef").value || "").trim().slice(0, 40);
+  const t = (document.getElementById("inpRefTel").value || "").trim().slice(0, 20);
   const out = document.getElementById("linkRef");
   if(!n){ out.textContent = "Escribe tu nombre primero."; return; }
-  const url = location.origin + location.pathname + "?ref=" + encodeURIComponent(n);
+  const url = location.origin + location.pathname + "?ref=" + encodeURIComponent(n) + (t ? "&tel=" + encodeURIComponent(t) : "");
   out.innerHTML = "";
   const a = document.createElement("a");
   a.href = url; a.textContent = url; a.target = "_blank"; a.rel = "noopener";
@@ -2758,7 +2766,7 @@ function enviarWhatsApp(){
   const c = calc();
   let m = "🛍️ *PEDIDO JESÚS PARFUM*\n";
   const ref = referido();
-  if(ref) m += `👥 Recomendado por: ${ref}\n`;
+  if(ref) m += `👥 Recomendado por: ${ref}${referidoTel() ? " · Tel: " + referidoTel() : ""}\n`;
   m += "\n";
   pedido.forEach((i, x) => {
     m += `${x+1}. ${i.n} — ${i.t} ml × ${i.q} = ${dinero(CONFIG.precios[i.t] * i.q)}\n`;
