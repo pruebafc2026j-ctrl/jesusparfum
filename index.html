@@ -913,7 +913,7 @@ const CONFIG = {
    CÓDIGOS DE DESCUENTO (5%, un solo uso por cliente)
    - Hay 100 códigos: uno es de prueba reutilizable (aspecto normal).
    - Los demás son de un solo uso: al confirmar el pedido quedan usados.
-   - Cada compra genera además un código nuevo para la próxima compra.
+   - La primera compra genera un código para la próxima (solo la primera vez).
    - Para crear más códigos, pide a tu asistente y los agrega aquí.
    ===================================================================== */
 const CODIGOS = {
@@ -2791,8 +2791,14 @@ function enviarWhatsApp(){
   if(c.descCodigo) m += `Código ${codigoAplicado} (−${CONFIG.descuentoCodigo}%): −${dinero(c.descCodigo)}\n`;
   m += `Envío (${c.ciudad === "guayaquil" ? "Guayaquil — centros comerciales" : "Servientrega — provincia"}): ${c.envio === 0 ? "GRATIS" : dinero(c.envio)}\n`;
   m += `*TOTAL: ${dinero(c.total)}*\n\n`;
-  const nuevoCod = generarCodigo();
-  m += `🎁 *Tu código para tu próxima compra (−${CONFIG.descuentoCodigo}%):* ${nuevoCod}\n\n`;
+  /* el código de próxima compra SOLO se da en la primera compra */
+  let yaCompro = false;
+  try { yaCompro = localStorage.getItem("jp_ya_compro") === "1"; } catch(e){}
+  if(!yaCompro){
+    const nuevoCod = generarCodigo();
+    m += `🎁 *Tu código para tu próxima compra (−${CONFIG.descuentoCodigo}%):* ${nuevoCod}\n\n`;
+    try { localStorage.setItem("jp_ya_compro", "1"); } catch(e){}
+  }
   m += "⚠️ *IMPORTANTE:* responde este mensaje con tus datos:\n";
   m += "1️⃣ Nombre completo:\n2️⃣ Dirección:\n3️⃣ Ciudad y provincia:\n4️⃣ Teléfono:\n\n";
   m += "❌ Sin estos datos no podemos procesar el envío.";
