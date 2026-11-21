@@ -919,6 +919,17 @@ const CONFIG = {
    ===================================================================== */
 const CODIGOS = {};   // sin códigos escritos: todos se generan al azar
 const LS_CODIGO = "jp_codigo_aplicado", LS_USADOS = "jp_codigos_usados", LS_GEN = "jp_codigos_gen";
+/* Referidos: enlace personalizado ?ref=Nombre para cada recomendador.
+   Cuando su amigo compra, el pedido dice quién lo recomendó. */
+const LS_REF = "jp_ref";
+try {
+  const refUrl = new URLSearchParams(location.search).get("ref");
+  if(refUrl) localStorage.setItem(LS_REF, refUrl.trim().slice(0, 40));
+} catch(e){}
+function referido(){
+  try { return localStorage.getItem(LS_REF) || ""; } catch(e){ return ""; }
+}
+
 /* Códigos especiales del dueño (reutilizables):
    - JESUS-GENERA: genera un código nuevo al instante (para copiar y enviar).
    - JESUS-GENERA-2: al enviar el pedido por WhatsApp incluye un código al azar en el mensaje. */
@@ -2720,7 +2731,10 @@ function cerrarCarrito(){
 function enviarWhatsApp(){
   if(!pedido.length){ toast("Agrega al menos una fragancia 😉"); return; }
   const c = calc();
-  let m = "🛍️ *PEDIDO JESÚS PARFUM*\n\n";
+  let m = "🛍️ *PEDIDO JESÚS PARFUM*\n";
+  const ref = referido();
+  if(ref) m += `👥 Recomendado por: ${ref}\n`;
+  m += "\n";
   pedido.forEach((i, x) => {
     m += `${x+1}. ${i.n} — ${i.t} ml × ${i.q} = ${dinero(CONFIG.precios[i.t] * i.q)}\n`;
   });
@@ -2884,6 +2898,8 @@ function irArriba(){ window.scrollTo({ top:0, behavior:"smooth" }); }
 
   cargar();
   cargarLikesLocales();
+  const ref0 = referido();
+  if(ref0) setTimeout(() => toast("👋 ¡Hola! Llegas recomendado por " + ref0), 1200);
   pintarCatalogo();
   renderCarrito();
   engancharLikes(document);
