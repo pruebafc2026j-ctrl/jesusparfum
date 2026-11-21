@@ -935,23 +935,34 @@ function codigosUsados(){
 function codigosGen(){
   try { return JSON.parse(localStorage.getItem(LS_GEN) || "[]"); } catch(e){ return []; }
 }
+/* Letra de control: el último carácter se calcula de los 5 primeros.
+   Así cualquier celular valida que el código es auténtico, sin servidor. */
+const ALF_COD = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+function letraControl(base){
+  let s = 0;
+  for(let i = 0; i < base.length; i++) s += ALF_COD.indexOf(base[i]) * (i + 1);
+  return ALF_COD[s % ALF_COD.length];
+}
+function formatoValido(cod){
+  const m = /^JESUS-([A-Z0-9]{6})$/.exec(cod || "");
+  if(!m) return false;
+  const c = m[1];
+  for(const ch of c) if(ALF_COD.indexOf(ch) < 0) return false;
+  return letraControl(c.slice(0, 5)) === c[5];
+}
 function existeCodigo(cod){
-  return !!cod && ((cod in CODIGOS) || codigosGen().includes(cod));
+  return !!cod && ((cod in CODIGOS) || formatoValido(cod) || codigosGen().includes(cod));
 }
 function codigoValido(cod){
   if(!existeCodigo(cod)) return false;
   if(cod in CODIGOS && CODIGOS[cod]) return true;   // código de prueba reutilizable
   return !codigosUsados().includes(cod);              // un solo uso
 }
-/* genera un código nuevo para la próxima compra del cliente */
+/* genera un código nuevo (con letra de control) para la próxima compra del cliente */
 function generarCodigo(){
-  const alf = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
-  let cod;
-  do { cod = "JESUS-" + Array.from({length:6}, () => alf[Math.floor(Math.random()*alf.length)]).join(""); }
-  while((cod in CODIGOS) || codigosGen().includes(cod));
-  const g = codigosGen(); g.push(cod);
-  try { localStorage.setItem(LS_GEN, JSON.stringify(g)); } catch(e){}
-  return cod;
+  let base = "";
+  for(let i = 0; i < 5; i++) base += ALF_COD[Math.floor(Math.random() * ALF_COD.length)];
+  return "JESUS-" + base + letraControl(base);
 }
 function marcarUsado(cod){
   if(!cod || CODIGOS[cod]) return;            // el de prueba no se gasta
