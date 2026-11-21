@@ -1019,8 +1019,14 @@ const CODIGOS = {
   "JESUS-ZVFBDC": false
 };
 const LS_CODIGO = "jp_codigo_aplicado", LS_USADOS = "jp_codigos_usados", LS_GEN = "jp_codigos_gen";
-/* Código especial del dueño: al aplicarlo genera un código nuevo de 5% (reutilizable) */
+/* Códigos especiales del dueño (reutilizables):
+   - JESUS-GENERA: genera un código nuevo al instante (para copiar y enviar).
+   - JESUS-GENERA-2: al enviar el pedido por WhatsApp incluye un código al azar en el mensaje. */
 const CODIGO_GENERADOR = "JESUS-GENERA";
+const CODIGO_GENERADOR2 = "JESUS-GENERA-2";
+const LS_GEN_ENVIAR = "jp_gen_enviar";
+let genAlEnviar = false;
+try { genAlEnviar = localStorage.getItem(LS_GEN_ENVIAR) === "1"; } catch(e){}
 let codigoAplicado = "";
 try { codigoAplicado = localStorage.getItem(LS_CODIGO) || ""; } catch(e){}
 function codigosUsados(){
@@ -1063,6 +1069,13 @@ function aplicarCodigo(){
     toast("✅ Nuevo código generado: " + nuevo + " — cópialo y entrégalo");
     return;
   }
+  if(cod === CODIGO_GENERADOR2){
+    genAlEnviar = true;
+    try { localStorage.setItem(LS_GEN_ENVIAR, "1"); } catch(e){}
+    toast("✅ Al enviar el pedido se incluirá un código para tu cliente");
+    renderCarrito();
+    return;
+  }
   if(!existeCodigo(cod)){ toast("❌ Ese código no existe."); return; }
   if(!codigoValido(cod)){ toast("❌ Ese código ya fue usado."); return; }
   codigoAplicado = cod;
@@ -1073,6 +1086,11 @@ function aplicarCodigo(){
 function quitarCodigo(){
   codigoAplicado = "";
   try { localStorage.removeItem(LS_CODIGO); } catch(e){}
+  renderCarrito();
+}
+function quitarGen(){
+  genAlEnviar = false;
+  try { localStorage.removeItem(LS_GEN_ENVIAR); } catch(e){}
   renderCarrito();
 }
 
@@ -2751,6 +2769,7 @@ function renderCarrito(){
       <option value="provincia"${ciudadActual === "provincia" ? " selected" : ""}>Otra provincia (Servientrega) — ${dinero(CONFIG.envio.provincia)}</option>
     </select>
     <span class="nota-corta">Envío gratis desde ${dinero(CONFIG.envioGratisDesde)} (después del descuento).</span>
+    ${genAlEnviar ? `<p class="desc" style="margin:8px 0 0"><span>🎁 Al enviar se incluirá un código para tu cliente</span><button class="btn-mini" onclick="quitarGen()">Quitar</button></p>` : ""}
     <div class="fila-codigo">
       <input type="text" id="inpCodigo" placeholder="Código de descuento" autocomplete="off" value="${codigoAplicado && codigoValido(codigoAplicado) ? codigoAplicado : ""}" ${codigoAplicado && codigoValido(codigoAplicado) ? "disabled" : ""}>
       ${codigoAplicado && codigoValido(codigoAplicado)
@@ -2800,6 +2819,13 @@ function enviarWhatsApp(){
   if(c.descCodigo) m += `Código ${codigoAplicado} (−${CONFIG.descuentoCodigo}%): −${dinero(c.descCodigo)}\n`;
   m += `Envío (${c.ciudad === "guayaquil" ? "Guayaquil — centros comerciales" : "Servientrega — provincia"}): ${c.envio === 0 ? "GRATIS" : dinero(c.envio)}\n`;
   m += `*TOTAL: ${dinero(c.total)}*\n\n`;
+  /* GENERA-2: incluye un código al azar en el mensaje */
+  if(genAlEnviar){
+    const codAuto = generarCodigo();
+    m += `🎁 *Código de descuento para ti (−${CONFIG.descuentoCodigo}%):* ${codAuto}\n\n`;
+    genAlEnviar = false;
+    try { localStorage.removeItem(LS_GEN_ENVIAR); } catch(e){}
+  }
   /* el código de próxima compra SOLO se da en la primera compra */
   let yaCompro = false;
   try { yaCompro = localStorage.getItem("jp_ya_compro") === "1"; } catch(e){}
