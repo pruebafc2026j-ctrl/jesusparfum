@@ -937,10 +937,16 @@ const LS_CODIGO = "jp_codigo_aplicado", LS_USADOS = "jp_codigos_usados", LS_GEN 
 const LS_REF = "jp_ref";
 try {
   const q = new URLSearchParams(location.search);
-  const refUrl = q.get("ref");
-  if(refUrl) localStorage.setItem(LS_REF, refUrl.trim().slice(0, 40));
-  const telUrl = q.get("tel");
-  if(telUrl) localStorage.setItem("jp_ref_tel", telUrl.trim().slice(0, 20));
+  if(q.has("ref")){
+    const v = q.get("ref").trim();
+    if(v) localStorage.setItem(LS_REF, v.slice(0, 40));
+    else localStorage.removeItem(LS_REF);   // ?ref= vacío borra el referido guardado
+  }
+  if(q.has("tel")){
+    const v = q.get("tel").trim();
+    if(v) localStorage.setItem("jp_ref_tel", v.slice(0, 20));
+    else localStorage.removeItem("jp_ref_tel");
+  }
 } catch(e){}
 function referido(){
   try { return localStorage.getItem(LS_REF) || ""; } catch(e){ return ""; }
