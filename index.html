@@ -1019,6 +1019,8 @@ const CODIGOS = {
   "JESUS-ZVFBDC": false
 };
 const LS_CODIGO = "jp_codigo_aplicado", LS_USADOS = "jp_codigos_usados", LS_GEN = "jp_codigos_gen";
+/* Código especial del dueño: al aplicarlo genera un código nuevo de 5% (reutilizable) */
+const CODIGO_GENERADOR = "JESUS-GENERA";
 let codigoAplicado = "";
 try { codigoAplicado = localStorage.getItem(LS_CODIGO) || ""; } catch(e){}
 function codigosUsados(){
@@ -1054,6 +1056,13 @@ function aplicarCodigo(){
   const inp = document.getElementById("inpCodigo");
   const cod = (inp.value || "").trim().toUpperCase();
   if(!cod) return;
+  if(cod === CODIGO_GENERADOR){
+    const nuevo = generarCodigo();
+    inp.value = nuevo;
+    inp.focus(); inp.select();
+    toast("✅ Nuevo código generado: " + nuevo + " — cópialo y entrégalo");
+    return;
+  }
   if(!existeCodigo(cod)){ toast("❌ Ese código no existe."); return; }
   if(!codigoValido(cod)){ toast("❌ Ese código ya fue usado."); return; }
   codigoAplicado = cod;
