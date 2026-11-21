@@ -960,7 +960,7 @@ function generarEnlaceRef(){
   const t = (document.getElementById("inpRefTel").value || "").trim().slice(0, 20);
   const out = document.getElementById("linkRef");
   if(!n){ out.textContent = "Escribe tu nombre primero."; return; }
-  const url = location.origin + location.pathname + "?ref=" + encodeURIComponent(n) + (t ? "&tel=" + encodeURIComponent(t) : "");
+  const url = "https://pruebafc2026j-ctrl.github.io/jesusparfum/?ref=" + encodeURIComponent(n) + (t ? "&tel=" + encodeURIComponent(t) : "");
   out.innerHTML = "";
   const a = document.createElement("a");
   a.href = url; a.textContent = url; a.target = "_blank"; a.rel = "noopener";
