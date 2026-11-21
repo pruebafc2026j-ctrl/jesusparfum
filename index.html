@@ -384,6 +384,10 @@ p.conoce-ej{color:var(--oro-claro);font-size:.82rem;line-height:1.6}
 .tamanos .t{display:block;font-weight:800;font-size:.85rem}
 .tamanos .p{display:block;font-size:.72rem;color:var(--oro);margin-top:2px}
 .fila-cant{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.fila-codigo{display:flex;gap:8px;margin:12px 0 4px}
+.fila-codigo input{flex:1;background:#0f0f0f;border:1.5px solid #2f2f2f;border-radius:10px;color:#fff;padding:10px 12px;font:inherit;font-size:.85rem;text-transform:uppercase;min-width:0}
+.fila-codigo input:focus{outline:none;border-color:var(--oro)}
+.fila-codigo input:disabled{opacity:.6}
 .stepper{display:inline-flex;align-items:center;border:1px solid var(--linea);border-radius:99px;overflow:hidden}
 .stepper button{width:34px;height:34px;background:#1f1f1f;border:0;color:#fff;font-size:1rem;line-height:1}
 .stepper button:hover{background:var(--oro);color:#000}
@@ -901,8 +905,71 @@ const CONFIG = {
   envioGratisDesde: 50,            // monto (después del descuento)
   promoPorGrupo: true,             // true = 15%/20% por cada tamaño; false = solo al tamaño con más frascos
   minimoDesc15: 2,                 // 2-3 frascos -> 15%
-  minimoDesc20: 4                  // 4+ frascos -> 20%
+  minimoDesc20: 4,                 // 4+ frascos -> 20%
+  descuentoCodigo: 5              // % de descuento con código (un solo uso)
 };
+
+/* =====================================================================
+   CÓDIGOS DE DESCUENTO (5%, un solo uso por cliente)
+   - JESUS-TEST es de prueba: se puede usar varias veces.
+   - Los demás son de un solo uso: al confirmar el pedido quedan usados.
+   - Para crear más códigos, pide a tu asistente y los agrega aquí.
+   ===================================================================== */
+const CODIGOS = {
+  "JESUS-TEST": true,   // true = reutilizable (prueba)
+  "JESUS-2BV3B4": false,
+  "JESUS-4BHYUW": false,
+  "JESUS-4TFP8C": false,
+  "JESUS-5QD23T": false,
+  "JESUS-7YMUMM": false,
+  "JESUS-8G49V2": false,
+  "JESUS-9EB8D4": false,
+  "JESUS-9EP9VK": false,
+  "JESUS-A6YU7G": false,
+  "JESUS-CQ85W5": false,
+  "JESUS-DGUUEM": false,
+  "JESUS-F3TNBT": false,
+  "JESUS-F442QY": false,
+  "JESUS-F4EK5J": false,
+  "JESUS-F8NUF3": false,
+  "JESUS-JFH29N": false,
+  "JESUS-NQMZS7": false,
+  "JESUS-SAHWFX": false,
+  "JESUS-TK6F89": false,
+  "JESUS-UF8YJ8": false
+};
+const LS_CODIGO = "jp_codigo_aplicado", LS_USADOS = "jp_codigos_usados";
+let codigoAplicado = "";
+try { codigoAplicado = localStorage.getItem(LS_CODIGO) || ""; } catch(e){}
+function codigosUsados(){
+  try { return JSON.parse(localStorage.getItem(LS_USADOS) || "[]"); } catch(e){ return []; }
+}
+function codigoValido(cod){
+  if(!cod || !(cod in CODIGOS)) return false;
+  if(CODIGOS[cod]) return true;               // código de prueba reutilizable
+  return !codigosUsados().includes(cod);      // un solo uso
+}
+function marcarUsado(cod){
+  if(!cod || CODIGOS[cod]) return;            // el de prueba no se gasta
+  const u = codigosUsados();
+  if(!u.includes(cod)){ u.push(cod); try { localStorage.setItem(LS_USADOS, JSON.stringify(u)); } catch(e){} }
+}
+function aplicarCodigo(){
+  const inp = document.getElementById("inpCodigo");
+  const cod = (inp.value || "").trim().toUpperCase();
+  if(!cod) return;
+  if(!(cod in CODIGOS)){ toast("❌ Ese código no existe."); return; }
+  if(!codigoValido(cod)){ toast("❌ Ese código ya fue usado."); return; }
+  codigoAplicado = cod;
+  try { localStorage.setItem(LS_CODIGO, cod); } catch(e){}
+  toast("✅ Código aplicado: −" + CONFIG.descuentoCodigo + "%");
+  renderCarrito();
+}
+function quitarCodigo(){
+  codigoAplicado = "";
+  try { localStorage.removeItem(LS_CODIGO); } catch(e){}
+  renderCarrito();
+}
 
 /* =====================================================================
    CATÁLOGO (una sola fuente de verdad)
@@ -2514,9 +2581,14 @@ function calc(){
   }
 
   const ciudad = document.getElementById("ciudad") ? document.getElementById("ciudad").value : "guayaquil";
-  const conDesc = subtotal - descuento;
+  let conDesc = subtotal - descuento;
+  let descCodigo = 0;
+  if(codigoAplicado && codigoValido(codigoAplicado)){
+    descCodigo = conDesc * CONFIG.descuentoCodigo / 100;
+    conDesc -= descCodigo;
+  }
   const envio = conDesc >= CONFIG.envioGratisDesde ? 0 : CONFIG.envio[ciudad];
-  return { subtotal, descuento, detalles, conDesc, envio, total: conDesc + envio, ciudad, frascos };
+  return { subtotal, descuento, detalles, conDesc, envio, total: conDesc + envio, ciudad, frascos, descCodigo };
 }
 
 function renderCarrito(){
@@ -2574,9 +2646,16 @@ function renderCarrito(){
       <option value="provincia"${ciudadActual === "provincia" ? " selected" : ""}>Otra provincia (Servientrega) — ${dinero(CONFIG.envio.provincia)}</option>
     </select>
     <span class="nota-corta">Envío gratis desde ${dinero(CONFIG.envioGratisDesde)} (después del descuento).</span>
+    <div class="fila-codigo">
+      <input type="text" id="inpCodigo" placeholder="Código de descuento" autocomplete="off" value="${codigoAplicado && codigoValido(codigoAplicado) ? codigoAplicado : ""}" ${codigoAplicado && codigoValido(codigoAplicado) ? "disabled" : ""}>
+      ${codigoAplicado && codigoValido(codigoAplicado)
+        ? `<button class="btn-mini" onclick="quitarCodigo()">Quitar</button>`
+        : `<button class="btn-mini" onclick="aplicarCodigo()">Aplicar</button>`}
+    </div>
     <div class="lista-totales">
       <p><span>Subtotal (${c.frascos} ${c.frascos === 1 ? "frasco" : "frascos"})</span><span>${dinero(c.subtotal)}</span></p>
       ${c.detalles.map(d => `<p class="desc"><span>Descuento ${d.pct}% · ${d.c} × ${d.tam} ml</span><span>−${dinero(d.d)}</span></p>`).join("")}
+      ${c.descCodigo ? `<p class="desc"><span>Código ${codigoAplicado} (−${CONFIG.descuentoCodigo}%)</span><span>−${dinero(c.descCodigo)}</span></p>` : ""}
       <p><span>Envío ${c.ciudad === "guayaquil" ? "(Guayaquil · centros comerciales)" : "(Provincia)"}</span><span>${c.envio === 0 ? "GRATIS" : dinero(c.envio)}</span></p>
       <p class="tot"><span>TOTAL</span><span>${dinero(c.total)}</span></p>
     </div>
@@ -2613,11 +2692,13 @@ function enviarWhatsApp(){
   m += "\n————————\n";
   m += `Subtotal: ${dinero(c.subtotal)}\n`;
   c.detalles.forEach(d => { m += `Descuento ${d.pct}% (${d.c} frascos de ${d.tam} ml): −${dinero(d.d)}\n`; });
+  if(c.descCodigo) m += `Código ${codigoAplicado} (−${CONFIG.descuentoCodigo}%): −${dinero(c.descCodigo)}\n`;
   m += `Envío (${c.ciudad === "guayaquil" ? "Guayaquil — centros comerciales" : "Servientrega — provincia"}): ${c.envio === 0 ? "GRATIS" : dinero(c.envio)}\n`;
   m += `*TOTAL: ${dinero(c.total)}*\n\n`;
   m += "⚠️ *IMPORTANTE:* responde este mensaje con tus datos:\n";
   m += "1️⃣ Nombre completo:\n2️⃣ Dirección:\n3️⃣ Ciudad y provincia:\n4️⃣ Teléfono:\n\n";
   m += "❌ Sin estos datos no podemos procesar el envío.";
+  if(c.descCodigo) marcarUsado(codigoAplicado);
   window.open(`https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(m)}`, "_blank");
 }
 
