@@ -2931,8 +2931,11 @@ function irArriba(){ window.scrollTo({ top:0, behavior:"smooth" }); }
 
   cargar();
   cargarLikesLocales();
-  const ref0 = referido();
-  if(ref0) setTimeout(() => toast("👋 ¡Hola! Llegas recomendado por " + ref0), 1200);
+  /* el saludo solo sale al abrir el enlace con ?ref= (la atribución queda guardada) */
+  try {
+    const refUrl = new URLSearchParams(location.search).get("ref");
+    if(refUrl){ const r0 = referido(); if(r0) setTimeout(() => toast("👋 ¡Hola! Llegas recomendado por " + r0), 1200); }
+  } catch(e){}
   pintarCatalogo();
   renderCarrito();
   engancharLikes(document);
