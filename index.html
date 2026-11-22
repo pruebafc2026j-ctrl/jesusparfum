@@ -567,8 +567,12 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
 }
 
 /* VIDEO TIKTOK */
-.marco-tk{position:relative;width:min(360px,100%);margin:0 auto;aspect-ratio:9/16;background:#000;border:1px solid var(--linea);border-radius:18px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.55)}
-.marco-tk iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.marco-tk{position:relative;width:min(360px,100%);margin:0 auto;aspect-ratio:9/16;background:#000;border:1px solid var(--linea);border-radius:18px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center}
+.marco-tk.cargado{aspect-ratio:auto;height:auto;min-height:0;display:block;background:transparent;box-shadow:none;border:0}
+.marco-tk .tiktok-embed{width:100%!important;max-width:100%!important;min-width:0!important;margin:0!important;background:transparent!important}
+.marco-tk iframe{width:100%!important;max-width:100%!important;border:0;display:block}
+.tk-fallback{display:flex;align-items:center;justify-content:center;gap:8px;color:var(--oro-claro);font-weight:700;text-decoration:none;padding:18px;text-align:center}
+.marco-tk.cargado .tk-fallback{display:none}
 .nota-tk{text-align:center;color:var(--tenue);font-size:.82rem;margin-top:12px}
 </style>
 </head>
@@ -629,10 +633,11 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
       <h2>Jesus Parfum en TikTok</h2>
       <p>@jesusparfumec — mira cómo se ven nuestras fragancias</p>
     </div>
-    <div class="marco-tk">
-      <iframe id="videoTk" data-src="https://www.tiktok.com/embed/v2/7710802012648099080" title="Video de Jesus Parfum en TikTok" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
+    <div class="marco-tk" id="marcoTk">
+      <blockquote class="tiktok-embed" data-video="7710802012648099080" data-autoplay="true" style="display:block;border:none;outline:none;text-align:left;"></blockquote>
+      <a class="tk-fallback" id="tkFallback" href="https://www.tiktok.com/@jesusparfumec/video/7710802012648099080" target="_blank" rel="noopener">▶ Ver el video en TikTok</a>
     </div>
-    <p class="nota-tk">Toca el video una vez para escucharlo con sonido 🔊</p>
+    <p class="nota-tk">Se reproduce solo al llegar; toca una vez para el sonido 🔊</p>
   </section>
 
   <!-- CONOCE JESÚS PARFUM -->
@@ -2981,17 +2986,34 @@ function irArriba(){ window.scrollTo({ top:0, behavior:"smooth" }); }
 if('serviceWorker' in navigator){ window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); }); }
 </script>
 <script>
-/* Video TikTok: carga apenas entra en pantalla y se silencia al bajar */
+/* Video TikTok oficial: carga cerca de la pantalla, se silencia al bajar (respaldo si no carga) */
 (function(){
-  var v=document.getElementById('videoTk'); if(!v) return;
-  var SRC=v.getAttribute('data-src');
-  if(!('IntersectionObserver' in window)){ v.setAttribute('src',SRC); return; }
+  var marco=document.getElementById('marcoTk');
+  if(!marco||!('IntersectionObserver' in window)) return;
+  var embedCargado=false, srcGuardado=null, intentos=0, espera=null;
+  function iframe(){ return marco.querySelector('iframe'); }
+  function vigilar(){
+    var f=iframe();
+    if(f){ marco.classList.add('cargado'); return; }
+    if(intentos++ < 25) espera=setTimeout(vigilar,400); /* si no aparece, queda el enlace de respaldo */
+  }
+  function cargarEmbed(){
+    if(embedCargado) return; embedCargado=true;
+    var s=document.createElement('script');
+    s.src='https://www.tiktok.com/embed.js'; s.async=true;
+    document.head.appendChild(s);
+    espera=setTimeout(vigilar,500);
+  }
   new IntersectionObserver(function(es){
-    for(var i=0;i<es.length;i++){
-      if(es[i].isIntersecting){ if(!v.getAttribute('src')) v.setAttribute('src',SRC); }
-      else if(v.getAttribute('src')){ v.setAttribute('src','about:blank'); }
+    var f=iframe();
+    if(es[0].isIntersecting){
+      cargarEmbed();
+      if(f&&f.getAttribute('src')==='about:blank'&&srcGuardado) f.setAttribute('src',srcGuardado);
+    }else if(f&&f.getAttribute('src')&&f.getAttribute('src')!=='about:blank'){
+      srcGuardado=f.getAttribute('src'); /* al bajar: detiene video y sonido */
+      f.setAttribute('src','about:blank');
     }
-  },{rootMargin:'150px 0px',threshold:.1}).observe(v);
+  },{rootMargin:'200px 0px',threshold:.1}).observe(marco);
 })();
 </script>
 </body>
