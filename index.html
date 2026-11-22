@@ -569,8 +569,8 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
 /* VIDEO PROPIO */
 .marco-tk{position:relative;width:min(360px,100%);margin:0 auto;aspect-ratio:9/16;background:#000;border:1px solid var(--linea);border-radius:18px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.55)}
 .marco-tk video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;display:block}
-.silencio{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(0,0,0,.72);color:#fff;font-size:.78rem;padding:7px 14px;border-radius:99px;pointer-events:none;transition:opacity .3s;white-space:nowrap;z-index:2}
-.silencio.off{opacity:0}
+.sonido-btn{position:absolute;right:12px;bottom:12px;background:rgba(0,0,0,.72);color:var(--oro-claro);border:1px solid rgba(201,162,39,.5);border-radius:99px;padding:7px 13px;font-weight:700;font-size:.78rem;cursor:pointer;transition:opacity .3s;white-space:nowrap;z-index:2}
+.sonido-btn.off{opacity:0;pointer-events:none}
 .nota-tk{text-align:center;color:var(--tenue);font-size:.82rem;margin-top:12px}
 .tk-link{color:var(--oro-claro);font-weight:700;text-decoration:none;white-space:nowrap}
 .tk-link:hover{text-decoration:underline}
@@ -634,10 +634,10 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
       <p>@jesusparfumec — mira cómo se ven nuestras fragancias</p>
     </div>
     <div class="marco-tk" id="marcoTk">
-      <video id="videoPropio" src="video-jesusparfum.mp4" playsinline muted loop preload="metadata" aria-label="Video de Jesus Parfum"></video>
-      <div class="silencio" id="sonidoHint">🔊 Toca para el sonido</div>
+      <video id="videoPropio" src="video-jesusparfum.mp4" playsinline loop preload="metadata" aria-label="Video de Jesus Parfum"></video>
+      <button type="button" class="sonido-btn off" id="sonidoBtn" aria-label="Activar sonido">🔊 Sonido</button>
     </div>
-    <p class="nota-tk">Se reproduce solo al aparecer y se detiene al bajar · <a class="tk-link" href="https://www.tiktok.com/@jesusparfumec/video/7710802012648099080" target="_blank" rel="noopener">▶ Ver en TikTok</a></p>
+    <p class="nota-tk">Sale con sonido al aparecer · un clic lo pausa · se detiene al bajar · <a class="tk-link" href="https://www.tiktok.com/@jesusparfumec/video/7710802012648099080" target="_blank" rel="noopener">▶ Ver en TikTok</a></p>
   </section>
 
   <!-- CONOCE JESÚS PARFUM -->
@@ -2986,22 +2986,32 @@ function irArriba(){ window.scrollTo({ top:0, behavior:"smooth" }); }
 if('serviceWorker' in navigator){ window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); }); }
 </script>
 <script>
-/* Video propio: suena (sin audio) al entrar, se detiene al bajar, toque = sonido */
+/* Video propio: sale con sonido al aparecer, un clic = pausa, al bajar de vista se detiene */
 (function(){
-  var v=document.getElementById('videoPropio'), hint=document.getElementById('sonidoHint');
+  var v=document.getElementById('videoPropio'), btn=document.getElementById('sonidoBtn');
   if(!v) return;
-  v.addEventListener('click', function(){
-    v.muted=false;                 /* primer toque: activa el sonido */
-    if(hint) hint.classList.add('off');
+  function ocultarBtn(){ if(btn) btn.classList.add('off'); }
+  function sonar(){ v.muted=false; ocultarBtn(); if(v.paused) v.play().catch(function(){}); }
+  if(btn) btn.addEventListener('click', sonar);       /* respaldo: activa sonido con un clic */
+  v.addEventListener('click', function(){             /* un clic = pausar / seguir */
     if(v.paused) v.play().catch(function(){});
+    else v.pause();
   });
+  function intentar(){                                /* intenta entrar CON sonido */
+    v.muted=false;
+    v.play().then(ocultarBtn).catch(function(){
+      /* navegador exige interacción previa: reproduce mudo y ofrece el botón de sonido */
+      v.muted=true;
+      v.play().then(function(){ if(btn) btn.classList.remove('off'); }).catch(function(){});
+    });
+  }
   if('IntersectionObserver' in window){
     new IntersectionObserver(function(es){
-      if(es[0].isIntersecting){ v.play().catch(function(){}); }   /* aparece: reproduce */
-      else { v.pause(); }                                         /* baja: se detiene y calla */
+      if(es[0].isIntersecting){ intentar(); }         /* aparece: reproduce (con sonido si el navegador deja) */
+      else { v.pause(); }                             /* baja de vista: se detiene y calla */
     },{rootMargin:'100px 0px',threshold:.25}).observe(v);
   }else{
-    v.play().catch(function(){});
+    intentar();
   }
 })();
 </script>
