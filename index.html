@@ -566,13 +566,11 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
   .aviso-pedido .btn-aviso{width:100%;justify-content:center}
 }
 
-/* VIDEO TIKTOK */
-.marco-tk{position:relative;width:min(360px,100%);margin:0 auto;aspect-ratio:9/16;background:#000;border:1px solid var(--linea);border-radius:18px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center}
-.marco-tk.cargado{aspect-ratio:auto;height:auto;min-height:0;display:block;background:transparent;box-shadow:none;border:0}
-.marco-tk .tiktok-embed{width:100%!important;max-width:100%!important;min-width:0!important;margin:0!important;background:transparent!important}
-.marco-tk iframe{width:100%!important;max-width:100%!important;border:0;display:block}
-.tk-fallback{display:flex;align-items:center;justify-content:center;gap:8px;color:var(--oro-claro);font-weight:700;text-decoration:none;padding:18px;text-align:center}
-.marco-tk.cargado .tk-fallback{display:none}
+/* VIDEO PROPIO */
+.marco-tk{position:relative;width:min(360px,100%);margin:0 auto;aspect-ratio:9/16;background:#000;border:1px solid var(--linea);border-radius:18px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.55)}
+.marco-tk video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;display:block}
+.silencio{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);background:rgba(0,0,0,.72);color:#fff;font-size:.78rem;padding:7px 14px;border-radius:99px;pointer-events:none;transition:opacity .3s;white-space:nowrap;z-index:2}
+.silencio.off{opacity:0}
 .nota-tk{text-align:center;color:var(--tenue);font-size:.82rem;margin-top:12px}
 .tk-link{color:var(--oro-claro);font-weight:700;text-decoration:none;white-space:nowrap}
 .tk-link:hover{text-decoration:underline}
@@ -636,10 +634,10 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
       <p>@jesusparfumec — mira cómo se ven nuestras fragancias</p>
     </div>
     <div class="marco-tk" id="marcoTk">
-      <blockquote class="tiktok-embed" data-video="7710802012648099080" data-autoplay="true" style="display:block;border:none;outline:none;text-align:left;"></blockquote>
-      <a class="tk-fallback" id="tkFallback" href="https://www.tiktok.com/@jesusparfumec/video/7710802012648099080" target="_blank" rel="noopener">▶ Ver el video en TikTok</a>
+      <video id="videoPropio" src="video-jesusparfum.mp4" playsinline muted loop preload="metadata" aria-label="Video de Jesus Parfum"></video>
+      <div class="silencio" id="sonidoHint">🔊 Toca para el sonido</div>
     </div>
-    <p class="nota-tk">Se reproduce solo al llegar; toca una vez para el sonido 🔊 · <a class="tk-link" href="https://www.tiktok.com/@jesusparfumec/video/7710802012648099080" target="_blank" rel="noopener">▶ Ver en TikTok</a></p>
+    <p class="nota-tk">Se reproduce solo al aparecer y se detiene al bajar · <a class="tk-link" href="https://www.tiktok.com/@jesusparfumec/video/7710802012648099080" target="_blank" rel="noopener">▶ Ver en TikTok</a></p>
   </section>
 
   <!-- CONOCE JESÚS PARFUM -->
@@ -2988,34 +2986,23 @@ function irArriba(){ window.scrollTo({ top:0, behavior:"smooth" }); }
 if('serviceWorker' in navigator){ window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); }); }
 </script>
 <script>
-/* Video TikTok oficial: carga cerca de la pantalla, se silencia al bajar (respaldo si no carga) */
+/* Video propio: suena (sin audio) al entrar, se detiene al bajar, toque = sonido */
 (function(){
-  var marco=document.getElementById('marcoTk');
-  if(!marco||!('IntersectionObserver' in window)) return;
-  var embedCargado=false, srcGuardado=null, intentos=0, espera=null;
-  function iframe(){ return marco.querySelector('iframe'); }
-  function vigilar(){
-    var f=iframe();
-    if(f){ marco.classList.add('cargado'); return; }
-    if(intentos++ < 25) espera=setTimeout(vigilar,400); /* si no aparece, queda el enlace de respaldo */
+  var v=document.getElementById('videoPropio'), hint=document.getElementById('sonidoHint');
+  if(!v) return;
+  v.addEventListener('click', function(){
+    v.muted=false;                 /* primer toque: activa el sonido */
+    if(hint) hint.classList.add('off');
+    if(v.paused) v.play().catch(function(){});
+  });
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){
+      if(es[0].isIntersecting){ v.play().catch(function(){}); }   /* aparece: reproduce */
+      else { v.pause(); }                                         /* baja: se detiene y calla */
+    },{rootMargin:'100px 0px',threshold:.25}).observe(v);
+  }else{
+    v.play().catch(function(){});
   }
-  function cargarEmbed(){
-    if(embedCargado) return; embedCargado=true;
-    var s=document.createElement('script');
-    s.src='https://www.tiktok.com/embed.js'; s.async=true;
-    document.head.appendChild(s);
-    espera=setTimeout(vigilar,500);
-  }
-  new IntersectionObserver(function(es){
-    var f=iframe();
-    if(es[0].isIntersecting){
-      cargarEmbed();
-      if(f&&f.getAttribute('src')==='about:blank'&&srcGuardado) f.setAttribute('src',srcGuardado);
-    }else if(f&&f.getAttribute('src')&&f.getAttribute('src')!=='about:blank'){
-      srcGuardado=f.getAttribute('src'); /* al bajar: detiene video y sonido */
-      f.setAttribute('src','about:blank');
-    }
-  },{rootMargin:'200px 0px',threshold:.1}).observe(marco);
 })();
 </script>
 </body>

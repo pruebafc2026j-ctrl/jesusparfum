@@ -33,6 +33,8 @@ self.addEventListener("fetch", e => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
   if (url.origin !== location.origin) return; // APIs externas: solo red
+  if (req.headers.has("Range")) return;        // rangos del video: solo red (no romper reproducción)
+  if (req.destination === "video" || req.destination === "audio") return;
 
   /* páginas HTML: primero red (para ver cambios), si no hay red usa la copia guardada */
   if (req.mode === "navigate") {
