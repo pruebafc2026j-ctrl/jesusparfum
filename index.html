@@ -635,7 +635,7 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
     </div>
     <div class="marco-tk" id="marcoTk">
       <video id="videoPropio" src="video-jesusparfum.mp4" playsinline loop preload="metadata" aria-label="Video de Jesus Parfum"></video>
-      <button type="button" class="sonido-btn off" id="sonidoBtn" aria-label="Activar sonido">🔊 Sonido</button>
+      <button type="button" class="sonido-btn off" id="sonidoBtn" aria-label="Reproducir con sonido">▶ 🔊 Con sonido</button>
     </div>
     <p class="nota-tk">Sale con sonido al aparecer · un clic lo pausa · se detiene al bajar · <a class="tk-link" href="https://www.tiktok.com/@jesusparfumec/video/7710802012648099080" target="_blank" rel="noopener">▶ Ver en TikTok</a></p>
   </section>
@@ -2986,32 +2986,29 @@ function irArriba(){ window.scrollTo({ top:0, behavior:"smooth" }); }
 if('serviceWorker' in navigator){ window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); }); }
 </script>
 <script>
-/* Video propio: sale con sonido al aparecer, un clic = pausa, al bajar de vista se detiene */
+/* Video propio: siempre CON sonido (si no hay sonido, no reproduce),
+   un clic = pausa/seguir, al bajar de vista se detiene */
 (function(){
   var v=document.getElementById('videoPropio'), btn=document.getElementById('sonidoBtn');
   if(!v) return;
   function ocultarBtn(){ if(btn) btn.classList.add('off'); }
-  function sonar(){ v.muted=false; ocultarBtn(); if(v.paused) v.play().catch(function(){}); }
-  if(btn) btn.addEventListener('click', sonar);       /* respaldo: activa sonido con un clic */
-  v.addEventListener('click', function(){             /* un clic = pausar / seguir */
-    if(v.paused) v.play().catch(function(){});
+  function mostrarBtn(){ if(btn) btn.classList.remove('off'); }
+  function conSonido(){ v.muted=false; return v.play(); }
+  function arrancar(){                                /* reproduce con sonido; si el navegador exige gesto, NO reproduce mudo: espera */
+    conSonido().then(ocultarBtn).catch(function(){ mostrarBtn(); });
+  }
+  if(btn) btn.addEventListener('click', arrancar);    /* botón: reproducir con sonido (un clic = gesto) */
+  v.addEventListener('click', function(){             /* un clic = pausar / seguir con sonido */
+    if(v.paused){ conSonido().then(ocultarBtn).catch(function(){}); }
     else v.pause();
   });
-  function intentar(){                                /* intenta entrar CON sonido */
-    v.muted=false;
-    v.play().then(ocultarBtn).catch(function(){
-      /* navegador exige interacción previa: reproduce mudo y ofrece el botón de sonido */
-      v.muted=true;
-      v.play().then(function(){ if(btn) btn.classList.remove('off'); }).catch(function(){});
-    });
-  }
   if('IntersectionObserver' in window){
     new IntersectionObserver(function(es){
-      if(es[0].isIntersecting){ intentar(); }         /* aparece: reproduce (con sonido si el navegador deja) */
+      if(es[0].isIntersecting){ arrancar(); }         /* aparece: intenta con sonido */
       else { v.pause(); }                             /* baja de vista: se detiene y calla */
     },{rootMargin:'100px 0px',threshold:.25}).observe(v);
   }else{
-    intentar();
+    arrancar();
   }
 })();
 </script>
