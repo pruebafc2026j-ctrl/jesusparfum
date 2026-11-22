@@ -565,6 +565,11 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
   .aviso-pedido p{font-size:14px;text-align:center;flex:1 1 100%}
   .aviso-pedido .btn-aviso{width:100%;justify-content:center}
 }
+
+/* VIDEO TIKTOK */
+.marco-tk{position:relative;width:min(360px,100%);margin:0 auto;aspect-ratio:9/16;background:#000;border:1px solid var(--linea);border-radius:18px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.55)}
+.marco-tk iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.nota-tk{text-align:center;color:var(--tenue);font-size:.82rem;margin-top:12px}
 </style>
 </head>
 <body>
@@ -616,6 +621,18 @@ footer a{color:var(--verde);text-decoration:none;font-weight:700}
       <span>🎁 Combos con descuento</span>
       <span>💯 Alta concentración</span>
     </div>
+  </section>
+
+  <!-- VIDEO TIKTOK -->
+  <section class="bloque contenedor" id="video-tk">
+    <div class="titulo-sec">
+      <h2>Jesus Parfum en TikTok</h2>
+      <p>@jesusparfumec — mira cómo se ven nuestras fragancias</p>
+    </div>
+    <div class="marco-tk">
+      <iframe id="videoTk" data-src="https://www.tiktok.com/embed/v2/7710802012648099080" title="Video de Jesus Parfum en TikTok" allow="autoplay; encrypted-media; fullscreen" allowfullscreen></iframe>
+    </div>
+    <p class="nota-tk">Toca el video una vez para escucharlo con sonido 🔊</p>
   </section>
 
   <!-- CONOCE JESÚS PARFUM -->
@@ -2962,6 +2979,20 @@ function irArriba(){ window.scrollTo({ top:0, behavior:"smooth" }); }
 </script>
 <script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5b2582c9a6eda4d',t:'MTc5NDc4ODU3OQ=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5b2582c9a6eda4d',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script>
 if('serviceWorker' in navigator){ window.addEventListener('load', function(){ navigator.serviceWorker.register('sw.js').catch(function(){}); }); }
+</script>
+<script>
+/* Video TikTok: carga apenas entra en pantalla y se silencia al bajar */
+(function(){
+  var v=document.getElementById('videoTk'); if(!v) return;
+  var SRC=v.getAttribute('data-src');
+  if(!('IntersectionObserver' in window)){ v.setAttribute('src',SRC); return; }
+  new IntersectionObserver(function(es){
+    for(var i=0;i<es.length;i++){
+      if(es[i].isIntersecting){ if(!v.getAttribute('src')) v.setAttribute('src',SRC); }
+      else if(v.getAttribute('src')){ v.setAttribute('src','about:blank'); }
+    }
+  },{rootMargin:'150px 0px',threshold:.1}).observe(v);
+})();
 </script>
 </body>
 </html>
