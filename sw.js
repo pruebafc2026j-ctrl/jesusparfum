@@ -2,7 +2,7 @@
    Guarda la tienda en el dispositivo: después de la primera visita,
    la página abre sin internet. Los enlaces a WhatsApp/TikTok y los
    datos en vivo (reseñas, contadores) sí necesitan conexión. */
-const CACHE = "jesusparfum-v1";
+const CACHE = "jesusparfum-v2";
 const CORE = [
   "./",
   "recomendaciones/",
